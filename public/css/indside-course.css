@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: "Lato", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* Sidebar section */
+
+.sidebar {
+    margin-top: 1rem;
+    height: auto;
+    width: 20%;
+    display: relative;
+    background: #655d8a;
+    padding: 1.5rem;
+    scroll-behavior: ovelay;
+    margin-bottom: 1rem;
+}
+
+.sidebar .over {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.sidebar .over i {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.drp_down {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    display: none;
+}
+
+.sidebar .drp_down .link {
+    margin-top: 1rem;
+}
+
+.sidebar li {
+    margin-top: 1.2rem;
+    padding: 0.5rem;
+}
+
+.sidebar .link {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.sidebar .link:hover {
+    color: #92a9bd;
+}
+
+.drp_downactive {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+}
+
+.drp_downactive .link {
+    margin-top: 1rem;
+}
+
+.sidebar .vidquiz {
+    margin-top: 12rem;
+}
+
+.sidebar .vidquiz i {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-right: 0.2rem;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    display: block;
+}
+
+
+/* week section  */
+
+.week {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.week .info {
+    position: absolute;
+    top: 12%;
+    left: 25%;
+    padding: .5rem;
+    text-align: start;
+    margin-top: 1rem;
+}
+
+.week .course-table {
+    align-self: center;
+    height: auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    text-transform: lowercase;
+    margin-bottom: 2rem;
+}
+
+
+/* grades */
+
+.grades {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    position: absolute;
+    top: 15%;
+}
+
+
+/*  Messages */
+
+.message {
+    width: calc(100% - 20%);
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Conact */
+
+.contact {
+    height: auto;
+    width: calc(100% - 20%);
+    display: none;
+    justify-content: center;
+}
+
+
+/* Resources */
+
+.resource {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    justify-content: center;
+}
+
+
+/*  Quizes */
+
+.quizs {
+    height: auto;
+    width: calc(100% - 20%);
+    justify-content: center;
+    padding: 3rem;
+}
+
+.quizs .quiz_container {
+    margin-top: 5rem;
+    height: auto;
+    width: 50%;
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+/*  videos */
+
+.videos {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    flex-direction: column;
+}
+
+.videos .video_container {
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    padding-bottom: 3rem;
+}
+
+.videos .video_container .video {
+    margin-top: 4rem;
+}
+
+.videos .video .info {
+    display: flex;
+    margin-bottom: .5rem;
+}
+
+.videos .video .info .note {
+    font-size: 1.1rem;
+    padding: 1rem;
+    color: #041562;
+}
+
+.videos .video .info .note i {
+    margin-right: .5rem;
+}
+
+.videos .video .info .discuss {
+    font-size: 1.1rem;
+    padding: 1rem;
+    color: #041562;
+}
+
+.videos .video .info .discuss i {
+    margin-right: .5rem;
+}
