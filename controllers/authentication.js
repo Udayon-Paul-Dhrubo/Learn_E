@@ -16,22 +16,24 @@ const transporter = nodemailer.createTransport(
     })
 );
 
-exports.getLogIn = (req, res, next)=>{
-    res.render('login/sign-in',{
-        pageTitle : 'Log In',        
+exports.getLogIn = (req, res, next) => {
+    res.render('login/sign-in', {
+        pageTitle: 'Log In',
     })
 }
 
-exports.getSignUp = (req, res, next)=>{
-    res.render('login/sign-up',{
-        pageTitle : 'Registration',
-        error: false,
-        errorMessage: null
-    })
-}
+exports.postSignUp =
 
-exports.postSignUp = async (req, res, next )=>{
-    
+    exports.getSignUp = (req, res, next) => {
+        res.render('login/sign-up', {
+            pageTitle: 'Registration',
+            error: false,
+            errorMessage: null
+        })
+    }
+
+exports.postSignUp = async(req, res, next) => {
+
 
     const name = req.body.name;
     const email = req.body.email;
@@ -41,49 +43,49 @@ exports.postSignUp = async (req, res, next )=>{
     const teacher = req.body.teacher;
     const agree = req.body.agree;
 
-    
+
     const _student = Boolean(student);
     const _teacher = Boolean(teacher);
     const _agree = Boolean(agree);
 
-    
-        
-    if( !_agree || !( _agree && (_student ^ _teacher)) ){
-        return res.render('login/sign-up',{
-            pageTitle : 'Registration',
+
+
+    if (!_agree || !(_agree && (_student ^ _teacher))) {
+        return res.render('login/sign-up', {
+            pageTitle: 'Registration',
             error: true,
             errorMessage: 'Check again carefully..'
         })
-    }  
+    }
 
-    if( pass != re_pass ){
-        return res.render('login/sign-up',{
-            pageTitle : 'Registration',
+    if (pass != re_pass) {
+        return res.render('login/sign-up', {
+            pageTitle: 'Registration',
             error: true,
             errorMessage: 'Check password again carefully..'
         })
-    }  
+    }
 
     const user_repo = await userRepository.findByEmail(email);
     console.log(user_repo)
 
 
-    if( user_repo.success && user_repo.data.length>0 ){
-            
-        return res.render('login/sign-up',{
-            pageTitle : 'Registration',
+    if (user_repo.success && user_repo.data.length > 0) {
+
+        return res.render('login/sign-up', {
+            pageTitle: 'Registration',
             error: true,
             errorMessage: 'This Email exists already..'
         })
 
-    } 
-    let id = Math.floor(Math.random()*1000 ) + 0
-    
-    const know = await userRepository.addUser(id, name, email, pass );
-    console.log(know)
-    
+    }
+    let id = Math.floor(Math.random() * 1000) + 0
 
-    
+    const know = await userRepository.addUser(id, name, email, pass);
+    console.log(know)
+
+
+
     /*
     let user = User.findByEmail(email);
     console.log(user)
@@ -96,10 +98,10 @@ exports.postSignUp = async (req, res, next )=>{
         })
     }
 */
-    
+
 
     res.redirect('/')
-    
+
 }
 
 
