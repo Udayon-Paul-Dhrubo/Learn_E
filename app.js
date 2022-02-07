@@ -10,8 +10,10 @@ app.set('views', 'views')
 
 const homeRoutes = require('./routes/home')
 const authRoutes = require('./routes/authentication')
+const studentRoutes;
+const teacherRoutes;
 
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(homeRoutes)
