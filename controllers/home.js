@@ -37,7 +37,7 @@ exports.getHome = async(req, res, next) => {
 
 }
 
-exports.getAbout = (req, res, next) => {
+exports.getAbout = async(req, res, next) => {
 
     const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
     console.log(testimonial_repo);

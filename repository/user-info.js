@@ -19,11 +19,21 @@ class UserRepository extends Repository {
         return result;
     }
 
-    addUser = async function(id, name, email, password) {
+    addUser = async function(id, name, email, password, isStudent) {
         console.log({ id, name, email, password })
         const query = 'insert into USERS("User_ID", "Username", "Email", "Password") values(:1, :2, :3, :4)';
         const params = [id, name, email, password];
         const result = await this.query(query, params, 'true');
+
+        if (isStudent) {
+            const query = 'insert into USERS("User_ID") values(:1)';
+            const params = [id];
+            const result = await this.query(query, params, 'true');
+        } else {
+            const query = 'insert into USERS("User_ID") values(:1)';
+            const params = [id];
+            const result = await this.query(query, params, 'true');
+        }
         return result;
     }
 

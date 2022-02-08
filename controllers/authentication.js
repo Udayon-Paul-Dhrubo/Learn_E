@@ -177,7 +177,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     }
 
-    const know = await userRepository.addUser(id, name, email, pass);
+    const know = await userRepository.addUser(id, name, email, pass, _student);
     console.log(know)
 
     if (know.success == 'false') {
@@ -195,7 +195,7 @@ exports.postSignUp = async(req, res, next) => {
         if (_student) url = url + '/student';
         else url = url + '/teacher';
 
-        url = url + '/user/id/';
+        url = url + '/user/' + id + '/';
 
         return res.redirect(url);
 

@@ -47,7 +47,7 @@ exports.getHome = async(req, res, next) => {
 
 }
 
-exports.getAbout = (req, res, next) => {
+exports.getAbout = async(req, res, next) => {
 
     const userId = req.params.ID;
 
@@ -73,7 +73,7 @@ exports.getAbout = (req, res, next) => {
 
 }
 
-exports.getCourses = (req, res, next) => {
+exports.getCourses = async(req, res, next) => {
 
     const userId = req.params.ID;
 
@@ -99,7 +99,7 @@ exports.getCourses = (req, res, next) => {
 
 }
 
-exports.getCourses = (req, res, next) => {
+exports.getCourses = async(req, res, next) => {
 
     const userId = req.params.ID;
 
@@ -125,7 +125,7 @@ exports.getCourses = (req, res, next) => {
 
 }
 
-exports.getCourses = (req, res, next) => {
+exports.getCourses = async(req, res, next) => {
 
     const userId = req.params.ID;
 
