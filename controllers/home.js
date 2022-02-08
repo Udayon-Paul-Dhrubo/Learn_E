@@ -16,6 +16,7 @@ exports.getHome = async(req, res, next) => {
     if (category_repo.success && category_repo.success) {
         return res.render('home/home-view.ejs', {
             pageTitle: 'Home',
+            path: '/home',
             isStudent: 'false',
             logged_in: 'false',
             categories: category_repo.data,
@@ -34,6 +35,7 @@ exports.getAbout = (req, res, next) => {
     if (testimonial_repo.success) {
         return res.render('home/home-view.ejs', {
             pageTitle: 'About',
+            path: '/about',
             isStudent: 'false',
             logged_in: 'false',
             testimonials: testimonial_repo.data

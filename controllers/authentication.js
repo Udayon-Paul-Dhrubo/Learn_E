@@ -19,10 +19,12 @@ const transporter = nodemailer.createTransport(
 exports.getLogIn = (req, res, next) => {
     res.render('login/sign-in', {
         pageTitle: 'Log In',
+        path: '/login',
         error: false,
         isStudent: 'false',
         logged_in: 'false',
-        errorMessage: ''
+        errorMessage: '',
+
     })
 }
 
@@ -65,6 +67,7 @@ exports.postLogIn = async(req, res, next) => {
 
     res.render('login/sign-in', {
         pageTitle: 'Log In',
+        path: '/login',
         error: true,
         isStudent: 'false',
         logged_in: 'false',
@@ -79,6 +82,7 @@ exports.postLogIn = async(req, res, next) => {
 exports.getSignUp = (req, res, next) => {
     res.render('login/sign-up', {
         pageTitle: 'Registration',
+        path: '/login',
         error: false,
         errorMessage: null,
         isStudent: 'false',
@@ -107,6 +111,7 @@ exports.postSignUp = async(req, res, next) => {
     if (!_agree || !(_agree && (_student ^ _teacher))) {
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
+            path: '/login',
             error: true,
             errorMessage: 'Check again carefully..',
             isStudent: 'false',
@@ -117,6 +122,7 @@ exports.postSignUp = async(req, res, next) => {
     if (pass != re_pass) {
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
+            path: '/login',
             error: true,
             errorMessage: 'Check password again carefully..',
             isStudent: 'false',
@@ -132,6 +138,7 @@ exports.postSignUp = async(req, res, next) => {
 
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
+            path: '/login',
             error: true,
             errorMessage: 'This Email exists already..',
             isStudent: 'false',
@@ -139,7 +146,23 @@ exports.postSignUp = async(req, res, next) => {
         })
 
     }
-    let id = Math.floor(Math.random() * 1000) + 0
+
+    const id_repo = await userRepository.last_user_id_inserted();
+    console.log(id_repo);
+
+    const id;
+    if (id_repo.success) {
+        id = id_repo.data[0] + 1;
+    } else {
+        return res.render('login/sign-up', {
+            pageTitle: 'Registration',
+            path: '/login',
+            error: true,
+            errorMessage: 'Something went wrong..pls try again..',
+            isStudent: 'false',
+            logged_in: 'false',
+        })
+    }
 
     const know = await userRepository.addUser(id, name, email, pass);
     console.log(know)
@@ -147,6 +170,7 @@ exports.postSignUp = async(req, res, next) => {
     if (know.success == 'false') {
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
+            path: '/login',
             error: true,
             errorMessage: 'There are some problems..Try again later',
             isStudent: 'false',
@@ -154,10 +178,15 @@ exports.postSignUp = async(req, res, next) => {
         })
     } else {
 
+        const url = '';
+        if (_student) url = url + '/student';
+        else url = url + '/teacher';
+
+        url = url + '/user/id/';
+
+        return res.redirect(url);
+
     }
-
-
-    res.redirect('/')
 
 }
 

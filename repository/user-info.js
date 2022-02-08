@@ -41,6 +41,13 @@ class UserRepository extends Repository {
         return result;
     }
 
+    last_user_id_inserted = async function() {
+        const query = '';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
 
 }
 

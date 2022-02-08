@@ -6,6 +6,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     getTopCategories = async function() {
+
         const query = '';
         const params = [];
         const result = await this.query(query, params, 'false');
@@ -27,6 +28,13 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     getTestimonials_about_learnE = async function() {
+        const query = '';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    last_course_id_inserted = async function() {
         const query = '';
         const params = [];
         const result = await this.query(query, params, 'false');

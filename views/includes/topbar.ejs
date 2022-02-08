@@ -10,8 +10,8 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav py-0">
-                    <a href="/home" class="nav-item nav-link active">Home</a>
-                    <a href="/about" class="nav-item nav-link">About</a>
+                    <a href="/home" class="nav-item nav-link <% if(path=='/home'){active}">Home</a>
+                    <a href="/about" class="nav-item nav-link <% if(path=='/about'){active}">About</a>
                 </div>
             </div>
 
@@ -33,11 +33,11 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav py-0">
-                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/ } else { teacher/user/<%= userInfo.id %>/ } %>" class="nav-item nav-link <% if(path=='home'){active}">Home</a>
-                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } %>" class="nav-item nav-link <% if(path=='about'){active}">About</a>
-                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/courses } else { teacher/user/<%= userInfo.id %>/courses } %>" class="nav-item nav-link <% if(path=='courses'){active}">Courses</a>
-                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/teachers } else { teacher/user/<%= userInfo.id %>/teachers } %>" class="nav-item nav-link <% if(path=='teachers'){active}">Teachers</a>
-                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/my-courses } else { teacher/user/<%= userInfo.id %>/my-courses } %>" class="nav-item nav-link <% if(path=='my-courses'){active}">My Courses</a>
+                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/ } else { teacher/user/<%= userInfo.id %>/ } %>" class="nav-item nav-link <% if(path=='/home'){active}">Home</a>
+                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } %>" class="nav-item nav-link <% if(path=='/about'){active}">About</a>
+                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/courses } else { teacher/user/<%= userInfo.id %>/courses } %>" class="nav-item nav-link <% if(path=='/courses'){active}">Courses</a>
+                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/teachers } else { teacher/user/<%= userInfo.id %>/teachers } %>" class="nav-item nav-link <% if(path=='/teachers'){active}">Teachers</a>
+                        <a href="<% if(isStudent=='true'){ student/user/<%= userInfo.id %>/my-courses } else { teacher/user/<%= userInfo.id %>/my-courses } %>" class="nav-item nav-link <% if(path=='/my-courses'){active}">My Courses</a>
 
                     </div>
                 </div>
