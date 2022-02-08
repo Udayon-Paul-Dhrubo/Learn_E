@@ -33,7 +33,7 @@ exports.getAbout = (req, res, next) => {
     console.log(testimonial_repo);
 
     if (testimonial_repo.success) {
-        return res.render('home/home-view.ejs', {
+        return res.render('home/about-view.ejs', {
             pageTitle: 'About',
             path: '/about',
             isStudent: 'false',

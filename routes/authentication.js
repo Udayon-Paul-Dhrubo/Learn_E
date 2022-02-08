@@ -5,11 +5,15 @@ const authController = require('../controllers/authentication')
 //const router = express.Router()
 const router = require('express-promise-router')()
 
-router.get('/log-in', authController.getLogIn )
+router.get('/log-in', authController.getLogIn)
 
-router.get('/sign-up', authController.getSignUp )
+router.post('/log-in', authController.postLogIn)
 
-router.post('/sign-up', authController.postSignUp )
+router.get('/sign-up', authController.getSignUp)
+
+router.post('/sign-up', authController.postSignUp)
+
+router.get('/sign-out', authController.getSignOut)
 
 
 
