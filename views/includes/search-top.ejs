@@ -5,44 +5,51 @@
             <div class="col-md-12 col-sm-12">
                 <div class="search-form">
 
-
-                    <form method="POST">
-                        <div class="sf-type">
-
-
-                            <div class="sf-input">
-                                <input type="text" name="search-bar-req" id="search-bar-req" placeholder="Search course and discount courses">
-                            </div>
-
-
-                            <div class="sf-list">
-                                <ul>
-                                    <li><a href="course-details.html">Accounting/Finance</a></li>
-                                    <li><a href="course-details.html">civil engineering</a></li>
-                                    <li><a href="course-details.html">Art/Design</a></li>
-                                    <li><a href="course-details.html">Marine Engineering</a></li>
-                                    <li><a href="course-details.html">Business Management</a></li>
-                                    <li><a href="course-details.html">Journalism/Writing</a></li>
-                                    <li><a href="course-details.html">Physical Education</a></li>
-                                    <li><a href="course-details.html">Political Science</a></li>
-                                    <li><a href="course-details.html">Sciences</a></li>
-                                    <li><a href="course-details.html">Statistics</a></li>
-                                    <li><a href="course-details.html">Web Design/Development</a></li>
-                                    <li><a href="course-details.html">SEO</a></li>
-                                    <li><a href="course-details.html">Google Business</a></li>
-                                    <li><a href="course-details.html">Graphics Design</a></li>
-                                    <li><a href="course-details.html">Networking Courses</a></li>
-                                    <li><a href="course-details.html">Information technology</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <% if(logged_in == 'false' ) { %>
+                        <form action="/" method="POST">
+                            <% } else { %>
+                                <% if(isStudent == 'true') { %>
+                                    <form action="student/user/<%= userInfo %>/" method="POST">
+                                        <% } else { %>
+                                            <form action="teacher/user/<%= userInfo %>/" method="POST">
+                                                <% }%>
+                                                    <% }%>
 
 
-                        <div class="sf-submit">
-                            <input class="btn" type="submit" value="Search" style="border-radius:0;">
-                        </div>
+                                                        <div class="sf-type">
+                                                            <div class="sf-input">
+                                                                <input type="text" name="search_bar_req" id="search_bar_req" placeholder="Search course and discount courses">
+                                                            </div>
 
-                    </form>
+
+                                                            <div class="sf-list">
+                                                                <ul>
+                                                                    <li><a href="course-details.html">Accounting/Finance</a></li>
+                                                                    <li><a href="course-details.html">civil engineering</a></li>
+                                                                    <li><a href="course-details.html">Art/Design</a></li>
+                                                                    <li><a href="course-details.html">Marine Engineering</a></li>
+                                                                    <li><a href="course-details.html">Business Management</a></li>
+                                                                    <li><a href="course-details.html">Journalism/Writing</a></li>
+                                                                    <li><a href="course-details.html">Physical Education</a></li>
+                                                                    <li><a href="course-details.html">Political Science</a></li>
+                                                                    <li><a href="course-details.html">Sciences</a></li>
+                                                                    <li><a href="course-details.html">Statistics</a></li>
+                                                                    <li><a href="course-details.html">Web Design/Development</a></li>
+                                                                    <li><a href="course-details.html">SEO</a></li>
+                                                                    <li><a href="course-details.html">Google Business</a></li>
+                                                                    <li><a href="course-details.html">Graphics Design</a></li>
+                                                                    <li><a href="course-details.html">Networking Courses</a></li>
+                                                                    <li><a href="course-details.html">Information technology</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="sf-submit">
+                                                            <input class="btn" type="submit" value="Search" style="border-radius:0;">
+                                                        </div>
+
+                                            </form>
                 </div>
             </div>
         </div>

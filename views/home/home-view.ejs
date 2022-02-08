@@ -19,7 +19,8 @@
                                     <div class="p-5" style="width: 100%; max-width: 900px;">
                                         <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
                                         <h1 class="display-3 text-white mb-md-4">Best Education From Your Home</h1>
-                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
+                More</a>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +30,8 @@
                                     <div class="p-5" style="width: 100%; max-width: 900px;">
                                         <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
                                         <h1 class="display-3 text-white mb-md-4">Best Online Learning Platform</h1>
-                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
+                More</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +41,8 @@
                                     <div class="p-5" style="width: 100%; max-width: 900px;">
                                         <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
                                         <h1 class="display-3 text-white mb-md-4">New Way To Learn From Home</h1>
-                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                                        <a href="<% if(logged_in == 'false') { /about } else { if(isStudent=='true'){ student/user/<%= userInfo.id %>/about } else { teacher/user/<%= userInfo.id %>/about } } %>" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn
+                More</a>
                                     </div>
                                 </div>
                             </div>
@@ -60,15 +63,15 @@
                             </div>
                             <div class="row">
 
-                                <% for( let category of categories ) { %>
+                                <% for( let cat_index=0; i<8; i++ ) { %>
                                     <div class="col-lg-3 col-md-6 mb-4">
                                         <div class="cat-item position-relative overflow-hidden rounded mb-2">
                                             <img class="img-fluid" src="/img/cat-1.jpg" alt="<%= category.name %>">
                                             <a class="cat-overlay text-white text-decoration-none" href="if(logged_in=='false') { /log-in } else { if(isStudent='true') { student/user/<%= userInfo.id %>/category-view/<%= category.id %> } else { teacher/user/<%= userInfo.id %>/category-view/<%= category.id %> } }">
                                                 <h4 class="text-white font-weight-medium">
-                                                    <%= category.name %>
+                                                    <%= categories[cat_index].name %>
                                                 </h4>
-                                                <span><%= category.totalCourses %></span>
+
                                             </a>
                                         </div>
                                     </div>
@@ -82,33 +85,37 @@
 
 
                         <!-- Courses Start -->
-                        <% if( courses.length > 0 ) { %>
+                        <% if( courses.length> 0 ) { %>
                             <div class="container-fluid py-5">
                                 <div class="container py-5">
                                     <div class="text-center mb-5">
-                                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+                                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">
+                                            Courses</h5>
                                         <h1>Our Popular Courses</h1>
                                     </div>
                                     <div class="row">
 
 
-                                        <% for(let course of courses ) { %>
+                                        <% for(let cour_index=0; cour_index<6; cour_index++ ) { %>
                                             <div class="col-lg-4 col-md-6 mb-4">
                                                 <div class="rounded overflow-hidden mb-2">
                                                     <img class="img-fluid" src="/img/course-1.jpg" alt="">
                                                     <div class="bg-secondary p-4">
                                                         <div class="d-flex justify-content-between mb-3">
-                                                            <small class="m-0"><i class="fa fa-users text-primary mr-2"></i><%= course.totalStudent %> Students</small>
+                                                            <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>
+                  <%= courses[cour_index].totalStudent %> Students
+                </small>
                                                         </div>
                                                         <a class="h5" href="if(logged_in=='false') { /log-in } else { if(isStudent='true') { student/user/<%= userInfo.id %>/course-view/<%= course.id %> } else { teacher/user/<%= userInfo.id %>/course-view/<%= course.id %> } }">
-                                                            <%= course.name %>
+                                                            <%= courses[cour_index].name %>
                                                         </a>
                                                         <div class="border-top mt-4 pt-4">
                                                             <div class="d-flex justify-content-between">
                                                                 <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>
-                                                                    <%= course.rating %> <small>(<%= course.ratingPerson %>)</small></h6>
+                                                                    <%= courses[cour_index].rating %> <small>(<%=courses[cour_index].ratingPerson %>)</small>
+                                                                </h6>
                                                                 <h5 class="m-0">$
-                                                                    <%= course.price %>
+                                                                    <%= courses[cour_index].price %>
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -127,7 +134,7 @@
 
 
                                 <!-- Team Start -->
-                                <% if( teachers.length > 0 ) { %>
+                                <% if( teachers.length> 0 ) { %>
                                     <div class="container-fluid py-5">
                                         <div class="container pt-5 pb-3">
                                             <div class="text-center mb-5">
@@ -136,7 +143,7 @@
                                             </div>
                                             <div class="row">
 
-                                                <% for(let teacher of teachers ) { %>
+                                                <% for(let teach_index=0; teach_index<4; teach_index++ ) { %>
                                                     <div class="col-md-6 col-lg-3 text-center team mb-4">
                                                         <div class="team-item rounded overflow-hidden mb-2">
                                                             <div class="team-img position-relative">
@@ -149,7 +156,7 @@
                                                             </div>
                                                             <div class="bg-secondary p-4">
                                                                 <h5>
-                                                                    <%= teacher.name %>
+                                                                    <%= teachers[teach_index].name %>
                                                                 </h5>
                                                             </div>
                                                         </div>

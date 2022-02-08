@@ -7,8 +7,13 @@ const homeController = require('../controllers/home')
 const router = require('express-promise-router')()
 
 router.get('/', homeController.getHome)
+router.post('/', homeController.postSearch)
 
 router.get('/about', homeController.getAbout)
+
+
+
+
 
 
 

@@ -7,6 +7,7 @@ const studentController = require('../controllers/student')
 const router = require('express-promise-router')()
 
 router.get('/user/:ID/', studentController.getHome)
+router.post('/user/:ID/', studentController.postSearch)
 
 router.get('/user/:ID/about', studentController.getAbout)
 

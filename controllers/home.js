@@ -37,6 +37,14 @@ exports.getHome = async(req, res, next) => {
 
 }
 
+exports.postSearch = (req, res, next) => {
+    const searchReq = req.body.search_bar_req;
+    console.log(searchReq);
+
+    //more to add later
+    res.redirect('/');
+}
+
 exports.getAbout = async(req, res, next) => {
 
     const testimonial_repo = await infoRepository.getTestimonials_about_learnE();

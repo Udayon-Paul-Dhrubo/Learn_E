@@ -47,6 +47,16 @@ exports.getHome = async(req, res, next) => {
 
 }
 
+exports.postSearch = (req, res, next) => {
+    const searchReq = req.body.search_bar_req;
+    console.log(searchReq);
+
+    //more to add later
+    const userId = req.params.ID;
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url);
+}
+
 exports.getAbout = async(req, res, next) => {
 
     const userId = req.params.ID;
