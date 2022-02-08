@@ -16,6 +16,15 @@ const transporter = nodemailer.createTransport(
     })
 );
 
+exports.getSignOut = (req, res, next) => {
+    res.render('home/home-view', {
+        pageTitle: 'Home',
+        path: '/home',
+        isStudent: 'false',
+        logged_in: 'false',
+    })
+}
+
 exports.getLogIn = (req, res, next) => {
     res.render('login/sign-in', {
         pageTitle: 'Log In',
@@ -189,6 +198,9 @@ exports.postSignUp = async(req, res, next) => {
     }
 
 }
+
+
+
 
 
 
