@@ -34,6 +34,17 @@ exports.getHome = async(req, res, next) => {
         })
     }
 
+    res.render('home/home-view', {
+        pageTitle: 'Home',
+        path: '/home',
+        isStudent: 'true',
+        logged_in: 'true',
+        categories: [],
+        courses: [],
+        teachers: [],
+        userInfo: user_repo.data[0]
+    })
+
 }
 
 exports.getAbout = (req, res, next) => {
@@ -57,28 +68,8 @@ exports.getAbout = (req, res, next) => {
         })
     }
 
-}
-
-exports.getCourses = (req, res, next) => {
-
-    const userId = req.params.ID;
-
-    const user_repo = await userRepository.findById(userId);
-    console.log(user_repo);
-
-    const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
-    console.log(testimonial_repo);
-
-    if (testimonial_repo.success && user_repo.success) {
-        return res.render('home/about-view.ejs', {
-            pageTitle: 'About',
-            path: '/about',
-            isStudent: 'true',
-            logged_in: 'true',
-            testimonials: testimonial_repo.data,
-            userInfo: user_repo.data[0]
-        })
-    }
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
 
 }
 
@@ -103,6 +94,9 @@ exports.getCourses = (req, res, next) => {
         })
     }
 
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
+
 }
 
 exports.getCourses = (req, res, next) => {
@@ -125,5 +119,34 @@ exports.getCourses = (req, res, next) => {
             userInfo: user_repo.data[0]
         })
     }
+
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
+
+}
+
+exports.getCourses = (req, res, next) => {
+
+    const userId = req.params.ID;
+
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+
+    const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
+    console.log(testimonial_repo);
+
+    if (testimonial_repo.success && user_repo.success) {
+        return res.render('home/about-view.ejs', {
+            pageTitle: 'About',
+            path: '/about',
+            isStudent: 'true',
+            logged_in: 'true',
+            testimonials: testimonial_repo.data,
+            userInfo: user_repo.data[0]
+        })
+    }
+
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
 
 }

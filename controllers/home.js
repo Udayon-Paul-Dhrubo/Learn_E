@@ -25,6 +25,16 @@ exports.getHome = async(req, res, next) => {
         })
     }
 
+    res.render('home/home-view.ejs', {
+        pageTitle: 'Home',
+        path: '/home',
+        isStudent: 'false',
+        logged_in: 'false',
+        categories: [],
+        courses: [],
+        teachers: []
+    })
+
 }
 
 exports.getAbout = (req, res, next) => {
@@ -41,5 +51,6 @@ exports.getAbout = (req, res, next) => {
             testimonials: testimonial_repo.data
         })
     }
+    res.redirect('/');
 
 }

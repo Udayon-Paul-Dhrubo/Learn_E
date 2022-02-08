@@ -45,6 +45,8 @@ exports.postLogIn = async(req, res, next) => {
     console.log(user_repo);
 
 
+    let msg = 'No account found!! Register Please..';
+
     if (user_repo.success && user_repo.data.length > 0) {
 
         const student_repo = await userRepository.isStudent(email);
@@ -71,6 +73,8 @@ exports.postLogIn = async(req, res, next) => {
             return res.redirect(url);
         }
 
+        msg = 'Something went wrong'
+
     }
 
 
@@ -80,7 +84,7 @@ exports.postLogIn = async(req, res, next) => {
         error: true,
         isStudent: 'false',
         logged_in: 'false',
-        errorMessage: 'No account found!! Register Please..'
+        errorMessage: msg
     })
 }
 
@@ -196,6 +200,7 @@ exports.postSignUp = async(req, res, next) => {
         return res.redirect(url);
 
     }
+
 
 }
 
