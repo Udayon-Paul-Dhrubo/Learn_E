@@ -160,3 +160,30 @@ exports.getCourses = async(req, res, next) => {
     res.redirect(url)
 
 }
+
+
+exports.getTeachers = async(req, res, next) => {
+
+    const userId = req.params.ID;
+
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+
+    const teacher_repo = await infoRepository.getTopTeachers();
+    console.log(teacher_repo);
+
+    if (teacher_repo.success && user_repo.success) {
+        return res.render('home/about-view.ejs', {
+            pageTitle: 'About',
+            path: '/about',
+            isStudent: 'true',
+            logged_in: 'true',
+            teachers: teacher_repo.data,
+            userInfo: user_repo.data[0]
+        })
+    }
+
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
+
+}
