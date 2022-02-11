@@ -3,9 +3,15 @@
     <body>
         <%- includes(../includes/topbar.ejs) %>
             <%- includes(../includes/search-top.ejs) %>
+                <% if(error == 'true') { %>
+                    <div class="alert alert-danger alert-dismissible" align='center'>
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!!</strong>
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
 
-
-                <%- includes(../includes/footer.ejs) %>
+                        <%- includes(../includes/footer.ejs) %>
     </body>
 
     </html>
