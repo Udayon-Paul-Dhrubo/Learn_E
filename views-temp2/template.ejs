@@ -9,3 +9,14 @@
     </body>
 
     </html>
+
+
+
+    <% if(logged_in=='false'){%>
+        <a href="/about" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+        <% } else { %>
+            <% if(isStudent=='true') { %>
+                <a href="student/user/<%=userInfo.id%>/about" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                <% } else { %>
+                    <a href="teacher/user/<%=userInfo.id%>/about" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                    <% } }%>

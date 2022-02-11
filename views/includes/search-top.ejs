@@ -9,9 +9,9 @@
                         <form action="/" method="POST">
                             <% } else { %>
                                 <% if(isStudent == 'true') { %>
-                                    <form action="student/user/<%= userInfo %>/" method="POST">
+                                    <form action="student/user/<%= userInfo.id %>/" method="POST">
                                         <% } else { %>
-                                            <form action="teacher/user/<%= userInfo %>/" method="POST">
+                                            <form action="teacher/user/<%= userInfo.id %>/" method="POST">
                                                 <% }%>
                                                     <% }%>
 
