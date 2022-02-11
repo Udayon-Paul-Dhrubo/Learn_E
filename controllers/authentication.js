@@ -4,7 +4,7 @@ const sendGridTransport = require('nodemailer-sendgrid-transport');
 const UserRepository = require('../repository/user-info').UserRepository;
 const userRepository = new UserRepository();
 
-const User = require('../models/user');
+
 
 
 
@@ -17,12 +17,7 @@ const transporter = nodemailer.createTransport(
 );
 
 exports.getSignOut = (req, res, next) => {
-    res.render('home/home-view', {
-        pageTitle: 'Home',
-        path: '/home',
-        isStudent: 'false',
-        logged_in: 'false',
-    })
+    res.redirect('/')
 }
 
 exports.getLogIn = (req, res, next) => {
@@ -163,7 +158,7 @@ exports.postSignUp = async(req, res, next) => {
     const id_repo = await userRepository.last_user_id_inserted();
     console.log(id_repo);
 
-    const id;
+    let id;
     if (id_repo.success) {
         id = id_repo.data[0] + 1;
     } else {

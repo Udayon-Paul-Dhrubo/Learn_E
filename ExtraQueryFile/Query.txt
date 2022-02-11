@@ -1,0 +1,86 @@
+ getTopCategories = async function() {
+
+        const query = 'SELECT "Catagory", COUNT("course_id") FROM Course GROUP BY "Catagory"';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    getTopCourses = async function() {
+        const query = 'select * from Courses ORDER BY "Rating"';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    getTopTeachers = async function() {
+        const query = 'select * from Users where "User_ID" in (select "Teacher_ID" from Teacher)';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    getTestimonials_about_learnE = async function() {
+        const query = 'select "Testimonial",(SELECT "Name" FROM User WHERE "User_ID"=T."Student_id")AS Student_Name from Student T where "Testimonial" IS NOT NULL';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    last_course_id_inserted = async function() {
+        const query = 'select MAX("course_id") from Course';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+//finding courses for specific catagory
+
+getCoursesOfCatagory = async function(Catagory) {
+
+        const query = 'select "Title","Price","Rating","total_Enrolled" from Course where "Catagory"= :1';
+        const params = [Catagory];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+//Finding modules for a course by course_ID
+
+ findModulesByCourseId = async function(course_ID) {
+        const query = 'SELECT * FROM Module  where "Module_ID" IN ( SELECT "Module_ID" FROM CourseModules WHERE "Course_ID"= :1 ) ORDER BY "Module_ID"'; //PROBLEM ,NEED SERIAL
+        const params = [userId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+//Finding contents of a module
+findContentsOfModule=async function(Module_ID) {
+        const query = 'select * from "Content" where "Module_ID"=: 1';
+        const params = [Module_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+--------------------------------
+
+
+//for adding a module by teacher -insertion
+
+step by step
+1.insert into module
+2.insert into course modules //while adding in course module you have to find the last inserted module of that course
+3.insert a content with that module_ID
+--------------------------
+//for finding the last module added
+---------------------------------
+
+
+//for finding a course by searching it's name
+
+
+getCourseBySearchName = async function(Name) {
+
+        const query = 'Select * from course where "Title" = :1';
+const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
