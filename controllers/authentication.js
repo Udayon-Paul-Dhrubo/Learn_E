@@ -1,35 +1,42 @@
-const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer')
-const sendGridTransport = require('nodemailer-sendgrid-transport');
-const UserRepository = require('../repository/user-info').UserRepository;
-const userRepository = new UserRepository();
+<%- includes(../includes/starting.ejs) %>
+
+<
+body >
+    <%- includes(../includes/topbar.ejs) %>
+<%- includes(../includes/search-top.ejs) %>
+
+<% if(error == 'true') { %> <
+div class = "alert alert-danger alert-dismissible"
+align = 'center' >
+    <
+    a href = "#"
+class = "close"
+data - dismiss = "alert"
+aria - label = "close" > & times; < /a> <
+strong > Error!! < /strong>
+<%= errorMessage %> <
+/div>
+<% } %>
 
 
 
 
 
-const transporter = nodemailer.createTransport(
-    sendGridTransport({
-        auth: {
-            api_key: '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'
-        }
-    })
-);
 
-exports.getSignOut = (req, res, next) => {
-    res.redirect('/')
-}
 
-exports.getLogIn = (req, res, next) => {
-    res.render('login/sign-in', {
-        pageTitle: 'Log In',
-        path: '/login',
-        error: false,
-        isStudent: 'false',
-        logged_in: 'false',
-        errorMessage: '',
 
-    })
+
+
+<%- includes(../includes/footer.ejs) %> <
+/body>
+
+<
+/html>or: 'false',
+isStudent: 'false',
+    logged_in: 'false',
+    errorMessage: '',
+
+})
 }
 
 exports.postLogIn = async(req, res, next) => {
