@@ -53,7 +53,7 @@ class UserRepository extends Repository {
     }
 
     last_user_id_inserted = async function() {
-        const query = 'select MAX("course_id")AS "id" from "User" ';
+        const query = 'select MAX("User_ID")AS "id" from "User" ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;

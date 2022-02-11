@@ -41,39 +41,29 @@ exports.postLogIn = async(req, res, next) => {
 
 
     let msg = 'No account found!! Register Please..';
-
     if (user_repo.success && user_repo.data.length > 0) {
 
         const student_repo = await userRepository.isStudent(email);
-        console.log(student_repo);
-
+        console.log(student_repo);       
         if (student_repo.success && student_repo.data.length > 0) {
             const student = student_repo.data[0];
             console.log(student);
 
-            const url = '/student/user/' + student.id + '/';
-
-            return res.redirect(url);
+            const url = '/student/user/' + student.Student_id + '/';
+            res.redirect(url);
         }
 
-        const teacher_repo = await userRepository.isTeacher(email);
-        console.log(teacher_repo);
+      }
 
-        if (teacher_repo.success && teacher_repo.data.length > 0) {
-            const teacher = teacher_repo.data[0];
-            console.log(teacher);
 
-            const url = '/teacher/user/' + teacher.id + '/';
-
-            return res.redirect(url);
-        }
 
         msg = 'Something went wrong'
 
-    }
+    
 
 
-    res.render('login/sign-in', {
+
+        res.render('login/sign-in', {
         pageTitle: 'Log In',
         path: '/login',
         error: true,
@@ -156,11 +146,13 @@ exports.postSignUp = async(req, res, next) => {
     }
 
     const id_repo = await userRepository.last_user_id_inserted();
+    console.log('here : ')
     console.log(id_repo);
 
     let id;
     if (id_repo.success) {
-        id = id_repo.data[0] + 1;
+        id = id_repo.data[0].id + 1;
+        console.log('id ; ', id);
     } else {
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
@@ -186,7 +178,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     } else {
 
-        const url = '';
+        let url = '';
         if (_student) url = url + '/student';
         else url = url + '/teacher';
 

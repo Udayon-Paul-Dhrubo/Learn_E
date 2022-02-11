@@ -1,17 +1,17 @@
-<%- includes(../includes/starting.ejs) %>
+<%- include('../includes/starting.ejs') %>
 
     <body>
-        <%- includes(../includes/topbar.ejs) %>
-            <%- includes(../includes/search-top.ejs) %>
+        <%- include('../includes/topbar.ejs') %>
+            <%- include('../includes/search-top.ejs') %>
 
                 <div class='main'>
-                    <% if(error == 'true') { %>
+                    <% if(error) { %>
                         <div class="alert alert-danger alert-dismissible" align='center'>
                             <a href="/sign-up" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>ERROR!</strong>
                             <%= errorMessage %>
                         </div>
-                        <% }  else { } %>
+                        <% } %>
 
                             <section class="signup">
                                 <div class="container">
@@ -21,37 +21,52 @@
 
 
 
-                                            <form action="/sign-up" method="POST" class="register-form" id="register-form">
+                                            <form action="/sign-up" method="POST" class="register-form"
+                                                id="register-form">
                                                 <div class="form-group">
-                                                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                                    <label for="name"><i
+                                                            class="zmdi zmdi-account material-icons-name"></i></label>
                                                     <input type="text" name="name" id="name" placeholder="Your Name" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                                    <input type="email" name="email" id="email" placeholder="Your Email" />
+                                                    <input type="email" name="email" id="email"
+                                                        placeholder="Your Email" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                                    <input type="password" name="pass" id="pass" placeholder="Password" />
+                                                    <input type="password" name="pass" id="pass"
+                                                        placeholder="Password" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                                    <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+                                                    <input type="password" name="re_pass" id="re_pass"
+                                                        placeholder="Repeat your password" />
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <input type="checkbox" name="student" id="student" class="agree-term" />
-                                                    <label for="student" class="label-agree-term"><span><span></span></span>As a student.
-                                                <br>
-                                                <input type="checkbox" name="teacher" id="teacher" class="agree-term" />
-                                                <label for="teacher" class="label-agree-term"><span><span></span></span>As a teacher.
-                                                <br>
-                                                <input type="checkbox" name="agree" id="agree" class="agree-term" />
-                                                <label for="agree" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="/" class="term-service">Terms of service</a></label>
+                                                    <input type="checkbox" name="student" id="student"
+                                                        class="agree-term" />
+                                                    <label for="student"
+                                                        class="label-agree-term"><span><span></span></span>As a student.
+                                                        <br>
+                                                        <input type="checkbox" name="teacher" id="teacher"
+                                                            class="agree-term" />
+                                                        <label for="teacher"
+                                                            class="label-agree-term"><span><span></span></span>As a
+                                                            teacher.
+                                                            <br>
+                                                            <input type="checkbox" name="agree" id="agree"
+                                                                class="agree-term" />
+                                                            <label for="agree"
+                                                                class="label-agree-term"><span><span></span></span>I
+                                                                agree all statements in <a href="/"
+                                                                    class="term-service">Terms of service</a></label>
 
                                                 </div>
                                                 <div class="form-group form-button">
-                                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                                                    <input type="submit" name="signup" id="signup" class="form-submit"
+                                                        value="Register" />
                                                 </div>
                                             </form>
                                         </div>
@@ -65,7 +80,7 @@
 
 
 
-                            <%- includes(../includes/footer.ejs) %>
+                            <%- include('../includes/footer.ejs') %>
 
                 </div>
     </body>

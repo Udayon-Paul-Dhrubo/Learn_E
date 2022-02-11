@@ -1,19 +1,19 @@
-<%- includes(../includes/starting.ejs) %>
+<%- include('../includes/starting.ejs') %>
 
     <body>
-        <%- includes(../includes/topbar.ejs) %>
-            <%- includes(../includes/search-top.ejs) %>
+        <%- include('../includes/topbar.ejs') %>
+            <%- include('../includes/search-top.ejs') %>
 
 
                 <div class='main'>
 
-                    <% if(error == 'true') { %>
+                    <% if(error=='true' ) { %>
                         <div class="alert alert-danger alert-dismissible" align='center'>
                             <a href="/log-in" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>ERROR!</strong>
                             <%= errorMessage %>
                         </div>
-                        <% }  else { } %>
+                        <% } %>
 
 
                             <section class="sign-in">
@@ -30,21 +30,27 @@
 
                                                 <div class="form-group">
                                                     <label for="email"></label>
-                                                    <input type="text" name="email" id="email" placeholder="Your User Email" />
+                                                    <input type="text" name="email" id="email"
+                                                        placeholder="Your User Email" />
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="pass"></label>
-                                                    <input type="password" name="pass" id="pass" placeholder="Password" />
+                                                    <input type="password" name="pass" id="pass"
+                                                        placeholder="Password" />
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                                    <input type="checkbox" name="remember-me" id="remember-me"
+                                                        class="agree-term" />
+                                                    <label for="remember-me"
+                                                        class="label-agree-term"><span><span></span></span>Remember
+                                                        me</label>
                                                 </div>
 
                                                 <div class="form-group form-button">
-                                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                                                    <input type="submit" name="signin" id="signin" class="form-submit"
+                                                        value="Log in" />
                                                 </div>
 
                                             </form>
@@ -53,9 +59,15 @@
                                             <div class="social-login">
                                                 <span class="social-label">Or login with</span>
                                                 <ul class="socials">
-                                                    <li><a href="/log-in"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                                    <li><a href="/log-in"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                                    <li><a href="/log-in"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                                    <li><a href="/log-in"><i
+                                                                class="display-flex-center zmdi zmdi-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="/log-in"><i
+                                                                class="display-flex-center zmdi zmdi-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="/log-in"><i
+                                                                class="display-flex-center zmdi zmdi-google"></i></a>
+                                                    </li>
                                                 </ul>
                                             </div>
 
@@ -67,7 +79,7 @@
 
 
 
-                            <%- includes(../includes/footer.ejs) %>
+                            <%- include('../includes/footer.ejs') %>
 
                 </div>
     </body>
