@@ -18,11 +18,11 @@ class UserRepository extends Repository {
         return result;
     }
 
-    addUser = async function(id, name, email, password, student ){
-        console.log({id, name, email, password })
+    addUser = async function(id, name, email, password, student,image ){
+        console.log({id, name, email, password,image })
         
-        const query = 'insert into "User"("User_ID", "Username", "Email", "Password") values(:1, :2, :3, :4)';
-        const params = [id, name, email, password];
+        const query = 'insert into "User"("User_ID", "Username", "Email", "Password","image") values(:1, :2, :3, :4, :6)';
+        const params = [id, name, email, password,image];
         const result = await this.query(query, params, 'true');
 
         if(student){
@@ -53,7 +53,7 @@ class UserRepository extends Repository {
     }
 
     last_user_id_inserted = async function() {
-        const query = 'select MAX("course_id")AS "id" from "User" ';
+        const query = 'select MAX("User_ID")AS "id" from "User" ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;

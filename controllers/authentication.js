@@ -1,5 +1,10 @@
 const bcrypt = require('bcryptjs');
+
 const nodemailer = require('nodemailer')
+const fileupload=require('express-fileupload')
+const multer=require('multer')
+const upload=multer({dest : 'upload/'})
+
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 const UserRepository = require('../repository/user-info').UserRepository;
 const userRepository = new UserRepository();
@@ -41,39 +46,29 @@ exports.postLogIn = async(req, res, next) => {
 
 
     let msg = 'No account found!! Register Please..';
-
     if (user_repo.success && user_repo.data.length > 0) {
 
         const student_repo = await userRepository.isStudent(email);
-        console.log(student_repo);
-
+        console.log(student_repo);       
         if (student_repo.success && student_repo.data.length > 0) {
             const student = student_repo.data[0];
             console.log(student);
 
-            const url = '/student/user/' + student.id + '/';
-
-            return res.redirect(url);
+            const url = '/student/user/' + student.Student_id + '/';
+            res.redirect(url);
         }
 
-        const teacher_repo = await userRepository.isTeacher(email);
-        console.log(teacher_repo);
+      }
 
-        if (teacher_repo.success && teacher_repo.data.length > 0) {
-            const teacher = teacher_repo.data[0];
-            console.log(teacher);
 
-            const url = '/teacher/user/' + teacher.id + '/';
-
-            return res.redirect(url);
-        }
 
         msg = 'Something went wrong'
 
-    }
+    
 
 
-    res.render('login/sign-in', {
+
+        res.render('login/sign-in', {
         pageTitle: 'Log In',
         path: '/login',
         error: true,
@@ -105,9 +100,22 @@ exports.postSignUp = async(req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
     const re_pass = req.body.re_pass;
+  //  const img = req.body.uploaded_image;
     const student = req.body.student;
     const teacher = req.body.teacher;
     const agree = req.body.agree;
+    console.log(email);
+    console.log(req.body.uploaded_image);
+    console.log(typeof(req.body.uploaded_image));
+    if(req.files) console.log("some file was uploaded ");
+    else console.log("no file found");
+     var file =req.files.uploaded_image;
+   var img_name=file.name;
+    console.log(img_name);
+ file.mv('public/img/'+file.name);
+
+       
+   
 
 
     const _student = Boolean(student);
@@ -140,6 +148,7 @@ exports.postSignUp = async(req, res, next) => {
 
     const user_repo = await userRepository.findByEmail(email);
     console.log(user_repo)
+    console.log("finished searching for email id in database")
 
 
     if (user_repo.success && user_repo.data.length > 0) {
@@ -154,13 +163,15 @@ exports.postSignUp = async(req, res, next) => {
         })
 
     }
-
+    console.log("looking for a new user id")
     const id_repo = await userRepository.last_user_id_inserted();
+    console.log('here : ')
     console.log(id_repo);
 
     let id;
     if (id_repo.success) {
-        id = id_repo.data[0] + 1;
+        id = id_repo.data[0].id + 1;
+        console.log('id ; ', id);
     } else {
         return res.render('login/sign-up', {
             pageTitle: 'Registration',
@@ -172,7 +183,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     }
 
-    const know = await userRepository.addUser(id, name, email, pass, _student);
+    const know = await userRepository.addUser(id, name, email, pass, _student,img_name);
     console.log(know)
 
     if (know.success == 'false') {
@@ -186,7 +197,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     } else {
 
-        const url = '';
+        let url = '';
         if (_student) url = url + '/student';
         else url = url + '/teacher';
 
