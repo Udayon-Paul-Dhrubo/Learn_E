@@ -21,8 +21,8 @@
 
 
 
-                                            <form action="/sign-up" method="POST" class="register-form"
-                                                id="register-form">
+                                            <form action="/sign-up" method="POST" enctype="multipart/form-data"
+                                                class="register-form" id="register-form">
                                                 <div class="form-group">
                                                     <label for="name"><i
                                                             class="zmdi zmdi-account material-icons-name"></i></label>
@@ -45,12 +45,13 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="uploaded_image" class="col-md-3 control-label">Profile
+                                                    <label for="mob_no" class="col-md-3 control-label">Profile
                                                         Image</label>
-
-                                                    <input type="file" name="uploaded_image" id="uploaded_image"
-                                                        enctype="multipart/form-data" accept="" />
-
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" runat="Server" type="file"
+                                                            name="uploaded_image" enctype="multipart/form-data"
+                                                            accept="" />
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
 

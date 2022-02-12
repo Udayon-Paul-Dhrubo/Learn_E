@@ -27,4 +27,4 @@ app.use(authRoutes)
 app.use('/student', studentRoutes)
 app.use('/teacher', teacherRoutes)
 
-app.listen(3002)
+app.listen(3000)

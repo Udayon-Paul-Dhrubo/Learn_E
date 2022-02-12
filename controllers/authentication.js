@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 const nodemailer = require('nodemailer')
-//const fileupload=require('express-fileupload')
+const fileupload=require('express-fileupload')
 const multer=require('multer')
 const upload=multer({dest : 'upload/'})
 
@@ -107,11 +107,13 @@ exports.postSignUp = async(req, res, next) => {
     console.log(email);
     console.log(req.body.uploaded_image);
     console.log(typeof(req.body.uploaded_image));
-    if(!req.files) console.log("no files uploaded");
+    if(req.files) console.log("some file was uploaded ");
+    else console.log("no file found");
      var file =req.files.uploaded_image;
    var img_name=file.name;
     console.log(img_name);
- file.mv('public/images'+file.name);
+ file.mv('public/img/'+file.name);
+
        
    
 
@@ -146,6 +148,7 @@ exports.postSignUp = async(req, res, next) => {
 
     const user_repo = await userRepository.findByEmail(email);
     console.log(user_repo)
+    console.log("finished searching for email id in database")
 
 
     if (user_repo.success && user_repo.data.length > 0) {
@@ -160,7 +163,7 @@ exports.postSignUp = async(req, res, next) => {
         })
 
     }
-
+    console.log("looking for a new user id")
     const id_repo = await userRepository.last_user_id_inserted();
     console.log('here : ')
     console.log(id_repo);
@@ -180,7 +183,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     }
 
-    const know = await userRepository.addUser(id, name, email, pass, _student);
+    const know = await userRepository.addUser(id, name, email, pass, _student,img_name);
     console.log(know)
 
     if (know.success == 'false') {
