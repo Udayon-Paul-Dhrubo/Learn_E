@@ -1,5 +1,10 @@
 const bcrypt = require('bcryptjs');
+
 const nodemailer = require('nodemailer')
+//const fileupload=require('express-fileupload')
+const multer=require('multer')
+const upload=multer({dest : 'upload/'})
+
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 const UserRepository = require('../repository/user-info').UserRepository;
 const userRepository = new UserRepository();
@@ -95,9 +100,20 @@ exports.postSignUp = async(req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
     const re_pass = req.body.re_pass;
+  //  const img = req.body.uploaded_image;
     const student = req.body.student;
     const teacher = req.body.teacher;
     const agree = req.body.agree;
+    console.log(email);
+    console.log(req.body.uploaded_image);
+    console.log(typeof(req.body.uploaded_image));
+    if(!req.files) console.log("no files uploaded");
+     var file =req.files.uploaded_image;
+   var img_name=file.name;
+    console.log(img_name);
+ file.mv('public/images'+file.name);
+       
+   
 
 
     const _student = Boolean(student);

@@ -28,7 +28,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     getTestimonials_about_learnE = async function() {
-        const query = 'select "Testimonial",(SELECT "Name" FROM "User" WHERE "User_ID"=T."Student_id")AS "Student_Name" from "Student" T where "Testimonial" IS NOT NULL';
+        const query = 'SELECT U."Name",U."image",S."Testimonial" FROM "User" U JOIN "Student" S ON(U."User_ID"=S."Student_id") where S."Testimonial" is NOT NULL';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;
