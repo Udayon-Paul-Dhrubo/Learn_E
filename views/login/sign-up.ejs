@@ -4,8 +4,14 @@
         <%- include('../includes/topbar.ejs') %>
             <%- include('../includes/search-top.ejs') %>
 
+
+
+
+
                 <div class='main'>
-                    <% if(error) { %>
+
+                    <% if(error == 'true') { %>
+
                         <div class="alert alert-danger alert-dismissible" align='center'>
                             <a href="/sign-up" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>ERROR!</strong>
@@ -13,6 +19,8 @@
                         </div>
                         <% } %>
 
+
+                            <!-- Sign up form -->
                             <section class="signup">
                                 <div class="container">
                                     <div class="signup-content">
@@ -20,9 +28,11 @@
                                             <h2 class="form-title">Sign up</h2>
 
 
-
                                             <form action="/sign-up" method="POST" enctype="multipart/form-data"
                                                 class="register-form" id="register-form">
+
+                                         
+
                                                 <div class="form-group">
                                                     <label for="name"><i
                                                             class="zmdi zmdi-account material-icons-name"></i></label>
@@ -55,6 +65,7 @@
                                                 </div>
                                                 <div class="form-group">
 
+
                                                     <input type="checkbox" name="student" id="student"
                                                         class="agree-term" />
                                                     <label for="student"
@@ -72,6 +83,8 @@
                                                                 class="label-agree-term"><span><span></span></span>I
                                                                 agree all statements in <a href="/"
                                                                     class="term-service">Terms of service</a></label>
+                                                   
+
 
                                                 </div>
                                                 <div class="form-group form-button">
@@ -80,6 +93,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+
                                         <div class="signup-image">
                                             <figure><img src="/img/signup-image.jpg" alt="sing up image"></figure>
                                             <a href="/log-in" class="signup-image-link">I am already member</a>
@@ -87,6 +102,8 @@
                                     </div>
                                 </div>
                             </section>
+
+                            <!-- Sing in  Form -->
 
 
 
