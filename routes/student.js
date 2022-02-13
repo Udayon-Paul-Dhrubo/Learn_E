@@ -15,6 +15,8 @@ router.get('/user/:ID/courses', studentController.getCourses)
 
 router.get('/user/:ID/teachers', studentController.getTeachers)
 
+router.get('/user/:ID/category-view/:CATEGORY/', studentController.get_Category_view)
+
 //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 
 //router.get('/user/:ID/profile-view', studentController.getProfileView)

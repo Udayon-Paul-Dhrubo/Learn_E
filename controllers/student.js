@@ -90,16 +90,16 @@ exports.getCourses = async(req, res, next) => {
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
 
-    const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
-    console.log(testimonial_repo);
+    const category_repo = await infoRepository.getTopCategories();
+    console.log(category_repo);
 
-    if (testimonial_repo.success && user_repo.success) {
-        return res.render('home/about-view.ejs', {
+    if (category_repo.success && user_repo.success) {
+        return res.render('home/courses-view.ejs', {
             pageTitle: 'About',
             path: '/about',
             isStudent: 'true',
             logged_in: 'true',
-            testimonials: testimonial_repo.data,
+            categories: category_repo.data,
             userInfo: user_repo.data[0]
         })
     }
@@ -109,57 +109,37 @@ exports.getCourses = async(req, res, next) => {
 
 }
 
-exports.getCourses = async(req, res, next) => {
+exports.get_Category_view = async(req, res, next) => {
 
     const userId = req.params.ID;
-
     const user_repo = await userRepository.findById(userId);
-    console.log(user_repo);
+    console.log('here : ', user_repo);
 
-    const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
-    console.log(testimonial_repo);
+    const reqCategory = req.params.CATEGORY;
+    console.log('here : ', reqCategory);
 
-    if (testimonial_repo.success && user_repo.success) {
-        return res.render('home/about-view.ejs', {
-            pageTitle: 'About',
-            path: '/about',
+    const courses_repo = await infoRepository.getCoursesOfCatagory(reqCategory);
+    console.log(courses_repo);
+
+    if (user_repo.success && courses_repo.success) {
+        return res.render('home/course-list.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
-            testimonials: testimonial_repo.data,
-            userInfo: user_repo.data[0]
+            category: reqCategory,
+            userInfo: user_repo.data[0],
+            courses: courses_repo.data,
+            fromCategory: 'true',
+            fromSearch: 'false'
         })
     }
 
-    const url = '/student/user/' + userId + '/';
-    res.redirect(url)
+
 
 }
 
-exports.getCourses = async(req, res, next) => {
 
-    const userId = req.params.ID;
-
-    const user_repo = await userRepository.findById(userId);
-    console.log(user_repo);
-
-    const testimonial_repo = await infoRepository.getTestimonials_about_learnE();
-    console.log(testimonial_repo);
-
-    if (testimonial_repo.success && user_repo.success) {
-        return res.render('home/about-view.ejs', {
-            pageTitle: 'About',
-            path: '/about',
-            isStudent: 'true',
-            logged_in: 'true',
-            testimonials: testimonial_repo.data,
-            userInfo: user_repo.data[0]
-        })
-    }
-
-    const url = '/student/user/' + userId + '/';
-    res.redirect(url)
-
-}
 
 
 exports.getTeachers = async(req, res, next) => {

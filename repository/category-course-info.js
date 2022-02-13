@@ -42,6 +42,16 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
 
+    //finding courses for specific catagory
+    getCoursesOfCatagory = async function(Catagory) {
+
+        const query = 'select "course_id", "Description", "Title","Price","Rating","total_Enrolled" from "Course" where "Catagory"= :1';
+        const params = [Catagory];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+
 
 
 }

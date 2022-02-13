@@ -1,109 +1,162 @@
-<%- includes(../includes/starting.ejs) %>
+<%- include('../includes/starting.ejs') %>
 
     <body>
-        <%- includes(../includes/topbar.ejs) %>
-            <%- includes(../includes/search-top.ejs) %>
+        <%- include('../includes/topbar.ejs') %>
+            <%- include('../includes/search-top.ejs') %>
 
-                <% let url = ''; %>
+                <% let url='' ; if(isStudent=='true' ) url=url + '/student/user/' + userInfo.User_ID; else url=url
+                    + '/teacher/user/' + userInfo.User_ID; %>
 
-                    <% 
-            if(isStudent == 'true') {
-                url = url + 'student/user' + userInfo.id + '/';
-            }
-            else {
-                url = url + 'teacher/user/' + userInfo.id + '/';
-            }            
-        %>
+                    <section class="white section">
+                        <div class="container">
 
-                        <section class="white section">
-                            <div class="container">
-
-                                <% if( fromCategory == 'true') { %>
-                                    <h5 class="text-primary text-uppercase" style="display: inline; margin-right: 1rem;">Category :</h5>
-                                    <h2 class="text-uppercase" style="letter-spacing: 2px; margin-bottom: 5rem; display: inline; color: #a33208;">
-                                        <%= category %>
+                            <% if( fromCategory=='true' ) { %>
+                                <h5 class="text-primary text-uppercase" style="display: inline; margin-right: 1rem;">
+                                    Category :</h5>
+                                <h2 class="text-uppercase" style="letter-spacing: 1px; margin-bottom: 5rem; display: inline; color: #a33208;">
+                                    <%= category %>
+                                </h2>
+                                <hr>
+                                <% } else { %>
+                                    <h5 class="text-primary text-uppercase" style="display: inline; margin-right: 1rem;">Result for :</h5>
+                                    <h2 class="text-uppercase" style="margin-bottom: 5rem; display: inline; color: #a33208;">
+                                        <%= req_search %>
                                     </h2>
                                     <hr>
                                     <% } %>
-                                        <% else if( fromSearch == 'true') { %>
-                                            <h5 class="text-primary text-uppercase" style="display: inline; margin-right: 1rem;">Result for :</h5>
-                                            <h2 class="text-uppercase" style="margin-bottom: 5rem; display: inline; color: #a33208;">
-                                                <%= req_search %>
-                                            </h2>
-                                            <hr>
-                                            <% } %>
 
 
-                                                <% if( courses.length > 10 ) { %>
+                                        <% if( courses.length> 10 ) { %>
 
-                                                    <% for( let index = 0; index < 10; index++ ) { %>
+                                            <% for( let index=0; index < 10; index++ ) { %>
 
-                                                        <div class="row course-list">
-                                                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                                                <div class="shop-item-list entry">
-                                                                    <div class="">
-                                                                        <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png" alt="">
-                                                                        <div class="magnifier">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8 col-md-8">
-                                                                <div class="shop-list-desc">
-                                                                    <h4 style="font-size:large; margin-top:0; margin-bottom: 0;">
-                                                                        <a href="<%= url + courses[index].id %> ">
-                                                                            <%= courses[index].Title  %>
-                                                                        </a>
-                                                                    </h4>
-                                                                    <div class="shopmeta" style="margin-bottom:0;">
-                                                                        <span class="pull-left"><strong>Course Price:</strong> $<%= courses[index].price  %>  </span>
-                                                                        <span class="rating pull-right">
-
-                                        <% let rate = Math.floor(courses[index].Rating); %> 
-                                        <% for( let star = 0; star<rate; star++){ %> 
-                                            <i class="fa fa-star"></i>
-                                        <% } %> 
-                                        <% if( rate < courses[index].Rating ) { %>
-                                            <i class="fa fa-star-half-alt "></i>
-                                        <% } %>                                      
-                                        
-                                    </span>
-                                                                    </div>
-
-
-                                                                    <hr class="invis clearfix">
-                                                                    <p style="font-size:small; margin-bottom:0;">
-                                                                        <%= courses[index].description %>
-                                                                    </p>
-                                                                    <a href="<%= url + courses[index].id %> " class="btn btn-default btn-sm">Learn More</a>
+                                                <div class="row course-list">
+                                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                                        <div class="shop-item-list entry">
+                                                            <div class="">
+                                                                <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png" alt="">
+                                                                <div class="magnifier">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <% } %>
+                                                    </div>
+                                                    <div class="col-md-8 col-md-8">
+                                                        <div class="shop-list-desc">
+                                                            <h4 style="font-size:large; margin-top:0; margin-bottom: 0;">
+                                                                <a href="<%= url + '/course-view/' + courses[index].course_id %> ">
+                                                                    <%= courses[index].Title %>
+                                                                </a>
+                                                            </h4>
+                                                            <div class="shopmeta" style="margin-bottom:0;">
+                                                                <span class="pull-left"><strong>Course
+                                                                        Price:<%= ' ' + 
+                                                                        course.Price %>  <small>BDT </small> </span>
+                                                                <span class="rating pull-right">
 
-                                                            <hr class="invis">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <a href="#" class="btn btn-default btn-block"><i class="fas fa-chevron-left"></i></a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <a href="#" class="btn btn-default btn-block"><i class="fas fa-chevron-right"></i></a>
-                                                                </div>
+                                                                    <% let rate=Math.floor(courses[index].Rating); %>
+                                                                        <% for( let star=0; star<rate; star++){ %>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <% } %>
+                                                                                <% if( rate < courses[index].Rating ) {
+                                                                                    %>
+                                                                                    <i class="fa fa-star-half-alt "></i>
+                                                                                    <% } %>
+
+                                                                </span>
                                                             </div>
 
 
+                                                            <hr class="invis clearfix">
+                                                            <p style="font-size:small; margin-bottom:0;">
+                                                                <%= courses[index].Description %>
+                                                            </p>
+                                                            <a href="<%= url + '/course-view/' + courses[index].course_id %> " class="btn btn-default btn-sm">Learn More</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% } %>
 
+                                                    <hr class="invis">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <a href="#" class="btn btn-default btn-block"><i
+                                                                    class="fas fa-chevron-left"></i></a>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="#" class="btn btn-default btn-block"><i
+                                                                    class="fas fa-chevron-right"></i></a>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <% } else { %>
+
+                                                        <% for( let course of courses ) { %>
+
+                                                            <div class="row course-list">
+                                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                                    <div class="shop-item-list entry">
+                                                                        <div class="">
+                                                                            <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png" alt="">
+                                                                            <div class="magnifier">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-md-8">
+                                                                    <div class="shop-list-desc">
+                                                                        <h4 style="font-size:large; margin-top:0; margin-bottom: 0;">
+                                                                            <a href="<%= url + '/course-view/' +  course.course_id %> ">
+                                                                                <%= course.Title %>
+                                                                            </a>
+                                                                        </h4>
+                                                                        <div class="shopmeta" style="margin-bottom:0;">
+                                                                            <span class="pull-left"><strong>Course
+                                                                                    Price:</strong><%= ' ' + 
+                                                                                    course.Price %>  <small>BDT </small> </span>
+                                                                            <span class="rating pull-right">
+
+                                                                                <% let
+                                                                                    rate=Math.floor(course.Rating);
+                                                                                    %>
+                                                                                    <% for( let star=0; star<rate;
+                                                                                        star++){ %>
+                                                                                        <i class="fa fa-star"></i>
+                                                                                        <% } %>
+                                                                                            <% if( rate <
+                                                                                                course.Rating )
+                                                                                                { %>
+                                                                                                <i
+                                                                                                    class="fa fa-star-half-alt "></i>
+                                                                                                <% } %>
+
+                                                                            </span>
+                                                                        </div>
+
+
+                                                                        <hr class="invis clearfix">
+                                                                        <p style="font-size:small; margin-bottom:0;">
+                                                                            <%= course.Description %>
+                                                                        </p>
+                                                                        <a href="<%= url + '/course-view/' + course.course_id %> " class="btn btn-default btn-sm">Learn
+                                                                            More</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <% } %>
 
-
-
-                            </div>
-                        </section>
+                                                                <% } %>
 
 
 
+                        </div>
+                    </section>
 
-                        <%- includes(../includes/footer.ejs) %>
+
+
+
+                    <%- include('../includes/footer.ejs') %>
     </body>
 
     </html>

@@ -1,49 +1,57 @@
-<%- includes(../includes/starting.ejs) %>
+<%- include('../includes/starting.ejs') %>
 
     <body>
-        <%- includes(../includes/topbar.ejs) %>
-            <%- includes(../includes/search-top.ejs) %>
+        <%- include('../includes/topbar.ejs') %>
+            <%- include('../includes/search-top.ejs') %>
 
-                <!-- Category Start -->
-                <% if(categories.length > 0 ) { %>
 
-                    <div class="container-fluid py-5">
-                        <div class="container pt-5 pb-3">
+                <% let url = '';
+                    if(isStudent =='true') url = url + '/student/user/' + userInfo.User_ID;
+                    else url = url + '/teacher/user/' + userInfo.User_ID;
+                                    
+                 %>
 
-                            <div class="text-center mb-5">
-                                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-                                <h1>Explore Subjects</h1>
-                            </div>
+                    <!-- Category Start -->
+                    <% if(categories.length > 0 ) { %>
 
-                            <div class="row">
+                        <div class="container-fluid py-5">
+                            <div class="container pt-5 pb-3">
 
-                                <% for(let category of categories ) { %>
+                                <div class="text-center mb-5">
+                                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
+                                    <h1>Explore Subjects</h1>
+                                </div>
 
-                                    <div class="col-lg-3 col-md-6 mb-4">
-                                        <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                                            <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                                            <a class="cat-overlay text-white text-decoration-none" href="/category-view/<%= category.Catagory%>/">
-                                                <h4 class="text-white font-weight-medium">
-                                                    <%= category.Catagory %>
-                                                </h4>
-                                            </a>
+                                <div class="row">
+
+                                    <% for(let category of categories ) { %>
+
+                                        <div class="col-lg-3 col-md-6 mb-4">
+                                            <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                                                <img class="img-fluid" src="/img/cat-3.jpg" alt="">
+                                                <a class="cat-overlay text-white text-decoration-none" href=" <%= url + '/category-view/' + category.Catagory + '/' %>  ">
+                                                    <h4 class="text-white font-weight-medium">
+                                                        <%= category.Catagory %>
+                                                    </h4>
+                                                    <span><%= category.Total_Courses  %>  Courses</span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <% } %>
+                                        <% } %>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
+                        <% } %>
 
-                        <!-- Category ends -->
-
+                            <!-- Category ends -->
 
 
 
 
-                        <%- includes(../includes/footer.ejs) %>
+
+                            <%- include('../includes/footer.ejs') %>
     </body>
 
     </html>

@@ -7,8 +7,7 @@
         <% if(logged_in=='false' ) { %>
 
             <a href="/" class="navbar-brand">
-                <img src="/img/logo1.png" alt="Learn_E" width="280" height="100" class="d-inline-block align-text-top"
-                    style="margin-left: 5px;">
+                <img src="/img/logo1.png" alt="Learn_E" width="280" height="100" class="d-inline-block align-text-top" style="margin-left: 5px;">
             </a>
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
@@ -30,19 +29,16 @@
             <% } else { %>
 
                 <% if( isStudent=='true' ) { %>
-                    <a href="/student/user/<%= userInfo.id %>/" class="navbar-brand">
-                        <img src="/img/logo1.png" alt="Learn_E" width="280" height="100"
-                            class="d-inline-block align-text-top" style="margin-left: 5px;">
+                    <a href="/student/user/<%= userInfo.User_ID %>/" class="navbar-brand">
+                        <img src="/img/logo1.png" alt="Learn_E" width="280" height="100" class="d-inline-block align-text-top" style="margin-left: 5px;">
                     </a>
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
-                            <a href="/student/user/<%= userInfo.id %>/"
-                                class="nav-item nav-link <%= path=='/home'? 'active':'' %>">Home</a>
-                            <a href="/student/user/<%= userInfo.id %>/about"
-                                class="nav-item nav-link<%= path=='/about'? 'active':'' %>">About</a>
-                            <a href="/student/user/<%= userInfo.id %>/courses" class="nav-item nav-link">Courses</a>
-                            <a href="/student/user/<%= userInfo.id %>/teachers" class="nav-item nav-link">Teachers</a>
+                            <a href="/student/user/<%= userInfo.User_ID %>/" class="nav-item nav-link <%= path=='/home'? 'active':'' %>">Home</a>
+                            <a href="/student/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link<%= path=='/about'? 'active':'' %>">About</a>
+                            <a href="/student/user/<%= userInfo.User_ID %>/courses" class="nav-item nav-link">Courses</a>
+                            <a href="/student/user/<%= userInfo.User_ID %>/teachers" class="nav-item nav-link">Teachers</a>
                         </div>
                     </div>
 
@@ -51,47 +47,38 @@
                     </button>
 
                     <div class="column text-end float-right header-profile" style="margin-right:2px;">
-                        <a href="/student/user/<%= userInfo.id %>/profile-view" class="btn btn-secondary"
-                            style="color:#ea6434;">
+                        <a href="/student/user/<%= userInfo.User_ID %>/profile-view" class="btn btn-secondary" style="color:#ea6434;">
                             <img src="/img/person.jpg" width="50" height="50" style="border-color: rgb(51, 100, 207);">
                             <%= userInfo.Name %>
                         </a>
                     </div>
 
                     <div class="column text-end float-right header-profile">
-                        <a href="/sign-out" class="btn btn-secondary" style="color:#ea3434; border-radius: 50px;"> <i
-                                class="fas fa-sign-out-alt"></i> </a>
+                        <a href="/sign-out" class="btn btn-secondary" style="color:#ea3434; border-radius: 50px;"> <i class="fas fa-sign-out-alt"></i> </a>
                     </div>
 
                     <% } else { %>
 
-                        <a href="/teacher/user/<%= userInfo.id %>/" class="navbar-brand">
-                            <img src="/img/logo1.png" alt="Learn_E" width="280" height="100"
-                                class="d-inline-block align-text-top" style="margin-left: 5px;">
+                        <a href="/teacher/user/<%= userInfo.User_ID %>/" class="navbar-brand">
+                            <img src="/img/logo1.png" alt="Learn_E" width="280" height="100" class="d-inline-block align-text-top" style="margin-left: 5px;">
                         </a>
 
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav py-0">
-                                <a href="/teacher/user/<%= userInfo.id %>/"
-                                    class="nav-item nav-link <%= path=='/home'? 'active':'' %>">Home</a>
-                                <a href="/teacher/user/<%= userInfo.id %>/about"
-                                    class="nav-item nav-link<%= path=='/about'? 'active':'' %>">About</a>
-                                <a href="/teacher/user/<%= userInfo.id %>/courses" class="nav-item nav-link">Courses</a>
-                                <a href="/teacher/user/<%= userInfo.id %>/teachers"
-                                    class="nav-item nav-link">Teachers</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/" class="nav-item nav-link <%= path=='/home'? 'active':'' %>">Home</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link<%= path=='/about'? 'active':'' %>">About</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/courses" class="nav-item nav-link">Courses</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/teachers" class="nav-item nav-link">Teachers</a>
                             </div>
                         </div>
 
-                        <button type="button" class="navbar-toggler" data-toggle="collapse"
-                            data-target="#navbarCollapse">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
                         <div class="column text-end float-right header-profile" style="margin-right:2px;">
-                            <a href="/teacher/user/<%= userInfo.id %>/profile-view" class="btn btn-secondary"
-                                style="color:#ea6434;">
-                                <img src="/img/person.jpg" width="50" height="50"
-                                    style="border-color: rgb(51, 100, 207);">
+                            <a href="/teacher/user/<%= userInfo.User_ID %>/profile-view" class="btn btn-secondary" style="color:#ea6434;">
+                                <img src="/img/person.jpg" width="50" height="50" style="border-color: rgb(51, 100, 207);">
                                 <%= userInfo.name %>
                             </a>
                         </div>

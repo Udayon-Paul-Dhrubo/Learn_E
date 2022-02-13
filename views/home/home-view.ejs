@@ -77,8 +77,8 @@
 
                 <!-- Category Start -->
                 <% if(categories.length) { %>
-                    <div class="container py-5">
-                        <div class="container pt-5 pb-3">
+                    <div class="container ">
+                        <div class="container">
                             <div class="text-center mb-5">
                                 <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
                                 <h1>Explore Top Subjects</h1>
@@ -98,13 +98,13 @@
                                                 </a>
                                                 <% } else { %>
                                                     <% if(isStudent=='true') { %>
-                                                        <a class="cat-overlay text-white text-decoration-none" href="student/user/<%=userInfo.id%>/category-view">
+                                                        <a class="cat-overlay text-white text-decoration-none" href="/student/user/<%=userInfo.User_ID%>/category-view/<%= category.Catagory %>/">
                                                             <h4 class="text-white font-weight-medium">
                                                                 <%= category.Catagory %>
                                                             </h4>
                                                         </a>
                                                         <% } else { %>
-                                                            <a class="cat-overlay text-white text-decoration-none" href="teacher/user/<%=userInfo.id%>/category-view/<%= course.Catagory %>">
+                                                            <a class="cat-overlay text-white text-decoration-none" href="/teacher/user/<%=userInfo.User_ID%>/category-view/<%= course.Catagory %>/">
                                                                 <h4 class="text-white font-weight-medium">
                                                                     <%= category.Catagory %>
                                                                 </h4>

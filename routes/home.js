@@ -11,6 +11,8 @@ router.post('/', homeController.postSearch)
 
 router.get('/about', homeController.getAbout)
 
+router.get('/')
+
 
 
 
