@@ -47,12 +47,34 @@ exports.getHome = async(req, res, next) => {
 
 }
 
-exports.postSearch = (req, res, next) => {
-    const searchReq = req.body.search_bar_req;
+exports.postSearch = async(req, res, next) => {
+    let searchReq = req.body.search_bar_req;
     console.log(searchReq);
 
-    //more to add later
+    searchReq = searchReq.toLowerCase();
+
+    console.log(searchReq);
+
+    const search_repo = await infoRepository.getCoursesofSearch();
+    console.log(search_repo);
+
+    if (search_repo.success) {
+        return res.render('home/course-list.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'true',
+            logged_in: 'false',
+            req: searchReq,
+            userInfo: user_repo.data[0],
+            courses: search_repo.data,
+            fromCategory: 'false',
+            fromSearch: 'true'
+        })
+    }
+
+
     const userId = req.params.ID;
+    console.log('test if params get : ', userId)
     const url = '/student/user/' + userId + '/';
     res.redirect(url);
 }

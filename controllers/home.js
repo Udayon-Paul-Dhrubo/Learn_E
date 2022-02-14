@@ -62,7 +62,6 @@ exports.postSearch = async(req, res, next) => {
         })
     }
 
-    //more to add later
     res.redirect('/');
 }
 
