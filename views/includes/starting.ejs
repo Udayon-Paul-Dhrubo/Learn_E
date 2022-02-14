@@ -28,8 +28,14 @@
     <link rel="stylesheet" type="text/css" href="/css/A.carousel.css.pagespeed.cf.VktteGiLwl.css">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <!--<link rel="stylesheet" type="text/css" href="/css/indside-course.css">-->
-    <link href="/css/extra-style.css" type="text/css" rel="stylesheet">
+    <% if(path == '/login') { %>
+        <link rel="stylesheet" type="text/css" href="/css/sign-up.css">
+        <% } %>
 
-    <link href="/css/style.css" type="text/css" rel="stylesheet">
+            <% if(path == '/insideCourse') { %>
+                <link rel="stylesheet" type="text/css" href="/css/indside-course.css">
+                <% } %>
+
+                    <link href="/css/extra-style.css" type="text/css" rel="stylesheet">
+                    <link href="/css/style.css" type="text/css" rel="stylesheet">
 </head>
