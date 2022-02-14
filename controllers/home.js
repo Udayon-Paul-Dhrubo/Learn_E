@@ -38,6 +38,9 @@ exports.getHome = async(req, res, next) => {
 }
 
 exports.postSearch = async(req, res, next) => {
+
+    let start = req.params.START;
+
     let searchReq = req.body.search_bar_req;
     console.log(searchReq);
 
@@ -60,7 +63,7 @@ exports.postSearch = async(req, res, next) => {
             courses: search_repo.data,
             fromCategory: 'false',
             fromSearch: 'true',
-            start: 0
+            start: start
         })
     }
 

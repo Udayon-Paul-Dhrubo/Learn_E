@@ -72,7 +72,7 @@ exports.postSearch = async(req, res, next) => {
             pageTitle: 'Courses',
             path: '/courses',
             isStudent: 'true',
-            logged_in: 'false',
+            logged_in: 'true',
             req: searchReq,
             userInfo: user_repo.data[0],
             courses: search_repo.data,

@@ -8,7 +8,7 @@ const router = require('express-promise-router')()
 
 router.get('/', homeController.getHome)
 
-router.post('/search', homeController.postSearch)
+router.post('/search/:START', homeController.postSearch)
 
 router.get('/about', homeController.getAbout)
 
