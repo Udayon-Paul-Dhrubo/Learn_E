@@ -1,0 +1,146 @@
+<%- includes('../includes/starting.ejs') %>
+
+    <body>
+        <%- includes('../includes/topbar.ejs') %>
+            <%- includes('../includes/search-top.ejs') %>
+
+                <section class="white section">
+                    <div class="container-fluid" style="width:90%;">
+                        <div class="row">
+
+                            <!-- left side bar starts-->
+                            <div id="course-left-sidebar" class="col-md-4">
+                                <div class="course-image-widget">
+                                    <img src="upload/xstudent_06.png.pagespeed.ic.M4STWuf1XS.png" alt="" class="img-responsive">
+                                </div>
+                                <div class="course-meta">
+                                    <h2 style="color:white;">AMANDA FOX</h2>
+                                    <hr>
+                                    <p>My Profile <small><a href="profile-view-edit.html">Edit <i></i><i class="fa fa-pen"></i></a></small></p>
+                                    <hr>
+                                    <p>My Courses <small class="label label-primary">12</small></p>
+                                    <hr>
+                                    <p>Notifications <small class="label label-primary"><a href="#">0</a></small></p>
+                                </div>
+                            </div>
+                            <!-- left side bar ends-->
+
+
+                            <% if(editReq == 'true') { %>
+
+                                <div id="course-content" class="col-md-8">
+                                    <div class="course-description">
+                                        <h3 class="course-title">Edit Profile</h3>
+
+                                        <div class="edit-profile">
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <label>First / Last Name</label>
+                                                    <input type="text" class="form-control" placeholder="Amanda FOX">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email Address</label>
+                                                    <input type="email" class="form-control" placeholder="name@learnplus.com">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" placeholder="************">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Re-Enter Password</label>
+                                                    <input type="password" class="form-control" placeholder="************">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>About Your Self</label>
+                                                    <textarea type="text" class="form-control" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.."></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Upload Avatar</label>
+                                                    <input type="file" class="btn btn-secondary">
+
+                                                </div>
+                                                <button type=" submit " class="btn btn-primary ">Submit Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <% } else { %>
+
+                                    <div class="container col-md-8">
+
+                                        <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;"> My Courses </a>
+                                        <a href="" class="btn btn-secondary text-primary text-uppercase <%= myWishReq=='true'? 'active':'' %>" style="display: inline;">My Wishlist </a>
+
+                                        <hr style="margin-bottom : 2rem;">
+
+                                        <% if(courses.length > 0 ) { %>
+
+                                            <!-- for loop here -->
+                                            <div class="row course-list ">
+
+                                                <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                                    <div class="shop-item-list">
+                                                        <div>
+                                                            <img src="upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png " alt=" ">
+                                                            <div class="magnifier ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8 col-md-8 ">
+                                                    <div class="shop-list-desc ">
+                                                        <h4 style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
+                                                            <a href="course-single.html ">Learn Web Design & Development</a>
+                                                        </h4>
+
+                                                        <div class="shopmeta " style="margin-bottom:0; ">
+                                                            <span class="rating ">
+                                                                <i class="fa fa-star "></i>
+                                                                <i class="fa fa-star "></i>
+                                                                <i class="fa fa-star "></i>
+                                                                <i class="fa fa-star "></i>
+                                                                <i class="fa fa-star-half-alt "></i>
+                                                            </span>
+                                                        </div>
+
+                                                        <!--progress bar -->
+                                                        <p class="lead" style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">90% Completed</p>
+                                                        <div class="progress ">
+                                                            <div class="progress-bar " role="progressbar " style="width: 40%; background-color: rgb(18, 19, 19); ">
+                                                                <span class="sr-only " style=" margin-top: 0; ">Complete 40%</span>
+                                                            </div>
+                                                        </div>
+                                                        <!--progress bar ends-->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- for loop ends here -->
+
+                                            <% } else { %>
+                                                <h2 class="text-primary text-uppercase" style="letter-spacing: 5px; margin-top: 5rem;">
+                                                    No courses yet..
+                                                </h2>
+                                                <% } %>
+
+                                    </div>
+                                    <% }%>
+
+
+
+
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <%- includes('../includes/footer.ejs') %>
+    </body>
+
+    </html>
