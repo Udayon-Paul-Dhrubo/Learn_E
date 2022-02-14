@@ -5,13 +5,13 @@ const infoRepository = new Category_Course_Teacher_Info_Repository();
 exports.getHome = async(req, res, next) => {
 
     const category_repo = await infoRepository.getTopCategories();
-    console.log(category_repo);
+    //console.log(category_repo);
 
     const course_repo = await infoRepository.getTopCourses();
-    console.log(course_repo);
+    //console.log(course_repo);
 
     const teacher_repo = await infoRepository.getTopTeachers();
-    console.log(teacher_repo);
+    //console.log(teacher_repo);
 
     if (category_repo.success && category_repo.success) {
         return res.render('home/home-view.ejs', {
@@ -37,10 +37,30 @@ exports.getHome = async(req, res, next) => {
 
 }
 
-exports.postSearch = (req, res, next) => {
-    const searchReq = req.body.search_bar_req;
+exports.postSearch = async(req, res, next) => {
+    let searchReq = req.body.search_bar_req;
     console.log(searchReq);
-    
+
+    searchReq = searchReq.toLowerCase();
+
+    console.log(searchReq);
+
+    const search_repo = await infoRepository.getCoursesofSearch();
+    console.log(search_repo);
+
+    if (search_repo.success) {
+        return res.render('home/course-list.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'false',
+            logged_in: 'false',
+            req: searchReq,
+            userInfo: user_repo.data[0],
+            courses: search_repo.data,
+            fromCategory: 'false',
+            fromSearch: 'true'
+        })
+    }
 
     //more to add later
     res.redirect('/');
