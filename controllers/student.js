@@ -169,6 +169,14 @@ exports.get_Category_view = async(req, res, next) => {
         })
     }
 
+}
+
+exports.get_course_view = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('here : ', user_repo);
+
+    const courseId = req.params.CRSID;
 
 
 }

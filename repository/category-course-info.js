@@ -59,6 +59,13 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
+    getCourseOutside = async function(id) {
+        const query = 'select * from "Course" where "course_id"= :1';
+        const params = [id];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
 
 
 
