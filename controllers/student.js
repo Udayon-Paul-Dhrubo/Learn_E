@@ -48,14 +48,23 @@ exports.getHome = async(req, res, next) => {
 }
 
 exports.postSearch = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+
+    let start = req.params.START;
+
+
     let searchReq = req.body.search_bar_req;
     console.log(searchReq);
 
     searchReq = searchReq.toLowerCase();
 
-    console.log(searchReq);
+    let req_search = '%' + searchReq + '%';
+    console.log(req_search)
 
-    const search_repo = await infoRepository.getCoursesofSearch();
+    const search_repo = await infoRepository.getCoursesofSearch(req_search);
     console.log(search_repo);
 
     if (search_repo.success) {
@@ -68,14 +77,13 @@ exports.postSearch = async(req, res, next) => {
             userInfo: user_repo.data[0],
             courses: search_repo.data,
             fromCategory: 'false',
-            fromSearch: 'true'
+            fromSearch: 'true',
+            start: start
         })
     }
 
 
-    const userId = req.params.ID;
-    console.log('test if params get : ', userId)
-    const url = '/student/user/' + userId + '/';
+    let url = '/student/user/' + userId + '/';
     res.redirect(url);
 }
 
@@ -140,8 +148,11 @@ exports.get_Category_view = async(req, res, next) => {
     const reqCategory = req.params.CATEGORY;
     console.log('here : ', reqCategory);
 
+    let start = req.params.START;
+    console.log(start);
+
     const search_repo = await infoRepository.getCoursesOfCatagory(reqCategory);
-    console.log(courses_repo);
+    console.log(search_repo);
 
     if (user_repo.success && search_repo.success) {
         return res.render('home/course-list.ejs', {
@@ -153,7 +164,8 @@ exports.get_Category_view = async(req, res, next) => {
             userInfo: user_repo.data[0],
             courses: search_repo.data,
             fromCategory: 'true',
-            fromSearch: 'false'
+            fromSearch: 'false',
+            start: start
         })
     }
 

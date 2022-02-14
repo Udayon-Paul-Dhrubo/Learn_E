@@ -8,7 +8,7 @@ const router = require('express-promise-router')()
 
 router.get('/user/:ID/', studentController.getHome)
 
-router.post('/user/:ID/search', studentController.postSearch)
+router.post('/user/:ID/search/:START', studentController.postSearch)
 
 router.get('/user/:ID/about', studentController.getAbout)
 
@@ -16,7 +16,7 @@ router.get('/user/:ID/courses', studentController.getCourses)
 
 router.get('/user/:ID/teachers', studentController.getTeachers)
 
-router.get('/user/:ID/category-view/:CATEGORY/', studentController.get_Category_view)
+router.get('/user/:ID/category-view/:CATEGORY/:START', studentController.get_Category_view)
 
 //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 

@@ -9,9 +9,10 @@
                         let url = '';
                         if(logged_in == 'false') url = '/search';
                         else{
-                            if(isStudent == 'true') url = '/student/user' + userInfo.User_ID + '/search';
-                            else url = url = '/teacher/user' + userInfo.User_ID + '/search';
+                            if(isStudent == 'true') url = '/student/user/' + userInfo.User_ID + '/search';
+                            else url = url = '/teacher/user/' + userInfo.User_ID + '/search';
                         }
+                        url = url + '/0';
                         
                     %>
 

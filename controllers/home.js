@@ -43,9 +43,10 @@ exports.postSearch = async(req, res, next) => {
 
     searchReq = searchReq.toLowerCase();
 
-    console.log(searchReq);
+    let req_search = '%' + searchReq + '%';
+    console.log(req_search)
 
-    const search_repo = await infoRepository.getCoursesofSearch();
+    const search_repo = await infoRepository.getCoursesofSearch(req_search);
     console.log(search_repo);
 
     if (search_repo.success) {
@@ -55,10 +56,11 @@ exports.postSearch = async(req, res, next) => {
             isStudent: 'false',
             logged_in: 'false',
             req: searchReq,
-            userInfo: user_repo.data[0],
+            userInfo: [],
             courses: search_repo.data,
             fromCategory: 'false',
-            fromSearch: 'true'
+            fromSearch: 'true',
+            start: 0
         })
     }
 

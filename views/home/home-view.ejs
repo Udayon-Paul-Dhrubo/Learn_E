@@ -98,13 +98,13 @@
                                                 </a>
                                                 <% } else { %>
                                                     <% if(isStudent=='true') { %>
-                                                        <a class="cat-overlay text-white text-decoration-none" href="/student/user/<%=userInfo.User_ID%>/category-view/<%= category.Catagory %>/">
+                                                        <a class="cat-overlay text-white text-decoration-none" href="/student/user/<%=userInfo.User_ID%>/category-view/<%= category.Catagory %>/0">
                                                             <h4 class="text-white font-weight-medium">
                                                                 <%= category.Catagory %>
                                                             </h4>
                                                         </a>
                                                         <% } else { %>
-                                                            <a class="cat-overlay text-white text-decoration-none" href="/teacher/user/<%=userInfo.User_ID%>/category-view/<%= course.Catagory %>/">
+                                                            <a class="cat-overlay text-white text-decoration-none" href="/teacher/user/<%=userInfo.User_ID%>/category-view/<%= course.Catagory %>/0">
                                                                 <h4 class="text-white font-weight-medium">
                                                                     <%= category.Catagory %>
                                                                 </h4>
