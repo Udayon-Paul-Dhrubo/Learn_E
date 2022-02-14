@@ -95,8 +95,8 @@ exports.getCourses = async(req, res, next) => {
 
     if (category_repo.success && user_repo.success) {
         return res.render('home/courses-view.ejs', {
-            pageTitle: 'About',
-            path: '/about',
+            pageTitle: 'Courses',
+            path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
             categories: category_repo.data,
@@ -118,18 +118,18 @@ exports.get_Category_view = async(req, res, next) => {
     const reqCategory = req.params.CATEGORY;
     console.log('here : ', reqCategory);
 
-    const courses_repo = await infoRepository.getCoursesOfCatagory(reqCategory);
+    const search_repo = await infoRepository.getCoursesOfCatagory(reqCategory);
     console.log(courses_repo);
 
-    if (user_repo.success && courses_repo.success) {
+    if (user_repo.success && search_repo.success) {
         return res.render('home/course-list.ejs', {
             pageTitle: 'Courses',
             path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
-            category: reqCategory,
+            req: reqCategory,
             userInfo: user_repo.data[0],
-            courses: courses_repo.data,
+            courses: search_repo.data,
             fromCategory: 'true',
             fromSearch: 'false'
         })

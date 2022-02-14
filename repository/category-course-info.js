@@ -54,7 +54,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     getCoursesofSearch = async function(req) {
 
         const query = 'select * from "Course" where lower("Title") like :1 or lower("Catagory") like :1 ';
-        const params = [Catagory];
+        const params = [req];
         const result = await this.query(query, params, 'false');
         return result;
     }
