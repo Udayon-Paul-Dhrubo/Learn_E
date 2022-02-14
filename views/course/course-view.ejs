@@ -1,0 +1,203 @@
+<%- includes('../includes/starting.ejs') %>
+
+    <body>
+        <%- includes('../includes/topbar.ejs') %>
+            <%- includes('../includes/search-top.ejs') %>
+
+
+                <section class="white section">
+
+
+                    <!-- main course info part start-->
+                    <div class="container-fluid py-5" style="width:88%; padding-left: 5rem; padding-right:5rem; ">
+                        <div class="row ">
+
+                            <!--left side course with picture section -->
+                            <div id="course-left-sidebar " class="col-md-4 pull-left ">
+
+                                <div class="course-image-widget ">
+                                    <img src="img/course-1.jpg " alt="" class="img-responsive ">
+                                </div>
+
+                                <div class="course-meta ">
+                                    <p class="course-category ">Category : <a href="">Graphic Design</a></p>
+                                    <hr>
+
+                                    <div class="rating ">
+                                        <p>Rating : &nbsp;
+                                            <i class="fa fa-star text-primary mr-2 "></i>
+                                        </p>
+                                    </div>
+                                    <hr>
+
+                                    <p class="course-student ">Students : 21 Members </p>
+                                    <hr>
+
+                                    <p class="course-prize ">Prize : 1200</p>
+                                    <hr>
+
+                                    <p class="course-instructors ">Instructor :
+                                        <a href=" " title=" "><img src="img/xstudent_01.png.pagespeed.ic.756JwMcqdq.png " class="img-circle " alt=" "> John DOE</a>
+                                    </p>
+                                    <hr>
+
+                                </div>
+
+                                <div class="course-button ">
+                                    <a href="" class="btn btn-primary btn-block inline-block ">TAKE</a>
+                                    <a href="" class="btn btn-primary btn-block inline-blockv ">WISHLIST </a>
+                                </div>
+
+                            </div>
+                            <!--left side course with picture section ends here-->
+
+
+                            <div id="course-content " class="col-md-8 pull-right ">
+
+                                <div class="course-description ">
+                                    <small>Course Status: <span>In Progress</span> </small>
+
+                                    <h1 class="course-title ">
+                                        <!-- title -->
+                                    </h1>
+
+                                    <p>
+                                        <!-- description -->
+                                    </p>
+
+                                </div>
+
+                                <!-- course lesson-->
+                                <div class="course-table ">
+                                    <h4>Course Lessons</h4>
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Lesson Title</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <!-- for loop -->
+                                            <tr>
+                                                <td><i class="fa fa-play-circle "></i></td>
+                                                <td><a href="# ">Introduction</a></td>
+                                                <td><i class="fa fa-check "></i></td>
+                                            </tr>
+                                            <!-- for loop -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- course lesson ends -->
+
+
+
+                                <hr class="invis ">
+
+
+                                <!-- review portion start -->
+                                <div id="reviews" class="feedbacks">
+                                    <p>
+                                        <a class="btn btn-default btn-block" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        What our user said? (3 Feedbacks) </a>
+                                    </p>
+
+
+                                    <!-- comment dropdown portion  -->
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="well">
+                                            <!-- single person (for loop here) -->
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <img class="media-object" src="upload/xstudent_01.png.pagespeed.ic.756JwMcqdq.png" alt="Generic placeholder image">
+                                                </div>
+
+                                                <div class="media-body">
+
+                                                    <h4 class="media-heading">
+                                                        <!-- name -->
+                                                    </h4>
+
+                                                    <p>
+                                                        <!-- review/comment -->
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--comment dropdown portion -->
+
+
+                                </div>
+                                <!-- review portion ends -->
+
+
+
+
+                                <!-- did you see portion -->
+                                <div class="other-courses ">
+                                    <img src="images/xothers.png.pagespeed.ic.BLyi2PaMRC.png " alt=" " class=" ">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- main course info part end -->
+
+
+
+
+
+                    <!-- did you see Start -->
+                    <div class="container-fluid py-5 ">
+                        <div class="container">
+                            <div class="row ">
+
+                                <!-- ejs code -->
+                                <div class="col-lg-4 col-md-6 mb-4 ">
+                                    <div class="rounded overflow-hidden mb-2 ">
+                                        <img class="img-fluid " src="img/course-4.jpg " alt=" ">
+                                        <div class="bg-secondary p-4 ">
+                                            <div class="d-flex justify-content-between mb-3 ">
+                                                <small class="m-0 "><i class="fa fa-users text-primary mr-2 "></i>25
+                                                        Students</small>
+                                                <small class="m-0 "><i class="far fa-clock text-primary mr-2 "></i>01h
+                                                        30m</small>
+                                            </div>
+                                            <a class="h5 " href="single-course.html ">Web design & development courses for
+                                                    beginner</a>
+                                            <div class="border-top mt-4 pt-4 ">
+                                                <div class="d-flex justify-content-between ">
+                                                    <h6 class="m-0 "><i class="fa fa-star text-primary mr-2 "></i>4.5
+                                                        <small>(250)</small></h6>
+                                                    <h5 class="m-0 ">$99</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ejs code -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- did you see end  -->
+
+
+
+
+
+                </section>
+
+
+
+
+                <%- includes('../includes/footer.ejs') %>
+    </body>
+
+    </html>
