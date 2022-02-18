@@ -79,8 +79,18 @@ step by step
 getCourseBySearchName = async function(Name) {
 
         const query = 'Select * from course where "Title" = :1';
-const params = [];
+const params = [Name];
         const result = await this.query(query, params, 'false');
         return result;
     }
+
+    //getting all the contents of a course
+getContentsOfCourse = async function(Course_ID) {
+
+        const query = 'SELECT * FROM "Video_Content" JOIN "CourseModules" USING("Module_ID") WHERE "Course_ID"=:1 ORDER BY "Serial";';
+const params = [Course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
 

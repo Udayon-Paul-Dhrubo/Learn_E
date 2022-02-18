@@ -1,8 +1,8 @@
-<%- includes('../includes/starting.ejs') %>
+<%- include('../includes/starting.ejs') %>
 
     <body>
-        <%- includes('../includes/topbar.ejs') %>
-            <%- includes('../includes/search-top.ejs') %>
+        <%- include('../includes/topbar.ejs') %>
+            <%- include('../includes/search-top.ejs') %>
 
 
                 <section class="white section">
@@ -16,28 +16,33 @@
                             <div id="course-left-sidebar " class="col-md-4 pull-left ">
 
                                 <div class="course-image-widget ">
-                                    <img src="img/course-1.jpg " alt="" class="img-responsive ">
+                                    <img src="/img/<%=course.Image%>" alt="" class="img-responsive ">
                                 </div>
 
                                 <div class="course-meta ">
-                                    <p class="course-category ">Category : <a href="">Graphic Design</a></p>
+                                    <p class="course-category ">Category : <a href="">
+                                            <%=course.Catagory%>
+                                        </a></p>
                                     <hr>
 
                                     <div class="rating ">
-                                        <p>Rating : &nbsp;
-                                            <i class="fa fa-star text-primary mr-2 "></i>
+                                        <p>Rating : <%=course.Rating%>
                                         </p>
                                     </div>
                                     <hr>
 
-                                    <p class="course-student ">Students : 21 Members </p>
+                                    <p class="course-student ">Students : <%=course.total_Enrolled%> Enrolled </p>
                                     <hr>
 
-                                    <p class="course-prize ">Prize : 1200</p>
+                                    <p class="course-prize ">Price : <%=course.Price%>
+                                    </p>
                                     <hr>
 
                                     <p class="course-instructors ">Instructor :
-                                        <a href=" " title=" "><img src="img/xstudent_01.png.pagespeed.ic.756JwMcqdq.png " class="img-circle " alt=" "> John DOE</a>
+                                        <a href=" " title=" "><img src="/img/<%=teacher.image%> " class="img-circle "
+                                                alt=" ">
+                                            <%=teacher.Name%>
+                                        </a>
                                     </p>
                                     <hr>
 
@@ -56,13 +61,19 @@
 
                                 <div class="course-description ">
                                     <small>Course Status: <span>In Progress</span> </small>
+                                    <small>Course Level: <span>
+                                            <%=course.Level%>
+                                        </span> </small>
 
                                     <h1 class="course-title ">
                                         <!-- title -->
+                                        <%=course.Title%>
                                     </h1>
+
 
                                     <p>
                                         <!-- description -->
+                                        <%=course.Description%>
                                     </p>
 
                                 </div>
@@ -85,9 +96,22 @@
                                             <tr>
                                                 <td><i class="fa fa-play-circle "></i></td>
                                                 <td><a href="# ">Introduction</a></td>
+                                                <td>12 Min</td>
                                                 <td><i class="fa fa-check "></i></td>
                                             </tr>
                                             <!-- for loop -->
+                                            <%for(let content of contents){%>
+                                                <tr>
+                                                    <td><i class="fa fa-play-circle "></i></td>
+                                                    <td>
+                                                        <%=content.Description%>
+                                                    </td>
+                                                    <td>
+                                                        <%=content.Duration%>
+                                                    </td>
+                                                    <td><i class="fa fa-check "></i></td>
+                                                </tr>
+                                                <%}%>
 
                                         </tbody>
                                     </table>
@@ -102,8 +126,10 @@
                                 <!-- review portion start -->
                                 <div id="reviews" class="feedbacks">
                                     <p>
-                                        <a class="btn btn-default btn-block" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        What our user said? (3 Feedbacks) </a>
+                                        <a class="btn btn-default btn-block" role="button" data-toggle="collapse"
+                                            href="#collapseExample" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            What our user said? (3 Feedbacks) </a>
                                     </p>
 
 
@@ -111,23 +137,28 @@
                                     <div class="collapse" id="collapseExample">
                                         <div class="well">
                                             <!-- single person (for loop here) -->
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img class="media-object" src="upload/xstudent_01.png.pagespeed.ic.756JwMcqdq.png" alt="Generic placeholder image">
+                                            <%for(let review of reviews){%>
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <img class="media-object" src="/img/<%=review.image%>"
+                                                            alt="Generic placeholder image">
+                                                    </div>
+
+                                                    <div class="media-body">
+
+                                                        <h4 class="media-heading">
+                                                            <!-- name -->
+                                                            <%=review.Name%>
+                                                        </h4>
+
+                                                        <p>
+                                                            <!-- review/comment -->
+                                                            <%=review.Review%>
+                                                        </p>
+
+                                                    </div>
                                                 </div>
-
-                                                <div class="media-body">
-
-                                                    <h4 class="media-heading">
-                                                        <!-- name -->
-                                                    </h4>
-
-                                                    <p>
-                                                        <!-- review/comment -->
-                                                    </p>
-
-                                                </div>
-                                            </div>
+                                                <%}%>
                                         </div>
                                     </div>
                                     <!--comment dropdown portion -->
@@ -141,7 +172,7 @@
 
                                 <!-- did you see portion -->
                                 <div class="other-courses ">
-                                    <img src="images/xothers.png.pagespeed.ic.BLyi2PaMRC.png " alt=" " class=" ">
+                                    <img src="/images/xothers.png.pagespeed.ic.BLyi2PaMRC.png " alt=" " class=" ">
                                 </div>
 
                             </div>
@@ -154,39 +185,63 @@
 
 
                     <!-- did you see Start -->
-                    <div class="container-fluid py-5 ">
-                        <div class="container">
-                            <div class="row ">
+                    <% if( topCourses.length) { %>
+                        <div class="container py-5">
+                            <div class="container py-5">
+                                <div class="text-center mb-5">
 
-                                <!-- ejs code -->
-                                <div class="col-lg-4 col-md-6 mb-4 ">
-                                    <div class="rounded overflow-hidden mb-2 ">
-                                        <img class="img-fluid " src="img/course-4.jpg " alt=" ">
-                                        <div class="bg-secondary p-4 ">
-                                            <div class="d-flex justify-content-between mb-3 ">
-                                                <small class="m-0 "><i class="fa fa-users text-primary mr-2 "></i>25
-                                                        Students</small>
-                                                <small class="m-0 "><i class="far fa-clock text-primary mr-2 "></i>01h
-                                                        30m</small>
-                                            </div>
-                                            <a class="h5 " href="single-course.html ">Web design & development courses for
-                                                    beginner</a>
-                                            <div class="border-top mt-4 pt-4 ">
-                                                <div class="d-flex justify-content-between ">
-                                                    <h6 class="m-0 "><i class="fa fa-star text-primary mr-2 "></i>4.5
-                                                        <small>(250)</small></h6>
-                                                    <h5 class="m-0 ">$99</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- ejs code -->
-
+                                <div class="row">
+                                    <%index=0%>
+                                        <% for(let course of topCourses ) { %>
+                                            <%index++;if(index>3)break;%>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <div class="rounded overflow-hidden mb-2">
+                                                        <img class="img-fluid" src="/img/<%=course.Image %>" alt="">
+                                                        <div class="bg-secondary p-4">
+                                                            <div class="d-flex justify-content-between mb-3">
+                                                                <small class="m-0"><i
+                                                                        class="fa fa-users text-primary mr-2"></i>
+                                                                    <%= course.total_Enrolled %> Students
+                                                                </small>
+                                                            </div>
+                                                            <% if(logged_in=='false' ){%>
+                                                                <a class="h5" href="/log-in">
+                                                                    <%= course.Title %>
+                                                                </a>
+                                                                <% } else { %>
+                                                                    <% if(isStudent=='true' ) { %>
+                                                                        <a class="h5"
+                                                                            href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
+                                                                            <%= course.Title %>
+                                                                        </a>
+                                                                        <% } else { %>
+                                                                            <a class="h5"
+                                                                                href="/teacher/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
+                                                                                <%= course.Title %>
+                                                                            </a>
+                                                                            <% } }%>
+                                                                                <div class="border-top mt-4 pt-4">
+                                                                                    <div
+                                                                                        class="d-flex justify-content-between">
+                                                                                        <h6 class="m-0"><i
+                                                                                                class="fa fa-star text-primary mr-2"></i>
+                                                                                            <%= course.Rating %>
+                                                                                        </h6>
+                                                                                        <h5 class="m-0">$
+                                                                                            <%= course.Price %>
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- did you see end  -->
+                        <% } %>
+                            <!-- did you see end  -->
 
 
 
@@ -197,7 +252,7 @@
 
 
 
-                <%- includes('../includes/footer.ejs') %>
+                <%- include('../includes/footer.ejs') %>
     </body>
 
     </html>

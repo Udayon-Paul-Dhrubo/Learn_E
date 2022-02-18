@@ -178,7 +178,32 @@ exports.get_course_view = async(req, res, next) => {
 
     const courseId = req.params.CRSID;
     console.log('here : ', courseId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('here : ', course_repo);
+    const courseTeacher_repo = await infoRepository.findCourseTeacherById(courseId);
+    console.log('here : ', courseTeacher_repo);
+    const content_repo = await infoRepository.getContentsOfCourse(courseId);
+    console.log(content_repo);
+    const review_repo = await infoRepository.findReviewsOfCourse(courseId);
+    console.log("REVIEWS :",review_repo);
+    const TopCourse_repo = await infoRepository.getTopCourses();
+    console.log(TopCourse_repo);
 
+    if (user_repo.success && course_repo.success && content_repo.success) {
+        return res.render('course/course-view.ejs', {
+            pageTitle: 'Course',
+            path: '/course',
+            isStudent: 'true',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            teacher:courseTeacher_repo.data[0],
+            reviews :review_repo.data,
+            topCourses :TopCourse_repo.data,
+            contents:content_repo.data
+            
+        })
+    }
 
 }
 
