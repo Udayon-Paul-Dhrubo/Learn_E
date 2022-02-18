@@ -21,8 +21,7 @@
                                 <ul class="drp_down" id="drp_down">
 
                                     <div style="margin-top: 1rem;">
-                                        <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=module.Module_ID%>"
-                                            class="link">
+                                        <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=module.Module_ID%>" class="link">
                                             Module
                                         </a>
                                     </div>
@@ -49,15 +48,21 @@
                 <!--sidebar ends -->
 
 
+
+
                 <% if(weekView=='true' ) { %>
                     <div class="week others pull-right" id="week1">
                         <div class="info">
+                            <br><br><br>
+
                             <h2>Week 1</h2>
                             <h4>Week Lessons</h4>
                         </div>
 
+
                         <!-- week lesson-->
                         <div class="course-table ">
+
                             <table class="table ">
                                 <thead>
                                     <tr>
@@ -73,9 +78,11 @@
                                     <%for(content of contents){%>
                                         <tr style="background-color:rgb(196, 228, 196);">
                                             <td><i class="fa fa-play-circle"></i></td>
-                                            <td><a href="single-course-inside-video.html">
+                                            <td>
+                                                <a href="single-course-inside-video.html">
                                                     <%=content.Description%>
-                                                </a></td>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <%=content.Duration%>
                                             </td>
@@ -144,8 +151,7 @@
                                                                         <div class="panel-body">
                                                                             <!-- for right use rgb(162, 221, 162) -->
                                                                             <!-- for wrong use rgb(236, 156, 156) -->
-                                                                            <div
-                                                                                style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
+                                                                            <div style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
                                                                                 <div class="radio">
                                                                                     <label>
                                                                                         <input name="optionsRadios"
@@ -159,8 +165,7 @@
 
                                                                         </div>
 
-                                                                        <a href="" class="btn btn-primary "
-                                                                            role="button">Confirm</a>
+                                                                        <a href="" class="btn btn-primary " role="button">Confirm</a>
                                                                     </form>
                                                                 </div>
 
@@ -170,8 +175,7 @@
                                                                 <p class="lead">90% Completed</p>
 
                                                                 <div class="progress">
-                                                                    <div class="progress-bar" role="progressbar"
-                                                                        style="width: 40%; background-color: rgb(18, 19, 19);">
+                                                                    <div class="progress-bar" role="progressbar" style="width: 40%; background-color: rgb(18, 19, 19);">
                                                                         <span class="sr-only">Complete 40%</span>
                                                                     </div>
                                                                 </div>
