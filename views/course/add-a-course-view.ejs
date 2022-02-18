@@ -110,8 +110,36 @@
                         <!--create new view -->
 
                         <div class="create-new">
-                            <div class="info">
+                            <div class="info container">
                                 <h1>Week 2</h1>
+                                <a class="link btn btn-primary" href=""><i class="fa fa-plus"></i> Create New Module</a> <br> <br>
+                                <!--<a class="link btn btn-warning" href=""><i class="fa fa-plus"></i> Include Existing</a>-->
+
+
+
+                                <label for='description' style="width: 100%;">Description</label>
+                                <textarea name='description' id='description' style="width: 90%; margin-bottom:2rem;"></textarea>
+
+                                <!-- week lesson-->
+                                <h3>Week Content </h3>
+                                <a class="link" href=""><i class="fa fa-plus"></i> Add Video</a> / <a class="link" href=""><i class="fa fa-plus"></i> Add Quiz</a>
+                                <br><br>
+                                <!-- week lesson ends -->
+
+                                <!--if add video clicked -->
+
+                                <label for='description' style="">Name</label>
+                                <input name='name' id='name' style="width: 50%;"><br>
+
+                                <div class="col-sm-9">
+                                    <input class="form-control" runat="Server" type="file" name="uploaded_image" enctype="multipart/form-data" accept="" />
+                                </div>
+
+
+                                <!--if add quiz clicked -->
+
+
+
                             </div>
 
                         </div>
