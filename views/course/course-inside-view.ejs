@@ -76,7 +76,7 @@
                                 <tbody>
 
                                     <!-- for loop -->
-                                    <%for(content of contents){%>
+                                    <%for(content of VideoContents){%>
                                         <tr style="background-color:rgb(196, 228, 196);">
                                             <td><i class="fa fa-play-circle"></i></td>
                                             <td>
@@ -92,7 +92,14 @@
                                         </tr>
                                         <%}%>
                                             <!-- for loop -->
-
+                                            <tr>
+                                                <td><i class="fa fa-question-circle"></i></td>
+                                                <td> <a
+                                                        href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%=QuizContent.QuizContent_ID%>">
+                                                        Quiz Based on this module</a></td>
+                                                <td>31 Min</td>
+                                                <td><i class="fa fa-close"></i></td>
+                                            </tr>
                                 </tbody>
 
                             </table>
@@ -133,76 +140,116 @@
                                         <div class="row quiz_container">
                                             <div id="course-content" class="col-md-12">
                                                 <div class="course-description">
-
+                                                    <br>
+                                                    <br>
                                                     <small>Quiz Status: <span>Not Finished</span> </small>
                                                     <br>
                                                     <br>
+                                                    <%for(let question of quiz_content ){%>
+                                                        <h5 class="course-title">Quiz - Question 1</h5>
+                                                        <div class="quiz-wrapper">
 
-                                                    <h5 class="course-title">Quiz - Question 1</h5>
-                                                    <div class="quiz-wrapper">
+                                                            <!--Q-->
+                                                            <h3>
+                                                                <%=question.Question%>
+                                                            </h3>
+                                                            <!--Q-->
 
-                                                        <!--Q-->
-                                                        <h3>How to start Photoshop with short keyboard with Mac</h3>
-                                                        <!--Q-->
+                                                            <div class="row" style="margin-bottom:2rem;">
+                                                                <div class="col-md-12">
 
-                                                        <div class="row" style="margin-bottom:2rem;">
-                                                            <div class="col-md-12">
-
-                                                                <div class="panel panel-primary">
-                                                                    <form>
-                                                                        <div class="panel-body">
-                                                                            <!-- for right use rgb(162, 221, 162) -->
-                                                                            <!-- for wrong use rgb(236, 156, 156) -->
-                                                                            <div
-                                                                                style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
-                                                                                <div class="radio">
-                                                                                    <label>
-                                                                                        <input name="optionsRadios"
-                                                                                            id="optionsRadios1"
-                                                                                            value="option1"
-                                                                                            type="radio">
-                                                                                        Option 1
-                                                                                    </label>
+                                                                    <div class="panel panel-primary">
+                                                                        <form>
+                                                                            <div class="panel-body">
+                                                                                <!-- for right use rgb(162, 221, 162) -->
+                                                                                <!-- for wrong use rgb(236, 156, 156) -->
+                                                                                <div
+                                                                                    style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
+                                                                                    <div class="radio">
+                                                                                        <label>
+                                                                                            <input name="optionsRadios"
+                                                                                                id="optionsRadios1"
+                                                                                                value="option1"
+                                                                                                type="radio">
+                                                                                            <%=question.Option1%>
+                                                                                        </label>
+                                                                                    </div>
                                                                                 </div>
+                                                                                <div
+                                                                                    style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
+                                                                                    <div class="radio">
+                                                                                        <label>
+                                                                                            <input name="optionsRadios"
+                                                                                                id="optionsRadios1"
+                                                                                                value="option1"
+                                                                                                type="radio">
+                                                                                            <%=question.Option2%>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
+                                                                                    <div class="radio">
+                                                                                        <label>
+                                                                                            <input name="optionsRadios"
+                                                                                                id="optionsRadios1"
+                                                                                                value="option1"
+                                                                                                type="radio">
+                                                                                            <%=question.Option3%>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="width:100%;  margin-bottom: 5px; background-color: rgb(162, 221, 162); border-radius:10px;">
+                                                                                    <div class="radio">
+                                                                                        <label>
+                                                                                            <input name="optionsRadios"
+                                                                                                id="optionsRadios1"
+                                                                                                value="option1"
+                                                                                                type="radio">
+                                                                                            <%=question.Option4%>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+
                                                                             </div>
 
-                                                                        </div>
-
-                                                                        <a href="" class="btn btn-primary "
-                                                                            role="button">Confirm</a>
-                                                                    </form>
-                                                                </div>
-
-
-                                                                <!--progress bar -->
-                                                                <hr class="invis">
-                                                                <p class="lead">90% Completed</p>
-
-                                                                <div class="progress">
-                                                                    <div class="progress-bar" role="progressbar"
-                                                                        style="width: 40%; background-color: rgb(18, 19, 19);">
-                                                                        <span class="sr-only">Complete 40%</span>
+                                                                            <a href="" class="btn btn-primary "
+                                                                                role="button">Confirm</a>
+                                                                        </form>
                                                                     </div>
+
+
+                                                                    <!--progress bar -->
+                                                                    <hr class="invis">
+                                                                    <p class="lead">90% Completed</p>
+
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar" role="progressbar"
+                                                                            style="width: 40%; background-color: rgb(18, 19, 19);">
+                                                                            <span class="sr-only">Complete 40%</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--progress bar ends-->
+
+
                                                                 </div>
-                                                                <!--progress bar ends-->
-
-
                                                             </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a href="#" class="btn btn-default btn-block"><i
+                                                                            class="fas fa-chevron-left"></i></a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <a href="#" class="btn btn-default btn-block"><i
+                                                                            class="fas fa-chevron-right"></i></a>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <a href="#" class="btn btn-default btn-block"><i
-                                                                        class="fas fa-chevron-left"></i></a>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <a href="#" class="btn btn-default btn-block"><i
-                                                                        class="fas fa-chevron-right"></i></a>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
+                                                        <%}%>
 
                                                 </div>
                                             </div>

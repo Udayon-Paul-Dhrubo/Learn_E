@@ -86,7 +86,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
     findReviewsOfCourse = async function(Course_ID) {
-        const query = 'Select "Review","Name","image" FROM "Rating" JOIN "User" ON("Student_ID"="User_ID") WHERE "Course_ID"= :1';
+        const query = 'Select "Review","Name","image" FROM "Rating" JOIN "User" ON("Student_ID"="User_ID") WHERE "Course_ID"= :1 AND "Review" IS NOT NULL';
         const params = [Course_ID];
         const result = await this.query(query, params, 'false');
         return result;
@@ -114,6 +114,19 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     findVideoContentByContent_ID = async function(content_ID) {
         const query = 'SELECT * FROM "Video_Content"  WHERE "VideoContent_ID"= :1';
         const params = [content_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findQuizContentByContent_ID = async function(content_ID) {
+        const query = 'SELECT * FROM "Quiz_Content"  WHERE "QuizContent_ID"= :1';
+        const params = [content_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    findQuizContentIDByModule_ID = async function(Module_ID) {
+        const query = 'SELECT "QuizContent_ID" FROM "Quiz_Content"  WHERE "Module_ID"= :1 GROUP BY "QuizContent_ID" ';
+        const params = [Module_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
