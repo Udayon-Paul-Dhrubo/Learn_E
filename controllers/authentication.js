@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 
 const nodemailer = require('nodemailer')
-const fileupload=require('express-fileupload')
-const multer=require('multer')
-const upload=multer({dest : 'upload/'})
+const fileupload = require('express-fileupload')
+const multer = require('multer')
+const upload = multer({ dest: 'upload/' })
 
 const sendGridTransport = require('nodemailer-sendgrid-transport');
 const UserRepository = require('../repository/user-info').UserRepository;
@@ -49,7 +49,7 @@ exports.postLogIn = async(req, res, next) => {
     if (user_repo.success && user_repo.data.length > 0) {
 
         const student_repo = await userRepository.isStudent(email);
-        console.log(student_repo);       
+        console.log(student_repo);
         if (student_repo.success && student_repo.data.length > 0) {
             const student = student_repo.data[0];
             console.log(student);
@@ -58,17 +58,17 @@ exports.postLogIn = async(req, res, next) => {
             res.redirect(url);
         }
 
-      }
+    }
 
 
 
-        msg = 'Something went wrong'
-
-    
+    msg = 'Something went wrong'
 
 
 
-        res.render('login/sign-in', {
+
+
+    res.render('login/sign-in', {
         pageTitle: 'Log In',
         path: '/login',
         error: true,
@@ -100,22 +100,22 @@ exports.postSignUp = async(req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
     const re_pass = req.body.re_pass;
-  //  const img = req.body.uploaded_image;
+    //  const img = req.body.uploaded_image;
     const student = req.body.student;
     const teacher = req.body.teacher;
     const agree = req.body.agree;
     console.log(email);
     console.log(req.body.uploaded_image);
     console.log(typeof(req.body.uploaded_image));
-    if(req.files) console.log("some file was uploaded ");
+    if (req.files) console.log("some file was uploaded ");
     else console.log("no file found");
-     var file =req.files.uploaded_image;
-   var img_name=file.name;
+    var file = req.files.uploaded_image;
+    var img_name = file.name;
     console.log(img_name);
- file.mv('public/img/'+file.name);
+    file.mv('public/img/' + file.name);
 
-       
-   
+
+
 
 
     const _student = Boolean(student);
@@ -183,7 +183,7 @@ exports.postSignUp = async(req, res, next) => {
         })
     }
 
-    const know = await userRepository.addUser(id, name, email, pass, _student,img_name);
+    const know = await userRepository.addUser(id, name, email, pass, _student, img_name);
     console.log(know)
 
     if (know.success == 'false') {
