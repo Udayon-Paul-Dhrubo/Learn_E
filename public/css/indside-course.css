@@ -95,6 +95,23 @@ ul {
     display: block;
 }
 
+.create-new {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-new .info {
+    position: absolute;
+    top: 7%;
+    left: 25%;
+    padding: 0.5rem;
+    text-align: start;
+    margin-top: 5rem;
+}
+
 
 /* week section  */
 
