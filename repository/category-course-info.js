@@ -66,6 +66,51 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
+    getContentsOfCourse = async function(Course_ID) {
+
+        const query = 'SELECT * FROM "Video_Content" JOIN "CourseModules" USING("Module_ID") WHERE "Course_ID"= :1 ORDER BY "Serial" ';
+        const params = [Course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findCourseById = async function(Course_ID){
+        const query = 'SELECT * FROM "Course" WHERE "course_id" = :1';
+        const params = [Course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findCourseTeacherById = async function(Course_ID){
+        const query = 'SELECT * FROM "CreateCourse" JOIN "User" ON ("Teacher_ID"="User_ID") WHERE "Course_ID"= :1';
+        const params = [Course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findReviewsOfCourse = async function(Course_ID){
+        const query = 'Select "Review","Name","image" FROM "Rating" JOIN "User" ON("Student_ID"="User_ID") WHERE "Course_ID"= :1';
+        const params = [Course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    findModulesByCourseId = async function(course_ID) {
+        const query = 'SELECT * FROM "Module" JOIN "CourseModules" USING ("Module_ID") WHERE "Course_ID"= :1  ORDER BY "Serial"'; 
+        const params = [course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    findContentsOfSingleModule=async function(Module_ID){
+        const query = 'SELECT * FROM "Video_Content"  WHERE "Module_ID"= :1'; 
+        const params = [Module_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findModuleByModule_ID=async function(Module_ID){
+        const query = 'SELECT * FROM "Module"  WHERE "Module_ID"= :1'; 
+        const params = [Module_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
 
 
 
