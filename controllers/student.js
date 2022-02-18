@@ -177,6 +177,7 @@ exports.get_course_view = async(req, res, next) => {
     console.log('here : ', user_repo);
 
     const courseId = req.params.CRSID;
+    console.log('here : ', courseId);
 
 
 }
@@ -195,9 +196,9 @@ exports.getTeachers = async(req, res, next) => {
     console.log(teacher_repo);
 
     if (teacher_repo.success && user_repo.success) {
-        return res.render('home/about-view.ejs', {
-            pageTitle: 'About',
-            path: '/about',
+        return res.render('home/teacher-view.ejs', {
+            pageTitle: 'Teachers',
+            path: '/teachers',
             isStudent: 'true',
             logged_in: 'true',
             teachers: teacher_repo.data,
