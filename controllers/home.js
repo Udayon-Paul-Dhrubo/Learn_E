@@ -5,13 +5,13 @@ const infoRepository = new Category_Course_Teacher_Info_Repository();
 exports.getHome = async(req, res, next) => {
 
     const category_repo = await infoRepository.getTopCategories();
-    //console.log(category_repo);
+    console.log(category_repo);
 
     const course_repo = await infoRepository.getTopCourses();
-    //console.log(course_repo);
+    console.log(course_repo);
 
     const teacher_repo = await infoRepository.getTopTeachers();
-    //console.log(teacher_repo);
+    console.log(teacher_repo);
 
     if (category_repo.success && category_repo.success) {
         return res.render('home/home-view.ejs', {
