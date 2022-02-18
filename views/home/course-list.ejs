@@ -60,7 +60,7 @@
                                                         <div class="col-md-8 col-md-8">
                                                             <div class="shop-list-desc">
                                                                 <h4 style="font-size:large; margin-top:0; margin-bottom: 0;">
-                                                                    <a href="<%= logged_in == 'true'? url + '/log-in' : url + 'course-view/' + courses[index].course_id %>">
+                                                                    <a href="<%= logged_in == 'false'? url + '/log-in' : url + 'course-view/' + courses[index].course_id %>">
                                                                         <%= courses[index].Title %>
                                                                     </a>
                                                                 </h4>
@@ -86,7 +86,7 @@
                                                                 <p style="font-size:small; margin-bottom:0;">
                                                                     <%= courses[index].Description %>
                                                                 </p>
-                                                                <a href="<%= logged_in == 'true'? url + '/log-in' : url + 'course-view/' + courses[index].course_id %>" class="btn btn-default btn-sm">Learn More</a>
+                                                                <a href="<%= logged_in == 'false'? url + '/log-in' : url + 'course-view/' + courses[index].course_id %>" class="btn btn-default btn-sm">Learn More</a>
                                                             </div>
                                                         </div>
                                                     </div>
