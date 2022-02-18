@@ -170,6 +170,71 @@ exports.get_Category_view = async(req, res, next) => {
     }
 
 }
+exports.getSingleCourseInsideView=async(req,res,next)=>{
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('here : ', user_repo);
+
+    const courseId = req.params.CRSID;
+    console.log('here : ', courseId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('here : ', course_repo);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    console.log('here : ', Module_repo);
+
+    if (user_repo.success && course_repo.success ) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/course',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView:'false',
+            videoView:'false',
+            quizView:'false',
+            gradeView:'false',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules:Module_repo.data
+            
+        })
+    }
+}
+exports.getSingleCourseInsideModuleView=async(req,res,next)=>{
+
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('here : ', user_repo);
+
+    const courseId = req.params.CRSID;
+    const moduleId =req.params.Module_ID;
+    console.log('here : ', courseId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('here : ', course_repo);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    console.log('here : ', Module_repo);
+    const content_repo=await infoRepository.findContentsOfSingleModule(moduleId);
+    const Module=await infoRepository.findModuleByModule_ID(moduleId);
+    console.log('Module Founded : ', Module_repo);
+
+    if (user_repo.success && course_repo.success ) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/course',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView:'true',
+            videoView:'false',
+            quizView:'false',
+            gradeView:'false',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules:Module_repo.data,
+            thisModule:Module.data[0],
+            contents:content_repo.data
+            
+        })
+    }
+}
 
 exports.get_course_view = async(req, res, next) => {
     const userId = req.params.ID;

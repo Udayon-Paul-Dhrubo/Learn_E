@@ -92,6 +92,26 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
+    findModulesByCourseId = async function(course_ID) {
+        const query = 'SELECT * FROM "Module" JOIN "CourseModules" USING ("Module_ID") WHERE "Course_ID"= :1  ORDER BY "Serial"'; 
+        const params = [course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    findContentsOfSingleModule=async function(Module_ID){
+        const query = 'SELECT * FROM "Video_Content"  WHERE "Module_ID"= :1'; 
+        const params = [Module_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    findModuleByModule_ID=async function(Module_ID){
+        const query = 'SELECT * FROM "Module"  WHERE "Module_ID"= :1'; 
+        const params = [Module_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
 
 
 }
