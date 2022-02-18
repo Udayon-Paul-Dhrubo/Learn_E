@@ -111,6 +111,12 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
+    findVideoContentByContent_ID = async function(content_ID) {
+        const query = 'SELECT * FROM "Video_Content"  WHERE "VideoContent_ID"= :1';
+        const params = [content_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
 
 
 
