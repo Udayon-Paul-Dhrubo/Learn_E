@@ -51,13 +51,16 @@ exports.get_add_course = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
 
+    console.log('there : ', user_repo);
+
     if (user_repo.success) {
-        return res.redirect('course/add-a-course-view', {
-            pageTitle: 'Add a course',
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
             path: '/insideCourse',
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0]
+
         })
     }
 

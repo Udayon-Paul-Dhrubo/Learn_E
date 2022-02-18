@@ -10374,7 +10374,7 @@ h6,
     box-shadow: 0 26px 64px 0 rgba(0, 0, 0, .6);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    height: 300px;
+    height: auto;
     overflow-y: hidden;
 }
 

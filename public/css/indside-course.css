@@ -96,6 +96,26 @@ ul {
 }
 
 
+/* create new */
+
+.create-new {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-new .info {
+    position: absolute;
+    top: 6%;
+    left: 25%;
+    padding: .5rem;
+    text-align: start;
+    margin-top: 5rem;
+}
+
+
 /* week section  */
 
 .week {

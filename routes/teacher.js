@@ -6,7 +6,7 @@ const teacherController = require('../controllers/teacher')
 //const router = express.Router()
 const router = require('express-promise-router')()
 
-router.get('/', teacherController.getHome)
+router.get('/user/:ID/', teacherController.getHome)
 
 router.get('/about', )
 

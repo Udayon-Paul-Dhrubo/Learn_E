@@ -58,6 +58,16 @@ exports.postLogIn = async(req, res, next) => {
             res.redirect(url);
         }
 
+        const teacher_repo = await userRepository.isTeacher(email);
+        console.log(teacher_repo);
+        if (teacher_repo.success && teacher_repo.data.length > 0) {
+            const teacher = teacher_repo.data[0];
+            console.log(teacher);
+
+            const url = '/teacher/user/' + teacher.Teacher_ID + '/';
+            res.redirect(url);
+        }
+
     }
 
 
