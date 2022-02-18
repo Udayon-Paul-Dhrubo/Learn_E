@@ -199,6 +199,7 @@ exports.getSingleCourseInsideView = async(req, res, next) => {
         })
     }
 }
+
 exports.getSingleCourseInsideModuleView = async(req, res, next) => {
 
     const userId = req.params.ID;
@@ -212,9 +213,10 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
     console.log('here : ', course_repo);
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
     console.log('here : ', Module_repo);
-    const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
     const Module = await infoRepository.findModuleByModule_ID(moduleId);
     console.log('Module Founded : ', Module_repo);
+    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -230,7 +232,87 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             course: course_repo.data[0],
             modules: Module_repo.data,
             thisModule: Module.data[0],
-            contents: content_repo.data
+            VideoContents: VideoContent_repo.data,
+            QuizContent :QuizContent_repo.data[0]
+
+        })
+    }
+}
+exports.getSingleCourseVideoContentView = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('here : ', user_repo);
+
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+    const VideoContent_ID=req.params.VideoContent_ID;
+    console.log('here : ', courseId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('here : ', course_repo);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    console.log('here : ', Module_repo);
+    const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    const Module = await infoRepository.findModuleByModule_ID(moduleId);
+    console.log('Module Founded : ', Module_repo);
+    const video_content=await infoRepository.findVideoContentByContent_ID(VideoContent_ID);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView: 'false',
+            videoView: 'true',
+            quizView: 'false',
+            gradeView: 'false',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules: Module_repo.data,
+            thisModule: Module.data[0],
+            contents: content_repo.data,
+            video_content:video_content.data[0]
+
+        })
+    }
+}
+exports.getSingleCourseQuizContentView = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('here : ', user_repo);
+
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+    const QuizContent_ID=req.params.QuizContent_ID;
+    console.log('here : ', courseId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('here : ', course_repo);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    console.log('here : ', Module_repo);
+    const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    const Module = await infoRepository.findModuleByModule_ID(moduleId);
+    console.log('Module Founded : ', Module_repo);
+    const quiz_content=await infoRepository.findQuizContentByContent_ID(QuizContent_ID);
+    console.log(quiz_content);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView: 'false',
+            videoView: 'false',
+            quizView: 'true',
+            gradeView: 'false',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules: Module_repo.data,
+            thisModule: Module.data[0],
+            contents: content_repo.data,
+            quiz_content:quiz_content.data
 
         })
     }
