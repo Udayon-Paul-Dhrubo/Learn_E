@@ -171,16 +171,24 @@ exports.get_Category_view = async(req, res, next) => {
 
 }
 exports.getSingleCourseInsideView = async(req, res, next) => {
+    
+   
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
-    console.log('here : ', user_repo);
+    console.log('here : user_repo', user_repo);
 
     const courseId = req.params.CRSID;
-    console.log('here : ', courseId);
+    console.log('here : courseId ', courseId);
     const course_repo = await infoRepository.findCourseById(courseId);
-    console.log('here : ', course_repo);
+    console.log('here : course_repo', course_repo);
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
-    console.log('here : ', Module_repo);
+    console.log('here : Module_repo ', Module_repo);
+    const purchased= await infoRepository.isPurchased(courseId,userId);
+    if(purchased.data.length==0)
+    {const newPurchase=await infoRepository.createNewPurchase(courseId,userId);
+    console.log("new purchase : ",courseId,userId);
+    console.log("new purchase repo : ",newPurchase.success);}
+    
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -335,7 +343,12 @@ exports.get_course_view = async(req, res, next) => {
     console.log("REVIEWS :", review_repo);
     const TopCourse_repo = await infoRepository.getTopCourses();
     console.log(TopCourse_repo);
-
+    var isPurchased;
+    const purchased= await infoRepository.isPurchased(courseId,userId);
+    if(purchased.data.length==0)isPurchased=false;
+    else
+    isPurchased=true;
+    
     if (user_repo.success && course_repo.success && content_repo.success) {
         return res.render('course/course-view.ejs', {
             pageTitle: 'Course',
@@ -347,7 +360,8 @@ exports.get_course_view = async(req, res, next) => {
             teacher: courseTeacher_repo.data[0],
             reviews: review_repo.data,
             topCourses: TopCourse_repo.data,
-            contents: content_repo.data
+            contents: content_repo.data,
+            purchased: isPurchased
 
         })
     }
