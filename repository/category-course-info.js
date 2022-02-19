@@ -131,23 +131,23 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    isPurchased=async function (course_ID,student_ID) {
+    isPurchased = async function(course_ID, student_ID) {
         const query = 'SELECT * FROM "PurchaseHistory" WHERE "Course_ID"= :1 AND "Student_ID"= :2 ';
-        const params = [course_ID,student_ID];
+        const params = [course_ID, student_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    createNewPurchase=async function (course_ID,student_ID) {
+    createNewPurchase = async function(course_ID, student_ID) {
         const query = 'INSERT INTO "PurchaseHistory"("Student_ID","Course_ID") VALUES(:1 , :2) ';
-        const params = [student_ID,course_ID];
+        const params = [student_ID, course_ID];
         const result = await this.query(query, params, 'true');
         return result;
     }
 
 
     searchTeacher_By_Name = async function(reqName) {
-        const query = 'SELECT * FROM "Video_Content"  WHERE "VideoContent_ID"= :1';
-        const params = [content_ID];
+        const query = 'select * from "User" where LOWER("Name") like :1 and "User_ID" =  ANY ( select "Teacher_ID" from "Teacher");';
+        const params = [reqName];
         const result = await this.query(query, params, 'false');
         return result;
     }

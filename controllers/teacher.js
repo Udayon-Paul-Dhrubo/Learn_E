@@ -246,14 +246,39 @@ exports.get_course_view = async(req, res, next) => {
 }
 
 
+exports.get_pre_add_course = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+
+    if (user_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            add_button: 'false',
+            create_button: 'false' ////
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
+
+}
+
+
 
 
 
 exports.get_add_course = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
-
     console.log('there : ', user_repo);
+
+    const teacher_repo = await userRepository.teacherInclude_in_course()
 
     if (user_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
@@ -270,6 +295,8 @@ exports.get_add_course = async(req, res, next) => {
     let url = '/teacher/user/' + userId + '/';
     res.redirect(url);
 }
+
+
 
 exports.get_add_course_add_button_clicked = async(req, res, next) => {
     const userId = req.params.ID;
@@ -302,7 +329,11 @@ exports.postSearchTeacher = async(req, res, next) => {
     const reqName = req.body.reqName;
     console.log('reqName: ', reqName);
 
-    const teacher_repo = await userRepository.searchTeacher_By_Name(reqName)
+    const search_teacher_repo = await userRepository.searchTeacher_By_Name(reqName)
+    console.log(teacher_repo);
+
+
+
 
     if (user_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
@@ -311,7 +342,8 @@ exports.postSearchTeacher = async(req, res, next) => {
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0],
-            add_button: 'true' /////
+            add_button: 'true', /////
+            search_teachers: search_teacher_repo.data
 
         })
     }
