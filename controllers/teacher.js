@@ -204,6 +204,90 @@ exports.get_Category_view = async(req, res, next) => {
 
 }
 
+exports.getProfileView = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+    const coursesTaken = await userRepository.coursesTaken(userId);
+
+
+    if (user_repo.success) {
+        return res.render('profile/profile-view.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'true',
+            logged_in: 'true',
+            editReq: 'false',
+            userInfo: user_repo.data[0],
+            myCoursesReq: 'true',
+            courses: coursesTaken.data,
+
+        })
+    }
+}
+
+
+exports.PostEditProfileView = async(req, res, next) => {
+    const userId = req.params.ID;
+    let user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+    const coursesTaken = await userRepository.coursesTaken(userId);
+
+    const name = req.body.name;
+    console.log("new name :", name)
+    const email = req.body.email;
+    console.log("new email :", email)
+    const pass = req.body.pass;
+    console.log("new password :", pass)
+    const re_pass = req.body.re_pass;
+    if (req.files) console.log("some file was uploaded ");
+    else console.log("no file found");
+    var file = req.files.uploaded_image;
+    var img_name = file.name;
+    console.log(img_name);
+    file.mv('public/img/' + file.name);
+
+    const updateUser = await userRepository.updateUser(userId, name, email, pass, img_name);
+    // console.log(updateUser.data.success);
+    user_repo = await userRepository.findById(userId);
+
+    if (user_repo.success) {
+        return res.render('profile/profile-view.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'true',
+            logged_in: 'true',
+            editReq: 'false',
+            userInfo: user_repo.data[0],
+            myCoursesReq: 'true',
+            courses: coursesTaken.data,
+
+        })
+    }
+}
+exports.editProfileView = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+    const coursesTaken = await userRepository.coursesTaken(userId);
+
+
+    if (user_repo.success) {
+        return res.render('profile/profile-view.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'true',
+            logged_in: 'true',
+            editReq: 'true',
+            userInfo: user_repo.data[0],
+            myCoursesReq: 'false',
+            courses: coursesTaken.data,
+
+        })
+
+    }
+}
+
 
 exports.get_course_view = async(req, res, next) => {
     const userId = req.params.ID;

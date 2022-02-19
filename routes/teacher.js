@@ -14,6 +14,10 @@ router.get('/user/:ID/courses', teacherController.getCourses)
 
 router.get('/user/:ID/teachers', teacherController.getTeachers)
 
+router.get('/user/:ID/profile-view', teacherController.getProfileView)
+router.get('/user/:ID/profile-view/edit', teacherController.editProfileView);
+router.post('/user/:ID/profile-view/edit', teacherController.PostEditProfileView);
+
 
 /* */
 
