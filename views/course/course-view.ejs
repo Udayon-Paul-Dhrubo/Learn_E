@@ -59,9 +59,13 @@
                                     </div>
 
                                     <div class="course-button ">
-                                        <a href="<%= url + '/course-inside-view/' +  course.course_id %>"
-                                            class="btn btn-primary btn-block inline-block ">TAKE</a>
-                                        <a href="" class="btn btn-primary btn-block inline-blockv ">WISHLIST </a>
+                                        <%if(purchased==false){%>
+                                            <a href="<%= url + '/course-inside-view/' +  course.course_id %>"
+                                                class="btn btn-primary btn-block inline-block ">TAKE</a>
+                                            <%} else { %>
+                                                <a href="<%= url + '/course-inside-view/' +  course.course_id %>"
+                                                    class="btn btn-primary btn-block inline-block ">VIEW</a>
+                                                <%}%>
                                     </div>
 
                                 </div>
