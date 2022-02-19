@@ -249,6 +249,7 @@ exports.get_course_view = async(req, res, next) => {
 exports.get_pre_add_course = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
 
     if (user_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
