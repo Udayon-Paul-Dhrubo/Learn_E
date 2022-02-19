@@ -90,6 +90,7 @@ exports.PostEditProfileView=async(req,res,next)=>{
     file.mv('public/img/' + file.name);
     const updateUser=await userRepository.updateUser(userId,name,email,pass,img_name);
   // console.log(updateUser.data.success);
+  const user_repo = await userRepository.findById(userId);
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
             pageTitle: 'Courses',
