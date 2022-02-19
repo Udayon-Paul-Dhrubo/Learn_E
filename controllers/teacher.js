@@ -435,7 +435,7 @@ exports.post_search_add_course = async(req, res, next) => {
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0],
-            courseInfo: course_repo.data,
+            courseInfo: course_repo.data[0],
             create_button: 'true',
             teachers_in: teachers_repo.data,
             req_teachers: req_src_teacher_repo.data
@@ -453,10 +453,13 @@ exports.get_add_course_add_teacher = async(req, res, next) => {
 
     const userId = req.params.ID;
     const courseId = req.params.CRSID;
-    const new_teacher_id = req.param.TEACHID;
+    const new_teacher_id = req.params.TEACHID;
+
+    console.log('course id : ', courseId);
+    console.log('new_teacher_id : ', new_teacher_id);
 
 
-    const temp_repo = await add_teacher_into_new_course(new_teacher_id, courseId);
+    const temp_repo = await infoRepository.add_teacher_into_new_course(new_teacher_id, courseId);
     console.log(temp_repo);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId;
