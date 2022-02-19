@@ -261,11 +261,62 @@ exports.get_add_course = async(req, res, next) => {
             path: '/addCourse',
             isStudent: 'false',
             logged_in: 'true',
-            userInfo: user_repo.data[0]
+            userInfo: user_repo.data[0],
+            add_button: 'false' ////
 
         })
     }
 
     let url = '/teacher/user/' + userId + '/';
     res.redirect(url);
+}
+
+exports.get_add_course_add_button_clicked = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+
+    console.log('there : ', user_repo);
+
+    if (user_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            add_button: 'true' /////
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+}
+
+exports.postSearchTeacher = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('there : ', user_repo);
+
+    const reqName = req.body.reqName;
+    console.log('reqName: ', reqName);
+
+    const teacher_repo = await userRepository.searchTeacher_By_Name(reqName)
+
+    if (user_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            add_button: 'true' /////
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
 }

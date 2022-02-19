@@ -25,6 +25,12 @@ router.get('/user/:ID/course-view/:CRSID', teacherController.get_course_view)
 
 router.get('/user/:ID/add-course', teacherController.get_add_course)
 
+router.get('/user/:ID/add-course/add-teacher', teacherController.get_add_course_add_button_clicked)
+
+router.post('/user/:ID/add-course/search-teacher', teacherController.postSearchTeacher)
+
+
+
 
 
 
