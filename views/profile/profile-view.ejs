@@ -45,23 +45,19 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <input type="email" class="form-control"
-                                                        placeholder="name@learnplus.com">
+                                                    <input type="email" class="form-control" placeholder="name@learnplus.com">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="************">
+                                                    <input type="password" class="form-control" placeholder="************">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Re-Enter Password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="************">
+                                                    <input type="password" class="form-control" placeholder="************">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>About Your Self</label>
-                                                    <textarea type="text" class="form-control"
-                                                        placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.."></textarea>
+                                                    <textarea type="text" class="form-control" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.."></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Upload Avatar</label>
@@ -81,9 +77,7 @@
 
                                     <div class="container col-md-8">
 
-                                        <a href=""
-                                            class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> "
-                                            style="display: inline; margin-right: 3rem;"> My Courses </a>
+                                        <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;"> My Courses </a>
 
 
                                         <hr style="margin-bottom : 2rem;">
@@ -96,8 +90,7 @@
                                                     <div class="col-md-4 col-sm-4 col-xs-12 ">
                                                         <div class="shop-item-list">
                                                             <div>
-                                                                <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png "
-                                                                    alt=" ">
+                                                                <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png " alt=" ">
                                                                 <div class="magnifier ">
                                                                 </div>
                                                             </div>
@@ -106,10 +99,8 @@
 
                                                     <div class="col-md-8 col-md-8 ">
                                                         <div class="shop-list-desc ">
-                                                            <h4
-                                                                style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
-                                                                <a
-                                                                    href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
+                                                            <h4 style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
+                                                                <a href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
                                                                     <%=course.Title%>
                                                                 </a>
                                                             </h4>
@@ -125,14 +116,11 @@
                                                             </div>
 
                                                             <!--progress bar -->
-                                                            <p class="lead"
-                                                                style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">
+                                                            <p class="lead" style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">
                                                                 90% Completed</p>
                                                             <div class="progress ">
-                                                                <div class="progress-bar " role="progressbar "
-                                                                    style="width: 40%; background-color: rgb(18, 19, 19); ">
-                                                                    <span class="sr-only "
-                                                                        style=" margin-top: 0; ">Complete
+                                                                <div class="progress-bar " role="progressbar " style="width: 40%; background-color: rgb(18, 19, 19); ">
+                                                                    <span class="sr-only " style=" margin-top: 0; ">Complete
                                                                         40%</span>
                                                                 </div>
                                                             </div>
@@ -145,8 +133,7 @@
                                                     <!-- for loop ends here -->
 
                                                     <% } else { %>
-                                                        <h2 class="text-primary text-uppercase"
-                                                            style="letter-spacing: 5px; margin-top: 5rem;">
+                                                        <h2 class="text-primary text-uppercase" style="letter-spacing: 5px; margin-top: 5rem;">
                                                             No courses yet..
                                                         </h2>
                                                         <% } %>
