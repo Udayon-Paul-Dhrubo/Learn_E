@@ -8,60 +8,66 @@
                 <section class="white section" style="top: 0%;">
                     <div class="container-fluid" style="top: 0%;">
 
+                        <% if(create_button == 'false') { %>
 
+                            <form action="/user/<%= userInfo.User_ID %>/add-course" method="post">
+                                <button class="btn btn-primary" type="submit">Create New</button>
+                            </form>
 
-                        <!-- top portion -->
-                        <div class="row" style="margin-top:0;">
-                            <div class="col-md-3">
-                                Teachers : <a href="">Dhrubo</a>, <a href="">Anika</a>
-                            </div>
+                            <% } else { %>
 
-
-                            <!--search box -->
-                            <div class="col-md-7">
-                                <!--if clicked searchBox will appear-->
-                                <form class="invis">
-                                    <div class="sf-type" style="width: 50%;">
-
-                                        <div class="sf-input" style="border: .25px solid; height: 40px; border-radius: 2px;">
-                                            <input type="text" id="sf-box" name="reqName" placeholder="Search Teachers by name">
-                                        </div>
-                                        <div class="sf-list" style="width: 48%;">
-                                            <ul>
-                                                <li class="row" style="height: 50px;">
-                                                    <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                    <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                    <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                </li>
-                                                <hr>
-                                                <li class="row" style="height: 50px;">
-                                                    <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                    <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                    <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                </li>
-                                                <hr>
-                                                <li class="row" style="height: 50px;">
-                                                    <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                    <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                    <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                <!-- top portion -->
+                                <div class="row" style="margin-top:0;">
+                                    <div class="col-md-3">
+                                        Teachers : <a href="">Dhrubo</a>, <a href="">Anika</a>
                                     </div>
-                                    <div class="sf-submit " style="height: inherit; ">
-                                        <input class="btn " type="submit " value="Search " style="border-radius:0; ">
+
+
+                                    <!--search box -->
+                                    <div class="col-md-7">
+                                        <!--if clicked searchBox will appear-->
+                                        <form class="invis">
+                                            <div class="sf-type" style="width: 50%;">
+
+                                                <div class="sf-input" style="border: .25px solid; height: 40px; border-radius: 2px;">
+                                                    <input type="text" id="sf-box" name="reqName" placeholder="Search Teachers by name">
+                                                </div>
+                                                <div class="sf-list" style="width: 48%;">
+                                                    <ul>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                        <hr>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                        <hr>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="sf-submit " style="height: inherit; ">
+                                                <input class="btn " type="submit " value="Search " style="border-radius:0; ">
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                            <!--search box ends -->
+                                    <!--search box ends -->
 
-                            <div class="col-md-2 pull-right " style="margin-top:0; ">
-                                <button class="btn btn-primary "> <i class="fa fa-plus "></i> Add</button>
-                            </div>
+                                    <div class="col-md-2 pull-right " style="margin-top:0; ">
+                                        <button class="btn btn-primary "> <i class="fa fa-plus "></i> Add</button>
+                                    </div>
 
-                        </div>
-                        <hr width="100% " style=" border-color: #44425a; ">
-                        <!--top portion ends -->
+                                </div>
+                                <hr width="100% " style=" border-color: #44425a; ">
+                                <!--top portion ends -->
 
 
 
@@ -69,85 +75,89 @@
 
 
 
-                        <!--sidebar starts -->
-                        <div class="sidebar">
-                            <ul>
+                                <!--sidebar starts -->
+                                <div class="sidebar">
+                                    <ul>
 
-                                <!--dynamic overview -->
-                                <li>
-                                    <div class="over">
-                                        <a href="#" class="link" onclick="myFunction()">
+                                        <!--dynamic overview -->
+                                        <li>
+                                            <div class="over">
+                                                <a href="#" class="link" onclick="myFunction()">
                                             Overview <i class="fas fa-chevron-down"></i>
                                         </a>
-                                    </div>
+                                            </div>
 
 
 
-                                    <ul class="drp_down" id="drp_down">
+                                            <ul class="drp_down" id="drp_down">
 
-                                        <div style="margin-top: 1rem;">
-                                            <a href="" class="link">
+                                                <div style="margin-top: 1rem;">
+                                                    <a href="" class="link">
                                                 Module
                                             </a>
-                                        </div>
-                                        <div style="margin-top: 1rem;">
-                                            <a href="" class="link">
-                                                <i class="fa fa-plus"></i> Create New
-                                            </a>
-                                        </div>
+                                                </div>
+                                                <div style="margin-top: 1rem;">
+                                                    <a href="" class="link">
+                                                        <i class="fa fa-plus"></i> Create New
+                                                    </a>
+                                                </div>
 
+                                            </ul>
+
+
+                                        </li>
+                                        <!--dynamic overview ends -->
+
+                                        <li> <a href="" class="link"> Grades </a> </li>
+                                        <li> <a href="" class="link"> FAQ </a> </li>
+
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
                                     </ul>
+                                </div>
+                                <!--sidebar ends -->
 
 
-                                </li>
-                                <!--dynamic overview ends -->
+                                <!--create new view -->
+                                <div class="week others pull-right" id="week1">
+                                    <div class="info">
+                                        <h2>Week 2</h2>
+                                        <h5>Week Lessons</h5>
+                                    </div>
+                                    <!-- week lesson-->
+                                    <div class="course-table ">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <th>Lesson Title</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                <li> <a href="" class="link"> Grades </a> </li>
-                                <li> <a href="" class="link"> FAQ </a> </li>
+                                            </tbody>
 
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                        <!--sidebar ends -->
+                                        </table>
+                                    </div>
+                                    <!-- week lesson ends -->
 
-
-                        <!--create new view -->
-                        <div class="week others pull-right" id="week1">
-                            <div class="info">
-                                <h2>Week 2</h2>
-                                <h5>Week Lessons</h5>
-                            </div>
-                            <!-- week lesson-->
-                            <div class="course-table ">
-                                <table class="table ">
-                                    <thead>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th>Lesson Title</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-
-                                </table>
-                            </div>
-                            <!-- week lesson ends -->
-
-                        </div>
+                                </div>
 
 
 
 
 
-                        <!--create new view ends -->
+                                <!--create new view ends -->
+
+                                <% } %>
+
+
 
 
 
