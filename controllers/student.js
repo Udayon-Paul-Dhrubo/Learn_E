@@ -46,7 +46,27 @@ exports.getHome = async(req, res, next) => {
     })
 
 }
+exports.getProfileView=async(req,res,next)=>{
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+    console.log(user_repo);
+    const coursesTaken=await userRepository.coursesTaken(userId);
 
+
+    if (user_repo.success) {
+        return res.render('profile/profile-view.ejs', {
+            pageTitle: 'Courses',
+            path: '/courses',
+            isStudent: 'true',
+            logged_in: 'true',
+            editReq :'false',
+            userInfo: user_repo.data[0],
+            myCoursesReq:'true',
+            courses: coursesTaken.data,
+           
+        })
+    }
+}
 exports.postSearch = async(req, res, next) => {
 
     const userId = req.params.ID;
