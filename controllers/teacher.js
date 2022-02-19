@@ -272,7 +272,8 @@ exports.get_pre_add_course = async(req, res, next) => {
 exports.post_pre_add_course = async(req, res, next) => {
     const userId = req.params.ID;
     const id_repo = await infoRepository.last_course_id_inserted();
-    const new_id = id_repo.data + 1;
+    console.log(id_repo)
+    const new_id = id_repo.data[0] + 1;
 
     const course_repo = await infoRepository.add_new_course(new_id);
     console.log(course_repo);
