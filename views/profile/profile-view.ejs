@@ -18,8 +18,10 @@
                                         <%=userInfo.Name%>
                                     </h2>
                                     <hr>
-                                    <p>My Profile <small><a href="profile-view-edit.html">Edit <i></i><i
-                                                    class="fa fa-pen"></i></a></small></p>
+                                    <p>My Profile <small><a
+                                                href="/student/user/<%= userInfo.User_ID %>/profile-view/edit">Edit
+                                                <i></i><i class="fa fa-pen"></i></a></small>
+                                    </p>
                                     <hr>
                                     <p>My Courses <small class="label label-primary">
                                             <%=courses.length%>
@@ -38,25 +40,28 @@
                                         <h3 class="course-title">Edit Profile</h3>
 
                                         <div class="edit-profile">
-                                            <form role="form">
+                                            <form action="/student/user/<%= userInfo.User_ID %>/profile-view/edit"
+                                                method="POST" enctype="multipart/form-data" class="edit-form"
+                                                id="edit-form">
                                                 <div class="form-group">
-                                                    <label>First / Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Amanda FOX">
+                                                    <label for="name"><i
+                                                            class="zmdi zmdi-account material-icons-name"></i></label>
+                                                    <input type="text" name="name" id="name" placeholder="Your Name" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <input type="email" class="form-control"
+                                                    <input type="email" name="email" id="email" class="form-control"
                                                         placeholder="name@learnplus.com">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="password" class="form-control"
+                                                    <input type="password" name="pass" id="pass" class="form-control"
                                                         placeholder="************">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Re-Enter Password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="************">
+                                                    <input type="password" name="re_pass" id="re_pass"
+                                                        class="form-control" placeholder="************">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>About Your Self</label>
@@ -64,8 +69,12 @@
                                                         placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.."></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Upload Avatar</label>
-                                                    <input type="file" class="btn btn-secondary">
+                                                    <label>Upload Image</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" runat="Server" type="file"
+                                                            name="uploaded_image" enctype="multipart/form-data"
+                                                            accept="" />
+                                                    </div>
 
                                                 </div>
                                                 <button type=" submit " class="btn btn-primary ">Submit Changes</button>

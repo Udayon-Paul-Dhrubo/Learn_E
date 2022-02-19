@@ -26,6 +26,9 @@ router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:QuizContent_ID'
     //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 
 router.get('/user/:ID/profile-view', studentController.getProfileView)
+router.get('/user/:ID/profile-view/edit', studentController.editProfileView);
+router.post('/user/:ID/profile-view/edit', studentController.PostEditProfileView);
+
 
 
 
