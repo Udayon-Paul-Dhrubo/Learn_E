@@ -152,9 +152,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    add_new_course = async function(new_id) {
-        const query = 'INSERT INTO "Course"("course_id") VALUES(:1 ) ';
-        const params = [new_id];
+    add_new_course = async function(new_id, title) {
+        const query = 'INSERT INTO "Course"("course_id","Title" ) VALUES(:1 , :2, ) ';
+        const params = [new_id, title];
         const result = await this.query(query, params, 'true');
         return result;
     }

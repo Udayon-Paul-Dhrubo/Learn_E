@@ -89,9 +89,9 @@ exports.PostEditProfileView = async(req, res, next) => {
     console.log(img_name);
     file.mv('public/img/' + file.name);
 
-    const updateUser=await userRepository.updateUser(userId,name,email,pass,img_name);
-  // console.log(updateUser.data.success);
-   user_repo = await userRepository.findById(userId);
+    const updateUser = await userRepository.updateUser(userId, name, email, pass, img_name);
+    // console.log(updateUser.data.success);
+    user_repo = await userRepository.findById(userId);
 
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
