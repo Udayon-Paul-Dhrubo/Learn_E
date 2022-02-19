@@ -65,8 +65,9 @@ class UserRepository extends Repository {
         return result;
     }
     updateUser=async function(user_ID,userName,Email,Password,Image){
-        const query = 'UPDATE "User" SET "Name"= :2, "Password"= :4, "Email"= :3, "image"= :5 WHERE "User_ID"= :1';
-        const params = [user_ID,userName,Email,Password,Image];
+        const query = 'UPDATE "User" SET "Name"= :2, "Email"= :3,"Password"= :4, "image"= :5 WHERE "User_ID"= :1 ';
+        const params = [userName,Email,Password,Image,user_ID];
+        console.log("parameters ",params);
         const result = await this.query(query, params, 'true');
         return result;
     }
