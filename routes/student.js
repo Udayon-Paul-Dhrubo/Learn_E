@@ -19,11 +19,11 @@ router.get('/user/:ID/teachers', studentController.getTeachers)
 router.get('/user/:ID/category-view/:CATEGORY/:START', studentController.get_Category_view)
 
 router.get('/user/:ID/course-view/:CRSID', studentController.get_course_view)
-router.get('/user/:ID/course-inside-view/:CRSID',studentController.getSingleCourseInsideView)
-router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID',studentController.getSingleCourseInsideModuleView)
-router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/video/:VideoContent_ID',studentController.getSingleCourseVideoContentView)
-router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:QuizContent_ID',studentController.getSingleCourseQuizContentView)
-//router.get('/user/:ID/my-courses', studentController.getMyCourses)
+router.get('/user/:ID/course-inside-view/:CRSID', studentController.getSingleCourseInsideView)
+router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID', studentController.getSingleCourseInsideModuleView)
+router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/video/:VideoContent_ID', studentController.getSingleCourseVideoContentView)
+router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:QuizContent_ID', studentController.getSingleCourseQuizContentView)
+    //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 
 //router.get('/user/:ID/profile-view', studentController.getProfileView)
 
