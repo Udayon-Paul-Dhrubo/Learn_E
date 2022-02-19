@@ -71,7 +71,7 @@ exports.getProfileView = async(req, res, next) => {
 
 exports.PostEditProfileView = async(req, res, next) => {
     const userId = req.params.ID;
-    const user_repo = await userRepository.findById(userId);
+    let user_repo = await userRepository.findById(userId);
     console.log(user_repo);
     const coursesTaken = await userRepository.coursesTaken(userId);
 
