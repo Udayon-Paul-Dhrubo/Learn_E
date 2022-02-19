@@ -25,7 +25,7 @@ router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/video/:VideoContent_I
 router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:QuizContent_ID', studentController.getSingleCourseQuizContentView)
     //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 
-//router.get('/user/:ID/profile-view', studentController.getProfileView)
+router.get('/user/:ID/profile-view', studentController.getProfileView)
 
 
 
