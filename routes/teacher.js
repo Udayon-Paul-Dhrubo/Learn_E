@@ -23,11 +23,13 @@ router.get('/user/:ID/category-view/:CATEGORY/:START', teacherController.get_Cat
 
 router.get('/user/:ID/course-view/:CRSID', teacherController.get_course_view)
 
-router.get('/user/:ID/add-course', teacherController.get_add_course)
+router.get('/user/:ID/add-course/pre', teacherController.get_pre_add_course)
+router.post('/user/:ID/add-course/pre', teacherController.post_pre_add_course)
 
-router.get('/user/:ID/add-course/add-teacher', teacherController.get_add_course_add_button_clicked)
 
-router.post('/user/:ID/add-course/search-teacher', teacherController.postSearchTeacher)
+router.get('/user/:ID/add-course/:CRSID', teacherController.get_pre_add_course)
+
+
 
 
 

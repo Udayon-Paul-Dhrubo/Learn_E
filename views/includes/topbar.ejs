@@ -36,7 +36,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav py-0">
                             <a href="/student/user/<%= userInfo.User_ID %>/" class="nav-item nav-link <%= path=='/home'? 'active':'' %>">Home</a>
-                            <a href="/student/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link<%= path=='/about'? 'active':'' %>">About</a>
+                            <a href="/student/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link <%= path=='/about'? 'active':'' %>">About</a>
                             <a href="/student/user/<%= userInfo.User_ID %>/courses" class="nav-item nav-link">Courses</a>
                             <a href="/student/user/<%= userInfo.User_ID %>/teachers" class="nav-item nav-link">Teachers</a>
                         </div>
@@ -69,7 +69,7 @@
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link <%= path=='/about'? 'active':'' %>">About</a>
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/courses" class="nav-item nav-link <%= path=='/courses'? 'active':'' %>">Courses</a>
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/teachers" class="nav-item nav-link <%= path=='/teachers'? 'active':'' %>">Teachers</a>
-                                <a href="/teacher/user/<%= userInfo.User_ID %>/add-course" class="nav-item nav-link <%= path=='/addCourse'? 'active':'' %>">Create Course</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/add-course/pre" class="nav-item nav-link <%= path=='/addCourse'? 'active':'' %>">Create Course</a>
                             </div>
                         </div>
 

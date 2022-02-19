@@ -246,77 +246,71 @@ exports.get_course_view = async(req, res, next) => {
 }
 
 
+exports.get_pre_add_course = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
 
+    if (user_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            add_button: 'false',
+            create_button: 'false' ////
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
+
+}
+
+
+exports.post_pre_add_course = async(req, res, next) => {
+    const userId = req.params.ID;
+    const id_repo = await infoRepository.last_course_id_inserted();
+    const new_id = id_repo.data + 1;
+
+    const course_repo = await infoRepository.add_new_course(new_id);
+    console.log(course_repo);
+
+    const add_repo = await infoRepository.add_teacher_into_new_course(userId, new_id);
+    console.log(add_repo);
+
+    let url = '/teacher/user/' + userId + '/add-course/' + new_id;
+    res.redirect(url);
+}
 
 
 exports.get_add_course = async(req, res, next) => {
     const userId = req.params.ID;
-    const user_repo = await userRepository.findById(userId);
+    const courseId = req.params.CRSID;
 
+    const user_repo = await userRepository.findById(userId);
     console.log('there : ', user_repo);
 
-    if (user_repo.success) {
+    const course_repo = await userRepository.findCourseById(courseId);
+    console.log('there : ', course_repo);
+
+
+    if (user_repo.success && course_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
             pageTitle: 'Add Course',
             path: '/addCourse',
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0],
-            add_button: 'false' ////
+            courseInfo: course_repo.data,
+            add_button: 'false',
+            create_button: 'true'
 
         })
     }
 
     let url = '/teacher/user/' + userId + '/';
     res.redirect(url);
-}
-
-exports.get_add_course_add_button_clicked = async(req, res, next) => {
-    const userId = req.params.ID;
-    const user_repo = await userRepository.findById(userId);
-
-    console.log('there : ', user_repo);
-
-    if (user_repo.success) {
-        return res.render('course/add-a-course-view.ejs', {
-            pageTitle: 'Add Course',
-            path: '/addCourse',
-            isStudent: 'false',
-            logged_in: 'true',
-            userInfo: user_repo.data[0],
-            add_button: 'true' /////
-
-        })
-    }
-
-    let url = '/teacher/user/' + userId + '/';
-    res.redirect(url);
-}
-
-exports.postSearchTeacher = async(req, res, next) => {
-
-    const userId = req.params.ID;
-    const user_repo = await userRepository.findById(userId);
-    console.log('there : ', user_repo);
-
-    const reqName = req.body.reqName;
-    console.log('reqName: ', reqName);
-
-    const teacher_repo = await userRepository.searchTeacher_By_Name(reqName)
-
-    if (user_repo.success) {
-        return res.render('course/add-a-course-view.ejs', {
-            pageTitle: 'Add Course',
-            path: '/addCourse',
-            isStudent: 'false',
-            logged_in: 'true',
-            userInfo: user_repo.data[0],
-            add_button: 'true' /////
-
-        })
-    }
-
-    let url = '/teacher/user/' + userId + '/';
-    res.redirect(url);
-
 }
