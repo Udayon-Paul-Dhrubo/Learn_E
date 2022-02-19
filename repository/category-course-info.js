@@ -159,10 +159,18 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    add_teacher_into_new_course = async function(course_id, teacher_id) {
+    add_teacher_into_new_course = async function(teacher_id, course_id) {
         const query = 'INSERT INTO "CreateCourse"("Teacher_ID","Course_ID") VALUES(:1, :2) ';
-        const params = [course_id, teacher_id];
+        const params = [teacher_id, course_id];
         const result = await this.query(query, params, 'true');
+        return result;
+    }
+
+
+    searchTeacherByTeacherName = async function(teacher_Name) {
+        const query = 'SELECT * FROM ("User"  JOIN "Teacher" ON("User_ID"="Teacher_ID")) WHERE LOWER("Name") like :1';
+        const params = [teacher_Name];
+        const result = await this.query(query, params, 'false');
         return result;
     }
 
