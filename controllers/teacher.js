@@ -232,7 +232,7 @@ exports.get_course_view = async(req, res, next) => {
             logged_in: 'true',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
-            teacher: courseTeacher_repo.data[0],
+            teachers: courseTeacher_repo.data,
             reviews: review_repo.data,
             topCourses: TopCourse_repo.data,
             contents: content_repo.data
