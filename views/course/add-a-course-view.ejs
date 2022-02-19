@@ -22,9 +22,50 @@
                             <% } else { %>
 
                                 <div class="row">
+                                    <div class="col-md-5 pull-left">
+                                        <p style="display: inline;">Teachers : </p>
+                                        <% for( teacher_in of teachers_in ) { %>
+                                            <a href=" " title=" ">
+                                                <img src="/img/<%=teacher_in.image%>" class="img-circle" alt=" "> <%=teacher_in.Name + ' , '%>
+                                            </a>
+                                            <% } %>
+                                    </div>
 
+                                    <div class="col-md-7 pull-right">
+                                        <form>
+                                            <div class="sf-type" style="width: 50%; margin-bottom: 5rem;">
 
+                                                <div class="sf-input" style="border: .25px solid; height: 40px; border-radius: 2px;">
+                                                    <input type="text" id="sf-box" name="reqName" placeholder="Search Teachers by name">
+                                                </div>
+                                                <div class="sf-list" style="width: 48%;">
+                                                    <ul>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                        <hr>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                        <hr>
+                                                        <li class="row" style="height: 50px;">
+                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="sf-submit " style="height: inherit; ">
+                                                <input class="btn " type="submit " value="Search " style="border-radius:0; ">
+                                            </div>
+                                        </form>
 
+                                    </div>
                                 </div>
 
                                 <!--sidebar starts -->

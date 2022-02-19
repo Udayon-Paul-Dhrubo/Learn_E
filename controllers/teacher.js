@@ -257,7 +257,6 @@ exports.get_pre_add_course = async(req, res, next) => {
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0],
-            add_button: 'false',
             create_button: 'false' ////
 
         })
@@ -296,6 +295,9 @@ exports.get_add_course = async(req, res, next) => {
     const course_repo = await userRepository.findCourseById(courseId);
     console.log('there : ', course_repo);
 
+    const teachers_repo = await userRepository.findCourseTeacherById(courseId);
+    console.log(teachers_repo);
+
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
@@ -305,8 +307,8 @@ exports.get_add_course = async(req, res, next) => {
             logged_in: 'true',
             userInfo: user_repo.data[0],
             courseInfo: course_repo.data,
-            add_button: 'false',
-            create_button: 'true'
+            create_button: 'true',
+            teachers_in: teachers_repo.data
 
         })
     }
