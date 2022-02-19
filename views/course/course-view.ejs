@@ -49,10 +49,11 @@
                                         <hr>
 
                                         <p class="course-instructors ">Instructor :
-                                            <a href=" " title=" "><img src="/img/<%=teacher.image%> "
-                                                    class="img-circle " alt=" ">
-                                                <%=teacher.Name%>
-                                            </a>
+                                            <% for( let teacher of teachers) { %>
+                                                <a href=" " title=" ">
+                                                    <img src="/img/<%=teacher.image%>" class="img-circle" alt=" "> <%=teacher.Name + ' , '%>
+                                                </a>
+                                                <% } %>
                                         </p>
                                         <hr>
 
@@ -60,11 +61,9 @@
 
                                     <div class="course-button ">
                                         <%if(purchased==false){%>
-                                            <a href="<%= url + '/course-inside-view/' +  course.course_id %>"
-                                                class="btn btn-primary btn-block inline-block ">TAKE</a>
+                                            <a href="<%= url + '/course-inside-view/' +  course.course_id %>" class="btn btn-primary btn-block inline-block ">TAKE</a>
                                             <%} else { %>
-                                                <a href="<%= url + '/course-inside-view/' +  course.course_id %>"
-                                                    class="btn btn-primary btn-block inline-block ">VIEW</a>
+                                                <a href="<%= url + '/course-inside-view/' +  course.course_id %>" class="btn btn-primary btn-block inline-block ">VIEW</a>
                                                 <%}%>
                                     </div>
 
@@ -130,9 +129,7 @@
                                     <!-- review portion start -->
                                     <div id="reviews" class="feedbacks">
                                         <p>
-                                            <a class="btn btn-default btn-block" role="button" data-toggle="collapse"
-                                                href="#collapseExample" aria-expanded="false"
-                                                aria-controls="collapseExample">
+                                            <a class="btn btn-default btn-block" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                 What our user said? (<%=reviews.length%> feedbacks) </a>
                                         </p>
 
@@ -144,8 +141,7 @@
                                                 <%for(let review of reviews){%>
                                                     <div class="media">
                                                         <div class="media-left">
-                                                            <img class="media-object" src="/img/<%=review.image%>"
-                                                                alt="Generic placeholder image">
+                                                            <img class="media-object" src="/img/<%=review.image%>" alt="Generic placeholder image">
                                                         </div>
 
                                                         <div class="media-body">
@@ -215,21 +211,17 @@
                                                                     </a>
                                                                     <% } else { %>
                                                                         <% if(isStudent=='true' ) { %>
-                                                                            <a class="h5"
-                                                                                href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
+                                                                            <a class="h5" href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
                                                                                 <%= course.Title %>
                                                                             </a>
                                                                             <% } else { %>
-                                                                                <a class="h5"
-                                                                                    href="/teacher/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
+                                                                                <a class="h5" href="/teacher/user/<%=userInfo.User_ID%>/course-view/<%= course.course_id %>">
                                                                                     <%= course.Title %>
                                                                                 </a>
                                                                                 <% } }%>
                                                                                     <div class="border-top mt-4 pt-4">
-                                                                                        <div
-                                                                                            class="d-flex justify-content-between">
-                                                                                            <h6 class="m-0"><i
-                                                                                                    class="fa fa-star text-primary mr-2"></i>
+                                                                                        <div class="d-flex justify-content-between">
+                                                                                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>
                                                                                                 <%= course.Rating %>
                                                                                             </h6>
                                                                                             <h5 class="m-0">$

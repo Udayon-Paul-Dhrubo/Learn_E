@@ -46,11 +46,11 @@ exports.getHome = async(req, res, next) => {
     })
 
 }
-exports.getProfileView=async(req,res,next)=>{
+exports.getProfileView = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
-    const coursesTaken=await userRepository.coursesTaken(userId);
+    const coursesTaken = await userRepository.coursesTaken(userId);
 
 
     if (user_repo.success) {
@@ -59,28 +59,28 @@ exports.getProfileView=async(req,res,next)=>{
             path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
-            editReq :'false',
+            editReq: 'false',
             userInfo: user_repo.data[0],
-            myCoursesReq:'true',
+            myCoursesReq: 'true',
             courses: coursesTaken.data,
-           
+
         })
     }
 }
 
-exports.PostEditProfileView=async(req,res,next)=>{
-  
-  let userId=req.params.ID;
-    let user_repo = await userRepository.findById(userId);
+
+exports.PostEditProfileView = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
-    userId=user_repo.data[0].User_ID;
-    const coursesTaken=await userRepository.coursesTaken(userId);
+    const coursesTaken = await userRepository.coursesTaken(userId);
+
     const name = req.body.name;
-    console.log("new name :",name)
+    console.log("new name :", name)
     const email = req.body.email;
-    console.log("new email :",email)
+    console.log("new email :", email)
     const pass = req.body.pass;
-    console.log("new password :",pass)
+    console.log("new password :", pass)
     const re_pass = req.body.re_pass;
     if (req.files) console.log("some file was uploaded ");
     else console.log("no file found");
@@ -88,28 +88,30 @@ exports.PostEditProfileView=async(req,res,next)=>{
     var img_name = file.name;
     console.log(img_name);
     file.mv('public/img/' + file.name);
+
     const updateUser=await userRepository.updateUser(userId,name,email,pass,img_name);
   // console.log(updateUser.data.success);
    user_repo = await userRepository.findById(userId);
+
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
             pageTitle: 'Courses',
             path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
-            editReq :'false',
+            editReq: 'false',
             userInfo: user_repo.data[0],
-            myCoursesReq:'true',
+            myCoursesReq: 'true',
             courses: coursesTaken.data,
-           
+
         })
     }
 }
-exports.editProfileView=async(req,res,next)=>{
+exports.editProfileView = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
-    const coursesTaken=await userRepository.coursesTaken(userId);
+    const coursesTaken = await userRepository.coursesTaken(userId);
 
 
     if (user_repo.success) {
@@ -118,14 +120,14 @@ exports.editProfileView=async(req,res,next)=>{
             path: '/courses',
             isStudent: 'true',
             logged_in: 'true',
-            editReq :'true',
+            editReq: 'true',
             userInfo: user_repo.data[0],
-            myCoursesReq:'false',
+            myCoursesReq: 'false',
             courses: coursesTaken.data,
-           
+
         })
-  
-}
+
+    }
 }
 exports.postSearch = async(req, res, next) => {
 
@@ -254,8 +256,8 @@ exports.get_Category_view = async(req, res, next) => {
 
 }
 exports.getSingleCourseInsideView = async(req, res, next) => {
-    
-   
+
+
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
     console.log('here : user_repo', user_repo);
@@ -266,12 +268,13 @@ exports.getSingleCourseInsideView = async(req, res, next) => {
     console.log('here : course_repo', course_repo);
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
     console.log('here : Module_repo ', Module_repo);
-    const purchased= await infoRepository.isPurchased(courseId,userId);
-    if(purchased.data.length==0)
-    {const newPurchase=await infoRepository.createNewPurchase(courseId,userId);
-    console.log("new purchase : ",courseId,userId);
-    console.log("new purchase repo : ",newPurchase.success);}
-    
+    const purchased = await infoRepository.isPurchased(courseId, userId);
+    if (purchased.data.length == 0) {
+        const newPurchase = await infoRepository.createNewPurchase(courseId, userId);
+        console.log("new purchase : ", courseId, userId);
+        console.log("new purchase repo : ", newPurchase.success);
+    }
+
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -428,11 +431,11 @@ exports.get_course_view = async(req, res, next) => {
     console.log(TopCourse_repo);
 
     var isPurchased;
-    const purchased= await infoRepository.isPurchased(courseId,userId);
-    if(purchased.data.length==0)isPurchased=false;
+    const purchased = await infoRepository.isPurchased(courseId, userId);
+    if (purchased.data.length == 0) isPurchased = false;
     else
-    isPurchased=true;
-    
+        isPurchased = true;
+
 
     if (user_repo.success && course_repo.success && content_repo.success) {
         return res.render('course/course-view.ejs', {
@@ -442,7 +445,7 @@ exports.get_course_view = async(req, res, next) => {
             logged_in: 'true',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
-            teacher: courseTeacher_repo.data[0],
+            teachers: courseTeacher_repo.data,
             reviews: review_repo.data,
             topCourses: TopCourse_repo.data,
             contents: content_repo.data,
