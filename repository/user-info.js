@@ -4,33 +4,32 @@ class UserRepository extends Repository {
     constructor() {
         super();
     }
-    findById = async function(userId){
+    findById = async function(userId) {
         const query = 'select * from "User" where "User_ID" = :1';
         const params = [userId];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
-    findByEmail = async function(userEmail){
+    findByEmail = async function(userEmail) {
         const query = 'select * from "User" where "Email" = :1';
         const params = [userEmail];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
-    addUser = async function(id, name, email, password, student,image ){
-        console.log({id, name, email, password,image })
-        
+    addUser = async function(id, name, email, password, student, image) {
+        console.log({ id, name, email, password, image })
+
         const query = 'insert into "User"("User_ID", "Username", "Email", "Password","image") values(:1, :2, :3, :4, :6)';
-        const params = [id, name, email, password,image];
+        const params = [id, name, email, password, image];
         const result = await this.query(query, params, 'true');
 
-        if(student){
+        if (student) {
             const query = 'insert into "Student"("Student_id") values(:1)';
             const params = [id];
             const result = await this.query(query, params, 'true');
-        }
-        else{
+        } else {
             const query = 'insert into "Teacher"("Teacher_ID") values(:1)';
             const params = [id];
             const result = await this.query(query, params, 'true');
@@ -58,17 +57,23 @@ class UserRepository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    coursesTaken = async function(user_ID){
+    coursesTaken = async function(user_ID) {
         const query = 'SELECT * FROM ( "Student"  JOIN "PurchaseHistory" ON("Student_id"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Student_ID"= : 1';
         const params = [user_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    updateUser=async function(user_ID,userName,Email,Password,Image){
+    updateUser = async function(user_ID, userName, Email, Password, Image) {
         const query = 'UPDATE "User" SET "Name"= :2, "Email"= :3,"Password"= :4, "image"= :5 WHERE "User_ID"= :1 ';
-        const params = [userName,Email,Password,Image,user_ID];
-        console.log("parameters ",params);
+        const params = [userName, Email, Password, Image, user_ID];
+        console.log("parameters ", params);
         const result = await this.query(query, params, 'true');
+        return result;
+    }
+    coursesCreated = async function(user_ID) {
+        const query = 'SELECT * FROM ( "Teacher"  JOIN "CreateCourse" ON("Teacher_ID"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Teacher_ID"= : 1';
+        const params = [user_ID];
+        const result = await this.query(query, params, 'false');
         return result;
     }
 
