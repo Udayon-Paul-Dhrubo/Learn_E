@@ -187,7 +187,7 @@ exports.get_Category_view = async(req, res, next) => {
     if (user_repo.success && search_repo.success) {
         return res.render('home/course-list.ejs', {
             pageTitle: 'Courses',
-            path: '/courses',
+            path: '/profile',
             isStudent: 'false',
             logged_in: 'true',
             req: reqCategory,
@@ -214,9 +214,9 @@ exports.getProfileView = async(req, res, next) => {
 
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
-            pageTitle: 'Courses',
-            path: '/courses',
-            isStudent: 'true',
+            pageTitle: 'My Profile',
+            path: '/profile',
+            isStudent: 'false',
             logged_in: 'true',
             editReq: 'false',
             userInfo: user_repo.data[0],
@@ -254,9 +254,9 @@ exports.PostEditProfileView = async(req, res, next) => {
 
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
-            pageTitle: 'Courses',
-            path: '/courses',
-            isStudent: 'true',
+            pageTitle: 'My Profile',
+            path: '/profile',
+            isStudent: 'false',
             logged_in: 'true',
             editReq: 'false',
             userInfo: user_repo.data[0],
@@ -275,9 +275,9 @@ exports.editProfileView = async(req, res, next) => {
 
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
-            pageTitle: 'Courses',
-            path: '/courses',
-            isStudent: 'true',
+            pageTitle: 'My Profile',
+            path: '/profile',
+            isStudent: 'false',
             logged_in: 'true',
             editReq: 'true',
             userInfo: user_repo.data[0],
