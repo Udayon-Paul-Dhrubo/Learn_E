@@ -68,11 +68,13 @@ exports.getProfileView = async(req, res, next) => {
     }
 }
 
+
 exports.PostEditProfileView = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
     const coursesTaken = await userRepository.coursesTaken(userId);
+
     const name = req.body.name;
     console.log("new name :", name)
     const email = req.body.email;
@@ -86,8 +88,11 @@ exports.PostEditProfileView = async(req, res, next) => {
     var img_name = file.name;
     console.log(img_name);
     file.mv('public/img/' + file.name);
-    const updateUser = await userRepository.updateUser(userId, name, email, pass, img_name);
-    console.log(updateUser.data.success);
+
+    const updateUser=await userRepository.updateUser(userId,name,email,pass,img_name);
+  // console.log(updateUser.data.success);
+   user_repo = await userRepository.findById(userId);
+
     if (user_repo.success) {
         return res.render('profile/profile-view.ejs', {
             pageTitle: 'Courses',
