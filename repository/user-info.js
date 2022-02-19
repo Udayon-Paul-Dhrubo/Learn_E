@@ -70,8 +70,8 @@ class UserRepository extends Repository {
         const result = await this.query(query, params, 'true');
         return result;
     }
-    coursesCreated = async function(user_ID) {
-        const query = 'SELECT * FROM ( "Teacher"  JOIN "CreateCourse" ON("Teacher_ID"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Teacher_ID"= : 1';
+    coursesCreatedByIndividualTeacher = async function(user_ID) {
+        const query = 'SELECT * FROM ( "Teacher"  JOIN "CreateCourse" USING("Teacher_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Teacher_ID"= :1';
         const params = [user_ID];
         const result = await this.query(query, params, 'false');
         return result;
