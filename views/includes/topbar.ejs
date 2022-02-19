@@ -69,6 +69,7 @@
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/about" class="nav-item nav-link <%= path=='/about'? 'active':'' %>">About</a>
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/courses" class="nav-item nav-link <%= path=='/courses'? 'active':'' %>">Courses</a>
                                 <a href="/teacher/user/<%= userInfo.User_ID %>/teachers" class="nav-item nav-link <%= path=='/teachers'? 'active':'' %>">Teachers</a>
+                                <a href="/teacher/user/<%= userInfo.User_ID %>/add-course" class="nav-item nav-link <%= path=='/addCourse'? 'active':'' %>">Create Course</a>
                             </div>
                         </div>
 
@@ -79,7 +80,7 @@
                         <div class="column text-end float-right header-profile" style="margin-right:2px;">
                             <a href="/teacher/user/<%= userInfo.User_ID %>/profile-view" class="btn btn-secondary" style="color:#ea6434;">
                                 <img src="/img/person.jpg" width="50" height="50" style="border-color: rgb(51, 100, 207);">
-                                <%= userInfo.name %>
+                                <%= userInfo.Name %>
                             </a>
                         </div>
 

@@ -189,6 +189,9 @@ exports.get_Category_view = async(req, res, next) => {
         })
     }
 
+    const url = '/student/user/' + userId + '/';
+    res.redirect(url)
+
 }
 exports.getSingleCourseInsideView = async(req, res, next) => {
     
@@ -261,7 +264,7 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
-            QuizContent :QuizContent_repo.data[0]
+            QuizContent: QuizContent_repo.data[0]
 
         })
     }
@@ -274,7 +277,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
 
     const courseId = req.params.CRSID;
     const moduleId = req.params.Module_ID;
-    const VideoContent_ID=req.params.VideoContent_ID;
+    const VideoContent_ID = req.params.VideoContent_ID;
     console.log('here : ', courseId);
     const course_repo = await infoRepository.findCourseById(courseId);
     console.log('here : ', course_repo);
@@ -283,7 +286,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
     const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
     const Module = await infoRepository.findModuleByModule_ID(moduleId);
     console.log('Module Founded : ', Module_repo);
-    const video_content=await infoRepository.findVideoContentByContent_ID(VideoContent_ID);
+    const video_content = await infoRepository.findVideoContentByContent_ID(VideoContent_ID);
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -300,7 +303,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             contents: content_repo.data,
-            video_content:video_content.data[0]
+            video_content: video_content.data[0]
 
         })
     }
@@ -313,7 +316,7 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
 
     const courseId = req.params.CRSID;
     const moduleId = req.params.Module_ID;
-    const QuizContent_ID=req.params.QuizContent_ID;
+    const QuizContent_ID = req.params.QuizContent_ID;
     console.log('here : ', courseId);
     const course_repo = await infoRepository.findCourseById(courseId);
     console.log('here : ', course_repo);
@@ -322,7 +325,7 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
     const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
     const Module = await infoRepository.findModuleByModule_ID(moduleId);
     console.log('Module Founded : ', Module_repo);
-    const quiz_content=await infoRepository.findQuizContentByContent_ID(QuizContent_ID);
+    const quiz_content = await infoRepository.findQuizContentByContent_ID(QuizContent_ID);
     console.log(quiz_content);
 
     if (user_repo.success && course_repo.success) {
@@ -340,7 +343,7 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             contents: content_repo.data,
-            quiz_content:quiz_content.data
+            quiz_content: quiz_content.data
 
         })
     }
@@ -363,12 +366,14 @@ exports.get_course_view = async(req, res, next) => {
     console.log("REVIEWS :", review_repo);
     const TopCourse_repo = await infoRepository.getTopCourses();
     console.log(TopCourse_repo);
+
     var isPurchased;
     const purchased= await infoRepository.isPurchased(courseId,userId);
     if(purchased.data.length==0)isPurchased=false;
     else
     isPurchased=true;
     
+
     if (user_repo.success && course_repo.success && content_repo.success) {
         return res.render('course/course-view.ejs', {
             pageTitle: 'Course',
