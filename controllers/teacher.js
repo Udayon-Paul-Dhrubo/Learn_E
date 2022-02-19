@@ -270,6 +270,16 @@ exports.get_pre_add_course = async(req, res, next) => {
 }
 
 
+exports.post_pre_add_course = async(req, res, next) => {
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+
+    res.redirect('')
+
+
+}
+
+
 
 
 
