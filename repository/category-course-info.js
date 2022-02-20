@@ -174,6 +174,20 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
+    insert_Completion = async function(courseId, studentId, ContentId, ModuleId) {
+        const query = 'insert into "Completion" ("Course_ID","Student_ID","Content_ID","Module_ID") values ( :1, :2, :3, :4)';
+        const params = [courseId, studentId, ContentId, ModuleId];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+
+    get_Completion_of_a_module = async function(courseId, studentId, ModuleId) {
+        const query = 'select "Content_ID" from "Completion" where "Course_ID" = :1 and "Student_ID" = :1 and "Module_ID" = :1';
+        const params = [courseId, studentId, ModuleId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
 
 
 

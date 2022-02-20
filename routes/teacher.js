@@ -36,6 +36,12 @@ router.post('/user/:ID/add-course/:CRSID/search-teacher', teacherController.post
 router.get('/user/:ID/add-course/:CRSID/add-teacher/show-teachers', teacherController.get_add_course_add_teacher_show)
 router.get('/user/:ID/add-course/:CRSID/add-teacher/:TEACHID', teacherController.get_add_course_add_teacher)
 
+//router.get('/user/:ID/add-course/:CRSID/add-quiz', teacherController.get_add_course_add_course)
+//router.post('/user/:ID/add-course/:CRSID/add-quiz', teacherController.post_add_course_add_course)
+
+
+
+
 
 
 

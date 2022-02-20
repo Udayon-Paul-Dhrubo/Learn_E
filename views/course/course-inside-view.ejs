@@ -76,27 +76,62 @@
 
                                     <!-- for loop -->
                                     <%for(content of VideoContents){%>
-                                        <tr style="background-color:rgb(196, 228, 196);">
-                                            <td><i class="fa fa-play-circle"></i></td>
-                                            <td>
-                                                <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/video/<%=content.VideoContent_ID%>">
-                                                    <%=content.Description%>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <%=content.Duration%>
-                                            </td>
-                                            <td><i class="fa fa-check "></i></td>
-                                        </tr>
-                                        <%}%>
-                                            <!-- for loop -->
-                                            <tr>
-                                                <td><i class="fa fa-question-circle"></i></td>
-                                                <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
-                                                        Quiz Based on this module</a></td>
-                                                <td>31 Min</td>
-                                                <td><i class="fa fa-close"></i></td>
-                                            </tr>
+
+                                        <% let isOk='false' ; for(let completedContent of completedContents){
+                                            if(completedContent.Content_ID==content.VideoContent_ID) { isOk='true' ;
+                                            break; } } %>
+                                            <% if(isOk=='false' ) {%>
+                                                <tr style="">
+                                                    <td><i class="fa fa-play-circle"></i></td>
+                                                    <td>
+                                                        <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/video/<%=content.VideoContent_ID%>">
+                                                            <%=content.Description%>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <%=content.Duration%>
+                                                    </td>
+                                                    <td><i class="fa fa-close "></i></td>
+                                                </tr>
+                                                <% } else { %>
+                                                    <tr style="background-color:rgb(196, 228, 196);">
+                                                        <td><i class="fa fa-play-circle"></i></td>
+                                                        <td>
+                                                            <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/video/<%=content.VideoContent_ID%>">
+                                                                <%=content.Description%>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <%=content.Duration%>
+                                                        </td>
+                                                        <td><i class="fa fa-check "></i></td>
+                                                    </tr>
+                                                    <% } %>
+                                                        <%}%>
+                                                            <!-- for loop -->
+                                                            <% let isOk2='false' ; for(let completedContent of
+                                                                completedContents){
+                                                                if(completedContent.Content_ID==QuizContent.QuizContent_ID)
+                                                                { isOk2='true' ; break; } } %>
+                                                                <% if(isOk2=='false' ) {%>
+                                                                    <tr>
+                                                                        <td><i class="fa fa-question-circle"></i></td>
+                                                                        <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
+                                                                                Quiz Based on this module</a></td>
+                                                                        <td>31 Min</td>
+                                                                        <td><i class="fa fa-close"></i></td>
+                                                                    </tr>
+                                                                    <% } else { %>
+                                                                        <tr style="background-color:rgb(196, 228, 196);">
+                                                                            <td><i class="fa fa-question-circle"></i>
+                                                                            </td>
+                                                                            <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
+                                                                                    Quiz Based on this module</a></td>
+                                                                            <td>31 Min</td>
+                                                                            <td><i class="fa fa-check"></i></td>
+                                                                        </tr>
+                                                                        <% } %>
+
                                 </tbody>
 
                             </table>
@@ -120,12 +155,13 @@
                                             </div>
                                         </div>
 
-                                        <video width="720" height="540" controls>
+                                        <video width="720" height="500" controls>
                                             <source src="./videos/<%=video_content.Video%>" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
-
-
+                                        <br>
+                                        <a class="btn btn-success" href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/completed/<%= video_content.VideoContent_ID  %> ">Back
+                                            to module</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +193,7 @@
 
                                                                 <div class="panel panel-primary">
 
-                                                                    <% if(showAnswer == 'false') { %>
+                                                                    <% if(showAnswer=='false' ) { %>
                                                                         <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%= quiz_serial %> ">
                                                                             <!-- options -->
                                                                             <div class="panel-body">
@@ -169,7 +205,7 @@
                                                                                                 id="option1"
                                                                                                 value="option1"
                                                                                                 type="radio">
-                                                                                            <%= question.Option1  %> 
+                                                                                            <%= question.Option1 %>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
@@ -180,7 +216,7 @@
                                                                                                 id="option2"
                                                                                                 value="option2"
                                                                                                 type="radio">
-                                                                                                <%= question.Option2  %> 
+                                                                                            <%= question.Option2 %>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
@@ -191,7 +227,7 @@
                                                                                                 id="option3"
                                                                                                 value="option3"
                                                                                                 type="radio">
-                                                                                                <%= question.Option3  %> 
+                                                                                            <%= question.Option3 %>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
@@ -202,7 +238,7 @@
                                                                                                 id="option4"
                                                                                                 value="option4"
                                                                                                 type="radio">
-                                                                                                <%= question.Option4  %> 
+                                                                                            <%= question.Option4 %>
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
@@ -217,197 +253,281 @@
                                                                             <div class="panel-body">
 
 
-                                                                            <!-- option 1 -->
-                                                                            <% if( given_ans != 1 ) { %> 
-                                                                                <div style="width:100%;  margin-bottom: 5px; ">
-                                                                                    <div class="radio">
-                                                                                        <label>
-                                                                                            <input name="option1"
-                                                                                                id="option1"
-                                                                                                value="option1"
-                                                                                                type="radio">
-                                                                                                <%= question.Option1  %> 
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <% } else { %> 
-                                                                                <% if( question.Answer == 1 ){ %>
-                                                                                    <div style="width:100%; background-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
+                                                                                <!-- option 1 -->
+                                                                                <% if( given_ans !=1 ) { %>
+                                                                                    <div
+                                                                                        style="width:100%;  margin-bottom: 5px; ">
                                                                                         <div class="radio">
                                                                                             <label>
                                                                                                 <input name="option1"
                                                                                                     id="option1"
                                                                                                     value="option1"
                                                                                                     type="radio">
-                                                                                                <%= question.Option1  %> 
+                                                                                                <%= question.Option1 %>
                                                                                             </label>
                                                                                         </div>
                                                                                     </div>
-                                                                                <% } else { %> 
-                                                                                    <div style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option1"
-                                                                                                    id="option1"
-                                                                                                    value="option1"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option1  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } %> 
-                                                                            <% } %> 
-                                                                            <!-- option 1 ends -->
-                                                                            <!-- option 2 -->
-                                                                            <% if( given_ans != 2 ) { %> 
-                                                                                <div style="width:100%;  margin-bottom: 5px; ">
-                                                                                    <div class="radio">
-                                                                                        <label>
-                                                                                            <input name="option2"
-                                                                                                id="option2"
-                                                                                                value="option2"
-                                                                                                type="radio">
-                                                                                                <%= question.Option2  %> 
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <% } else { %> 
-                                                                                <% if( question.Answer == 2 ){ %>
-                                                                                    <div style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option2"
-                                                                                                    id="option2"
-                                                                                                    value="option2"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option2  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } else { %> 
-                                                                                    <div style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option2"
-                                                                                                    id="option2"
-                                                                                                    value="option2"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option2  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } %> 
-                                                                            <% } %> 
-                                                                            <!-- option 2 ends -->
+                                                                                    <% } else { %>
+                                                                                        <% if( question.Answer==1 ){ %>
+                                                                                            <div
+                                                                                                style="width:100%; background-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
+                                                                                                <div class="radio">
+                                                                                                    <label>
+                                                                                                        <input
+                                                                                                            name="option1"
+                                                                                                            id="option1"
+                                                                                                            value="option1"
+                                                                                                            type="radio">
+                                                                                                        <%= question.Option1
+                                                                                                            %>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <% } else { %>
+                                                                                                <div
+                                                                                                    style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
+                                                                                                    <div class="radio">
+                                                                                                        <label>
+                                                                                                            <input
+                                                                                                                name="option1"
+                                                                                                                id="option1"
+                                                                                                                value="option1"
+                                                                                                                type="radio">
+                                                                                                            <%= question.Option1
+                                                                                                                %>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <% } %>
+                                                                                                    <% } %>
+                                                                                                        <!-- option 1 ends -->
+                                                                                                        <!-- option 2 -->
+                                                                                                        <% if( given_ans
+                                                                                                            !=2 ) { %>
+                                                                                                            <div
+                                                                                                                style="width:100%;  margin-bottom: 5px; ">
+                                                                                                                <div
+                                                                                                                    class="radio">
+                                                                                                                    <label>
+                                                                                                                        <input
+                                                                                                                            name="option2"
+                                                                                                                            id="option2"
+                                                                                                                            value="option2"
+                                                                                                                            type="radio">
+                                                                                                                        <%= question.Option2
+                                                                                                                            %>
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <% } else {
+                                                                                                                %>
+                                                                                                                <% if(
+                                                                                                                    question.Answer==2
+                                                                                                                    ){
+                                                                                                                    %>
+                                                                                                                    <div
+                                                                                                                        style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
+                                                                                                                        <div
+                                                                                                                            class="radio">
+                                                                                                                            <label>
+                                                                                                                                <input
+                                                                                                                                    name="option2"
+                                                                                                                                    id="option2"
+                                                                                                                                    value="option2"
+                                                                                                                                    type="radio">
+                                                                                                                                <%= question.Option2
+                                                                                                                                    %>
+                                                                                                                            </label>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <% } else
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <div
+                                                                                                                            style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
+                                                                                                                            <div
+                                                                                                                                class="radio">
+                                                                                                                                <label>
+                                                                                                                                    <input
+                                                                                                                                        name="option2"
+                                                                                                                                        id="option2"
+                                                                                                                                        value="option2"
+                                                                                                                                        type="radio">
+                                                                                                                                    <%= question.Option2
+                                                                                                                                        %>
+                                                                                                                                </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <% }
+                                                                                                                            %>
+                                                                                                                            <% }
+                                                                                                                                %>
+                                                                                                                                <!-- option 2 ends -->
 
 
-                                                                            <!-- option 3 -->
-                                                                            <% if( given_ans != 3 ) { %> 
-                                                                                <div style="width:100%;  margin-bottom: 5px; ">
-                                                                                    <div class="radio">
-                                                                                        <label>
-                                                                                            <input name="option3"
-                                                                                                id="option3"
-                                                                                                value="option3"
-                                                                                                type="radio">
-                                                                                                <%= question.Option3  %> 
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <% } else { %> 
-                                                                                <% if( question.Answer == 3 ){ %>
-                                                                                    <div style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option3"
-                                                                                                    id="option3"
-                                                                                                    value="option3"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option3  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } else { %> 
-                                                                                    <div style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option3"
-                                                                                                    id="option3"
-                                                                                                    value="option3"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option3  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } %> 
-                                                                            <% } %> 
-                                                                            <!-- option 3 ends -->
+                                                                                                                                <!-- option 3 -->
+                                                                                                                                <% if(
+                                                                                                                                    given_ans
+                                                                                                                                    !=3
+                                                                                                                                    )
+                                                                                                                                    {
+                                                                                                                                    %>
+                                                                                                                                    <div
+                                                                                                                                        style="width:100%;  margin-bottom: 5px; ">
+                                                                                                                                        <div
+                                                                                                                                            class="radio">
+                                                                                                                                            <label>
+                                                                                                                                                <input
+                                                                                                                                                    name="option3"
+                                                                                                                                                    id="option3"
+                                                                                                                                                    value="option3"
+                                                                                                                                                    type="radio">
+                                                                                                                                                <%= question.Option3
+                                                                                                                                                    %>
+                                                                                                                                            </label>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                    <% } else
+                                                                                                                                        {
+                                                                                                                                        %>
+                                                                                                                                        <% if(
+                                                                                                                                            question.Answer==3
+                                                                                                                                            ){
+                                                                                                                                            %>
+                                                                                                                                            <div
+                                                                                                                                                style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
+                                                                                                                                                <div
+                                                                                                                                                    class="radio">
+                                                                                                                                                    <label>
+                                                                                                                                                        <input
+                                                                                                                                                            name="option3"
+                                                                                                                                                            id="option3"
+                                                                                                                                                            value="option3"
+                                                                                                                                                            type="radio">
+                                                                                                                                                        <%= question.Option3
+                                                                                                                                                            %>
+                                                                                                                                                    </label>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                            <% } else
+                                                                                                                                                {
+                                                                                                                                                %>
+                                                                                                                                                <div
+                                                                                                                                                    style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
+                                                                                                                                                    <div
+                                                                                                                                                        class="radio">
+                                                                                                                                                        <label>
+                                                                                                                                                            <input
+                                                                                                                                                                name="option3"
+                                                                                                                                                                id="option3"
+                                                                                                                                                                value="option3"
+                                                                                                                                                                type="radio">
+                                                                                                                                                            <%= question.Option3
+                                                                                                                                                                %>
+                                                                                                                                                        </label>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                                <% }
+                                                                                                                                                    %>
+                                                                                                                                                    <% }
+                                                                                                                                                        %>
+                                                                                                                                                        <!-- option 3 ends -->
 
-                                                                            <!-- option 4 -->
-                                                                            <% if( given_ans != 4 ) { %> 
-                                                                                <div style="width:100%;  margin-bottom: 5px; ">
-                                                                                    <div class="radio">
-                                                                                        <label>
-                                                                                            <input name="option4"
-                                                                                                id="option4"
-                                                                                                value="option4"
-                                                                                                type="radio">
-                                                                                                <%= question.Option4  %> 
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <% } else { %> 
-                                                                                <% if( question.Answer == 4 ){ %>
-                                                                                    <div style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option4"
-                                                                                                    id="option4"
-                                                                                                    value="option4"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option4  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } else { %> 
-                                                                                    <div style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
-                                                                                        <div class="radio">
-                                                                                            <label>
-                                                                                                <input name="option4"
-                                                                                                    id="option4"
-                                                                                                    value="option4"
-                                                                                                    type="radio">
-                                                                                                <%= question.Option4  %> 
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <% } %> 
-                                                                            <% } %> 
-                                                                            <!-- option 4 ends -->                                                                                                                                                     
-                                                                            
+                                                                                                                                                        <!-- option 4 -->
+                                                                                                                                                        <% if(
+                                                                                                                                                            given_ans
+                                                                                                                                                            !=4
+                                                                                                                                                            )
+                                                                                                                                                            {
+                                                                                                                                                            %>
+                                                                                                                                                            <div
+                                                                                                                                                                style="width:100%;  margin-bottom: 5px; ">
+                                                                                                                                                                <div
+                                                                                                                                                                    class="radio">
+                                                                                                                                                                    <label>
+                                                                                                                                                                        <input
+                                                                                                                                                                            name="option4"
+                                                                                                                                                                            id="option4"
+                                                                                                                                                                            value="option4"
+                                                                                                                                                                            type="radio">
+                                                                                                                                                                        <%= question.Option4
+                                                                                                                                                                            %>
+                                                                                                                                                                    </label>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                            <% } else
+                                                                                                                                                                {
+                                                                                                                                                                %>
+                                                                                                                                                                <% if(
+                                                                                                                                                                    question.Answer==4
+                                                                                                                                                                    ){
+                                                                                                                                                                    %>
+                                                                                                                                                                    <div
+                                                                                                                                                                        style="width:100%; border-color:rgb(162, 221, 162) ; margin-bottom: 5px; border-radius:10px;">
+                                                                                                                                                                        <div
+                                                                                                                                                                            class="radio">
+                                                                                                                                                                            <label>
+                                                                                                                                                                                <input
+                                                                                                                                                                                    name="option4"
+                                                                                                                                                                                    id="option4"
+                                                                                                                                                                                    value="option4"
+                                                                                                                                                                                    type="radio">
+                                                                                                                                                                                <%= question.Option4
+                                                                                                                                                                                    %>
+                                                                                                                                                                            </label>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <% } else
+                                                                                                                                                                        {
+                                                                                                                                                                        %>
+                                                                                                                                                                        <div
+                                                                                                                                                                            style="width:100%; background-color: rgb(236, 156, 156); margin-bottom: 5px; border-radius:10px;">
+                                                                                                                                                                            <div
+                                                                                                                                                                                class="radio">
+                                                                                                                                                                                <label>
+                                                                                                                                                                                    <input
+                                                                                                                                                                                        name="option4"
+                                                                                                                                                                                        id="option4"
+                                                                                                                                                                                        value="option4"
+                                                                                                                                                                                        type="radio">
+                                                                                                                                                                                    <%= question.Option4
+                                                                                                                                                                                        %>
+                                                                                                                                                                                </label>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <% }
+                                                                                                                                                                            %>
+                                                                                                                                                                            <% }
+                                                                                                                                                                                %>
+                                                                                                                                                                                <!-- option 4 ends -->
+
                                                                             </div>
 
                                                                             <div class="row">
-                                                            
+
                                                                                 <div class="col-md-12">
-                    
-                                                                                    <% let serial = +quiz_serial + +1; %>                                                                                                                       
-                                                                                     
-                                                                                    <% if( serial <= total_ques) {%> 
-                                                                                    <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%= serial %> " class="btn btn-default btn-block">Next Question<i
-                                                                                            class="fas fa-chevron-right"></i></a>
-                                                                                    <% } else {%> 
-                                                                                        <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-success btn-block">Back to Module
-                                                                                            </a>
-                                                                                    <% } %> 
+
+                                                                                    <% let serial=+quiz_serial + +1; %>
+
+                                                                                        <% if( serial <=total_ques) {%>
+                                                                                            <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%= serial %> "
+                                                                                                class="btn btn-default btn-block">Next
+                                                                                                Question<i
+                                                                                                    class="fas fa-chevron-right"></i></a>
+                                                                                            <% } else {%>
+                                                                                                <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/completed/<%= question.QuizContent_ID %> "
+                                                                                                    class="btn btn-success btn-block">Back
+                                                                                                    to Module
+                                                                                                </a>
+                                                                                                <% } %>
                                                                                 </div>
                                                                             </div>
-                                                                        <% } %> 
+                                                                            <% } %>
 
 
                                                                 </div>
                                                             </div>
-                                                        </div>                                                       
+                                                        </div>
 
                                                     </div>
 

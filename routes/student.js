@@ -24,6 +24,8 @@ router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID', studentController.g
 router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/video/:VideoContent_ID', studentController.getSingleCourseVideoContentView)
 router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:SERIAL', studentController.getSingleCourseQuizContentView)
 router.post('/user/:ID/course-inside-view/:CRSID/:Module_ID/quiz/:SERIAL', studentController.postSingleCourseQuizContentView)
+
+router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/completed/:Content_ID', studentController.getCompletion)
     //router.get('/user/:ID/my-courses', studentController.getMyCourses)
 
 router.get('/user/:ID/profile-view', studentController.getProfileView)
