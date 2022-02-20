@@ -46,3 +46,43 @@
             <input class="btn " type="submit " value="Search " style="border-radius:0; ">
         </div>
     </form>
+
+
+
+
+    <!--
+                                                    <div class="container-fluid" style="width: 70%;">
+                                                        <ul>
+
+                                                            <li class="row" style="height: 45px;">
+                                                                <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
+                                                                <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
+                                                                <a class="btn col-md-1 pull-right" style="display: inline;" href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/add-teacher/<%=   %> "><i class="fa fa-plus fa-sm "></i></a>
+                                                            </li>
+                                                            <hr>
+
+                                                        </ul>
+                                                    </div>
+                                                    -->
+
+
+
+    <% if(req_teachers.length > 0) { %>
+        <div class="form-control container-fluid" style="width: 100%; height: auto;">
+            <ul>
+                <% for( let req_teacher of req_teachers ) { %>
+                    <li class="row" style="height: 40px;">
+                        <section class="col-md-2  float-left">
+                            <img src="/img/<%= req_teacher.image %>" style="width: 50px; height: 50px; display: inline; border-radius: 50px;">
+                        </section>
+                        <a href="" class="link col-md-6" style=" font-size: 22px; margin-top:6px;">
+                            <%= req_teacher.Name %>
+                        </a>
+                        <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/add-teacher/<%=req_teacher.User_ID%> " class="btn btn-secondary col-md-2 pull-right" style="display: inline; border-radius: 80px;"><i class="fa fa-plus fa-sm "></i></a>
+                    </li>
+                    <hr>
+                    <% } %>
+            </ul>
+            <a class="link pull-right" href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>"><i class="fa fa-close"></i></a>
+        </div>
+        <% } %>

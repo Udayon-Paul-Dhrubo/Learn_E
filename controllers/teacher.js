@@ -209,7 +209,6 @@ exports.getProfileView = async(req, res, next) => {
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
     const coursesTaken = await userRepository.coursesCreatedByIndividualTeacher(userId);
-    console.log(coursesTaken)
 
 
     if (user_repo.success) {
@@ -381,13 +380,13 @@ exports.get_add_course = async(req, res, next) => {
     const courseId = req.params.CRSID;
 
     const user_repo = await userRepository.findById(userId);
-    console.log('there : ', user_repo);
+    console.log('user : ', user_repo);
 
-    const course_repo = await userRepository.findCourseById(courseId);
-    console.log('there : ', course_repo);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('course repo : ', course_repo);
 
-    const teachers_repo = await userRepository.findCourseTeacherById(courseId);
-    console.log(teachers_repo);
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+    console.log('teacher-repo', teachers_repo);
 
 
     if (user_repo.success && course_repo.success) {
@@ -397,13 +396,73 @@ exports.get_add_course = async(req, res, next) => {
             isStudent: 'false',
             logged_in: 'true',
             userInfo: user_repo.data[0],
-            courseInfo: course_repo.data,
+            courseInfo: course_repo.data[0],
             create_button: 'true',
-            teachers_in: teachers_repo.data
+            teachers_in: teachers_repo.data,
+            req_teachers: []
 
         })
     }
 
     let url = '/teacher/user/' + userId + '/';
     res.redirect(url);
+}
+
+exports.post_search_add_course = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const user_repo = await userRepository.findById(userId);
+    console.log('there : ', user_repo);
+
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('there : ', course_repo);
+
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+    console.log('teacher-repo', teachers_repo);
+
+    let req_src = req.body.search_bar_req;
+    console.log(req_src);
+
+    req_src = '%' + req_src + '%';
+
+    const req_src_teacher_repo = await infoRepository.searchTeacherByTeacherName(req_src);
+    console.log(req_src_teacher_repo);
+
+    if (user_repo.success && course_repo.success && req_src_teacher_repo) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            courseInfo: course_repo.data[0],
+            create_button: 'true',
+            teachers_in: teachers_repo.data,
+            req_teachers: req_src_teacher_repo.data
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
+}
+
+
+exports.get_add_course_add_teacher = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const new_teacher_id = req.params.TEACHID;
+
+    console.log('course id : ', courseId);
+    console.log('new_teacher_id : ', new_teacher_id);
+
+
+    const temp_repo = await infoRepository.add_teacher_into_new_course(new_teacher_id, courseId);
+    console.log(temp_repo);
+
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId;
+    res.redirect(url);
+
 }

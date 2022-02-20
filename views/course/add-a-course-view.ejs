@@ -21,77 +21,83 @@
 
                             <% } else { %>
 
-                                <div class="row">
-                                    <div class="col-md-5 pull-left">
-                                        <p style="display: inline;">Teachers : </p>
-                                        <% for( teacher_in of teachers_in ) { %>
-                                            <a href=" " title=" ">
-                                                <img src="/img/<%=teacher_in.image%>" class="img-circle" alt=" "> <%=teacher_in.Name + ' , '%>
-                                            </a>
-                                            <% } %>
-                                    </div>
+                                <div class="container">
+                                    <div class="row">
 
-                                    <div class="col-md-7 pull-right">
-                                        <form>
-                                            <div class="sf-type" style="width: 50%; margin-bottom: 5rem;">
+                                        <div class="col-md-5 pull-left">
+                                            <p style="display: inline;">Teachers : </p>
+                                            <% for( teacher_in of teachers_in ) { %>
+                                                <a href=" " title=" ">
+                                                    <%=teacher_in.Name + ' , '%>
+                                                </a>
+                                                <% } %>
+                                        </div>
 
-                                                <div class="sf-input" style="border: .25px solid; height: 40px; border-radius: 2px;">
-                                                    <input type="text" id="sf-box" name="reqName" placeholder="Search Teachers by name">
+                                        <div class="col-md-7 pull-right">
+
+                                            <form action="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/search-teacher" method="POST">
+                                                <div class="sf-type">
+                                                    <div class="sf-input">
+                                                        <input type="text" name="search_bar_req" id="search_bar_req" placeholder="Search by course or category" style="border: .3px solid;">
+                                                    </div>
                                                 </div>
-                                                <div class="sf-list" style="width: 48%;">
+                                                <div class="sf-submit">
+                                                    <input class="btn" type="submit" value="Search" style="border-radius:0;">
+                                                </div>
+                                            </form>
+                                            <br>
+
+                                            <% if(req_teachers.length > 0) { %>
+                                                <div class="form-control container-fluid pull-left" style="width: 100%; height: auto; margin-top: 1rem;">
                                                     <ul>
-                                                        <li class="row" style="height: 50px;">
-                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                        </li>
-                                                        <hr>
-                                                        <li class="row" style="height: 50px;">
-                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                        </li>
-                                                        <hr>
-                                                        <li class="row" style="height: 50px;">
-                                                            <img src="\upload\xteam_02.jpg.pagespeed.ic.Foo3PN64df.jpg" class="col-md-3 img-responsive float-left" style="width: auto; height: 100%; display: inline; border-radius: 50px;">
-                                                            <a href="" class="link col-md-7" style=" font-size: 18px;"> Teacher 1 </a>
-                                                            <a class="btn col-md-1 pull-right" style="display: inline;"><i class="fa fa-plus fa-sm "></i></a>
-                                                        </li>
+                                                        <% for( let req_teacher of req_teachers ) { %>
+                                                            <li class="row" style="height: 40px;">
+                                                                <section class="col-md-2  float-left">
+                                                                    <img src="/img/<%= req_teacher.image %>" style="width: 50px; height: 50px; display: inline; border-radius: 50px;">
+                                                                </section>
+                                                                <a href="" class="link col-md-6" style=" font-size: 22px; margin-top:6px;">
+                                                                    <%= req_teacher.Name %>
+                                                                </a>
+                                                                <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/add-teacher/<%=req_teacher.User_ID%> " class="btn btn-secondary col-md-2 pull-right" style="display: inline; border-radius: 80px;"><i class="fa fa-plus fa-sm "></i></a>
+                                                            </li>
+                                                            <hr>
+                                                            <% } %>
                                                     </ul>
+                                                    <a class="link pull-right" href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>"><i class="fa fa-close"></i></a>
                                                 </div>
-                                            </div>
-                                            <div class="sf-submit " style="height: inherit; ">
-                                                <input class="btn " type="submit " value="Search " style="border-radius:0; ">
-                                            </div>
-                                        </form>
+                                                <% } %>
+
+                                        </div>
+
 
                                     </div>
                                 </div>
+                                <hr style="border: .2px solid;">
 
                                 <!--sidebar starts -->
-                                <div class="sidebar">
+                                <div class="sidebar ">
                                     <ul>
 
                                         <!--dynamic overview -->
                                         <li>
-                                            <div class="over">
-                                                <a href="#" class="link" onclick="myFunction()">
-                                            Overview <i class="fas fa-chevron-down"></i>
+                                            <div class="over ">
+                                                <a href="# " class="link " onclick="myFunction() ">
+                                            Overview <i class="fas fa-chevron-down "></i>
                                         </a>
                                             </div>
 
 
 
-                                            <ul class="drp_down" id="drp_down">
+                                            <ul class="drp_down " id="drp_down ">
 
-                                                <div style="margin-top: 1rem;">
-                                                    <a href="" class="link">
+                                                <div style="margin-top: 1rem; ">
+                                                    <a href=" " class="link ">
                                                 Module
                                             </a>
                                                 </div>
-                                                <div style="margin-top: 1rem;">
-                                                    <a href="" class="link">
-                                                        <i class="fa fa-plus"></i> Create New
+                                                <div style="margin-top: 1rem; ">
+                                                    <a href=" " class="link ">
+                                                        <i class="fa fa-plus "></i> Create New
                                                     </a>
                                                 </div>
 
@@ -101,8 +107,8 @@
                                         </li>
                                         <!--dynamic overview ends -->
 
-                                        <li> <a href="" class="link"> Grades </a> </li>
-                                        <li> <a href="" class="link"> FAQ </a> </li>
+                                        <li> <a href=" " class="link "> Grades </a> </li>
+                                        <li> <a href=" " class="link "> FAQ </a> </li>
 
                                         <li></li>
                                         <li></li>
@@ -118,8 +124,8 @@
 
 
                                 <!--create new view -->
-                                <div class="week others pull-right" id="week1">
-                                    <div class="info">
+                                <div class="week others pull-right " id="week1 ">
+                                    <div class="info ">
                                         <h2>Week 2</h2>
                                         <h5>Week Lessons</h5>
                                     </div>
