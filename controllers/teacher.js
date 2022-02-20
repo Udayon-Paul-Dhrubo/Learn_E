@@ -215,6 +215,7 @@ exports.getProfileView = async(req, res, next) => {
     const user_repo = await userRepository.findById(userId);
     console.log(user_repo);
     const coursesTaken = await userRepository.coursesCreatedByIndividualTeacher(userId);
+    console.log(coursesTaken);
 
 
     if (user_repo.success) {

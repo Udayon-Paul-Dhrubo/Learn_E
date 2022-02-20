@@ -107,22 +107,31 @@
                                                     <div class="col-md-8 col-md-8 ">
                                                         <div class="shop-list-desc ">
                                                             <h4 style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
-                                                                <a href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
-                                                                    <%=course.Title%>
-                                                                </a>
+                                                                <% if(isStudent == 'true') {%>
+                                                                    <a href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
+                                                                        <%=course.Title%>
+                                                                    </a>
+                                                                    <% } else {%>
+                                                                        <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%= course.Course_ID %> ">
+                                                                            <%=course.Title%>
+                                                                        </a>
+                                                                        <% } %>
                                                             </h4>
 
                                                             <div class="shopmeta " style="margin-bottom:0; ">
-                                                                <span class="rating <%=course.Rating%>">
-                                                                    <i class="fa fa-star "></i>
-                                                                    <i class="fa fa-star "></i>
-                                                                    <i class="fa fa-star "></i>
-                                                                    <i class="fa fa-star "></i>
-                                                                    <i class="fa fa-star-half-alt "></i>
+                                                                <span class="rating pull-right"> 
+                                                                    <% let rate=Math.floor(course.Rating); %>
+                                                                    <% for( let star=0; star<rate; star++){ %>
+                                                                        <i class="fa fa-star"></i>
+                                                                    <% } %>
+                                                                    <% if( rate < course.Rating ) { %>
+                                                                        <i class="fa fa-star-half-alt "></i>
+                                                                    <% } %>
+                                
                                                                 </span>
                                                             </div>
 
-                                                            <!--progress bar -->
+                                                            <!--progress bar 
                                                             <p class="lead" style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">
                                                                 90% Completed</p>
                                                             <div class="progress ">
@@ -131,7 +140,7 @@
                                                                         40%</span>
                                                                 </div>
                                                             </div>
-                                                            <!--progress bar ends-->
+                                                            progress bar ends-->
 
                                                         </div>
                                                     </div>
