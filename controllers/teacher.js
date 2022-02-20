@@ -4,6 +4,12 @@ const userRepository = new UserRepository();
 const Category_Course_Teacher_Info_Repository = require('../repository/category-course-info').Category_Course_Teacher_Info_Repository;
 const infoRepository = new Category_Course_Teacher_Info_Repository();
 
+
+
+/* to show teacher search req */
+let searched_teacers = [];
+/* */
+
 exports.getHome = async(req, res, next) => {
 
     const userId = req.params.ID;
@@ -380,13 +386,13 @@ exports.get_add_course = async(req, res, next) => {
     const courseId = req.params.CRSID;
 
     const user_repo = await userRepository.findById(userId);
-    console.log('user : ', user_repo);
+
 
     const course_repo = await infoRepository.findCourseById(courseId);
-    console.log('course repo : ', course_repo);
+
 
     const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
-    console.log('teacher-repo', teachers_repo);
+
 
 
     if (user_repo.success && course_repo.success) {
@@ -399,7 +405,8 @@ exports.get_add_course = async(req, res, next) => {
             courseInfo: course_repo.data[0],
             create_button: 'true',
             teachers_in: teachers_repo.data,
-            req_teachers: []
+            req_teachers: [],
+            req_teachers_show: 'false'
 
         })
     }
@@ -412,13 +419,13 @@ exports.post_search_add_course = async(req, res, next) => {
     const userId = req.params.ID;
     const courseId = req.params.CRSID;
     const user_repo = await userRepository.findById(userId);
-    console.log('there : ', user_repo);
+
 
     const course_repo = await infoRepository.findCourseById(courseId);
-    console.log('there : ', course_repo);
+
 
     const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
-    console.log('teacher-repo', teachers_repo);
+
 
     let req_src = req.body.search_bar_req;
     console.log(req_src);
@@ -426,9 +433,43 @@ exports.post_search_add_course = async(req, res, next) => {
     req_src = '%' + req_src + '%';
 
     const req_src_teacher_repo = await infoRepository.searchTeacherByTeacherName(req_src);
-    console.log(req_src_teacher_repo);
+    console.log('req-search : ', req_src_teacher_repo);
 
-    if (user_repo.success && course_repo.success && req_src_teacher_repo) {
+    let url = '';
+
+    if (user_repo.success && course_repo.success && req_src_teacher_repo.success) {
+        if (req_src_teacher_repo.data.length > 0) searched_teacers = req_src_teacher_repo.data;
+        else searched_teacers = [];
+
+        console.log('here in post : ', searched_teacers);
+
+        url = '/teacher/user/' + userId + '/add-course/' + courseId + '/add-teacher/show-teachers';
+        return res.redirect(url);
+    }
+    url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
+}
+
+
+exports.get_add_course_add_teacher_show = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+
+    const user_repo = await userRepository.findById(userId);
+
+
+    const course_repo = await infoRepository.findCourseById(courseId);
+
+
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+
+
+    console.log('here in get : ', searched_teacers);
+
+
+    if (user_repo.success && course_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
             pageTitle: 'Add Course',
             path: '/addCourse',
@@ -438,15 +479,19 @@ exports.post_search_add_course = async(req, res, next) => {
             courseInfo: course_repo.data[0],
             create_button: 'true',
             teachers_in: teachers_repo.data,
-            req_teachers: req_src_teacher_repo.data
-
+            req_teachers: searched_teacers,
+            req_teachers_show: 'true'
         })
     }
 
-    let url = '/teacher/user/' + userId + '/';
+    url = '/teacher/user/' + userId + '/';
     res.redirect(url);
 
+
 }
+
+
+
 
 
 exports.get_add_course_add_teacher = async(req, res, next) => {

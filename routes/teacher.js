@@ -33,7 +33,9 @@ router.post('/user/:ID/add-course/pre', teacherController.post_pre_add_course)
 
 router.get('/user/:ID/add-course/:CRSID', teacherController.get_add_course)
 router.post('/user/:ID/add-course/:CRSID/search-teacher', teacherController.post_search_add_course)
+router.get('/user/:ID/add-course/:CRSID/add-teacher/show-teachers', teacherController.get_add_course_add_teacher_show)
 router.get('/user/:ID/add-course/:CRSID/add-teacher/:TEACHID', teacherController.get_add_course_add_teacher)
+
 
 
 
