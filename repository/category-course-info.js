@@ -125,7 +125,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     findQuizContentIDByModule_ID = async function(Module_ID) {
-        const query = 'SELECT "QuizContent_ID" FROM "Quiz_Content"  WHERE "Module_ID"= :1 GROUP BY "QuizContent_ID" ';
+        const query = 'SELECT * FROM "Quiz_Content"  WHERE "Module_ID"= :1 order BY "QuizContent_ID" ';
         const params = [Module_ID];
         const result = await this.query(query, params, 'false');
         return result;
