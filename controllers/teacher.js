@@ -238,7 +238,7 @@ exports.PostEditProfileView = async(req, res, next) => {
     const userId = req.params.ID;
     let user_repo = await userRepository.findById(userId);
     console.log(user_repo);
-    const coursesTaken = await userRepository.coursesTaken(userId);
+    const coursesTaken = await userRepository.coursesCreatedByIndividualTeacher(userId);
 
     const name = req.body.name;
     console.log("new name :", name)
