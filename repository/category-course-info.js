@@ -213,6 +213,32 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'true');
         return result;
     }
+    getLastInsertedVideoContentID= async function() {
+        const query = 'SELECT MAX("VideoContent_ID") AS "VideoID" FROM "Video_Content" ';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    getLastInsertedQuizContentID= async function() {
+        const query = 'SELECT MAX("QuizContent_ID") AS "QuizID" FROM "Quiz_Content" ';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    addNewVideo= async function(VideoContent_ID, ModuleId,Title,description,Video_Name) {
+        const query = 'INSERT INTO "Video_Content"("VideoContent_ID","Module_ID","Topic","Description","Video") VALUES(:1,:2,:3,:4, :5)';
+        const params = [VideoContent_ID, ModuleId,Title,description,Video_Name];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+    addQuizQuestion= async function(QuizContent_ID, ModuleId,question,option1,option2,option3,option4,answer,question_ID) {
+        const query = 'INSERT INTO "Quiz_Content"("QuizContent_ID","Module_ID","Question","Option1","Option2","Option3","Option4","Answer","Question_ID") VALUES(:1,:2,:3,:4, :5,:6,:7,:8,:9)';
+        const params = [QuizContent_ID, ModuleId,question,option1,option2,option3,option4,answer,question_ID];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+
+    
 
 
 

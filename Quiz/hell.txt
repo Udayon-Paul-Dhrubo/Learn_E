@@ -1,0 +1,12 @@
+What's the color of sky?
+blue 
+pink
+brown
+red
+1
+what's the color of wind?
+violet
+red
+blue
+has not color
+4
