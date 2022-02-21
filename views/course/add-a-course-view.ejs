@@ -175,8 +175,7 @@
                                                         <th>Type</th>
                                                         <th>Lesson Title</th>
                                                         <th>Status</th>
-                                                    </tr>
-
+                                                    </tr>                                        
                                                 </thead>
                                                 <tbody>
 
@@ -195,16 +194,18 @@
                                                         </tr>
                                                         <% } %>
 
-                                                            <%%>
-                                                                <tr style="background-color:rgb(196, 228, 196);">
-                                                                    <td><i class="fa fa-question-circle"></i>
-                                                                    </td>
+                                                     <%if(QuizContent.length>0){%>
+                                                        <tr style="background-color:rgb(196, 228, 196);">
+                                                            <td>
+                                                              <i class="fa fa-question-circle"></i>
+                                                            </td>                                                        
+                                                            <td> 
+                                                              <a href=""> Quiz Based on this module</a></td>
+                                                            <td>31 Min</td>
+                                                            <td><i class="fa fa-check"></i></td>
+                                                          </tr>
+                                                      <%}%>
 
-                                                                    <td> <a href="">
-                                                                Quiz Based on this module</a></td>
-                                                                    <td>31 Min</td>
-                                                                    <td><i class="fa fa-check"></i></td>
-                                                                </tr>
 
 
                                                                 <% if(add_quiz_button == 'false' && add_video_button == 'false') { %>

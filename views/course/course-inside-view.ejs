@@ -15,14 +15,14 @@
                                     Overview <i class="fas fa-chevron-down"></i>
                                 </a>
                             </div>
-                            <%index=0%>
+                            
                                 <%for(let module of modules ){%>
-                                    <%index=index+1%>
+                                    
                                         <ul class="drp_down" id="drp_down">
 
                                             <div style="margin-top: 1rem;">
                                                 <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=module.Module_ID%>" class="link">
-                                                    Module <%=index%>
+                                                    Module  <%=module.Serial%>
                                                 </a>
                                             </div>
 
