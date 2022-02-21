@@ -15,19 +15,20 @@
                                     Overview <i class="fas fa-chevron-down"></i>
                                 </a>
                             </div>
-                            
-                                <%for(let module of modules ){%>
-                                    
-                                        <ul class="drp_down" id="drp_down">
 
+                            <ul class="drp_down" id="drp_down">
+                                <%index=0%>
+                                    <%for(let module of modules ){%>
+                                        <%index=index+1%>
                                             <div style="margin-top: 1rem;">
                                                 <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=module.Module_ID%>" class="link">
-                                                    Module  <%=module.Serial%>
+                                                    Module <%=index%>
                                                 </a>
                                             </div>
+                                            <%}%>
 
-                                        </ul>
-                                        <%}%>
+                            </ul>
+
 
                         </li>
                         <!--dynamic overview ends -->
@@ -55,8 +56,13 @@
                         <div class="info">
 
 
-                            <h2>Week 1</h2>
-                            <h4>Week Lessons</h4>
+                            <h2 style="margin-bottom: 0;">Module
+                                <%= thisModule.Serial %>
+                            </h2>
+                            <p style="margin-top: 0; margin-bottom: 0;">
+                                <%= thisModule.Description  %>
+                            </p>
+                            <h4># Module Lessons</h4>
                         </div>
 
 
@@ -88,9 +94,7 @@
                                                             <%=content.Description%>
                                                         </a>
                                                     </td>
-                                                    <td>
-                                                        <%=content.Duration%>
-                                                    </td>
+
                                                     <td><i class="fa fa-close "></i></td>
                                                 </tr>
                                                 <% } else { %>
@@ -101,9 +105,7 @@
                                                                 <%=content.Description%>
                                                             </a>
                                                         </td>
-                                                        <td>
-                                                            <%=content.Duration%>
-                                                        </td>
+
                                                         <td><i class="fa fa-check "></i></td>
                                                     </tr>
                                                     <% } %>
@@ -118,7 +120,7 @@
                                                                         <td><i class="fa fa-question-circle"></i></td>
                                                                         <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
                                                                                 Quiz Based on this module</a></td>
-                                                                        <td>31 Min</td>
+
                                                                         <td><i class="fa fa-close"></i></td>
                                                                     </tr>
                                                                     <% } else { %>
@@ -127,7 +129,7 @@
                                                                             </td>
                                                                             <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
                                                                                     Quiz Based on this module</a></td>
-                                                                            <td>31 Min</td>
+
                                                                             <td><i class="fa fa-check"></i></td>
                                                                         </tr>
                                                                         <% } %>
