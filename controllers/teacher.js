@@ -757,10 +757,11 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
 
     const Module = await infoRepository.findModuleByModule_ID(moduleId, courseId);
-    console.log(Module.data[0]);
-    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
-    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
 
+    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    console.log('video : ', VideoContent_repo);
+    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    console.log('quiz : ', QuizContent_repo)
     if (user_repo.success && course_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
             pageTitle: 'Course',
@@ -792,6 +793,7 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
 
 }
 
+
 exports.post_add_course_add_quiz = async(req, res, next) => {
     console.log("INSIDE QUIZ")
     const userId = req.params.ID;
@@ -800,38 +802,71 @@ exports.post_add_course_add_quiz = async(req, res, next) => {
     var file = req.files.quizFile;
     var quizFile_name = file.name;
     console.log(quizFile_name);
-    file.mv('Quiz/' + quizFile_name);
+    file.mv('./Quiz/' + quizFile_name);
+
+
     let question = [],
         option1 = [],
         option2 = [],
         option3 = [],
         option4 = [],
         answer = [];
-    const lineReader = require('line-reader');
-    let i = 1,
-        questionNo = 1;
+
+    /*
+        const lineReader = require('line-reader');
+        let i = 1;
+
+        const test = await lineReader.eachLine('./Quiz/' + quizFile_name, (line, last) => {
+            if (i % 6 == 1) {
+                question.push(line);
+                console.log("question :", question)
+            } else if (i % 6 == 2) option1.push(line);
+            else if (i % 6 == 3) {
+                option2.push(line);
+                console.log("option 2", option2)
+            } else if (i % 6 == 4) option3.push(line);
+            else if (i % 6 == 5) option4.push(line);
+            else if (i % 6 == 0) {
+                answer.push(line);
+                console.log("answer", answer)
+            }
+            i++;
+        })
+        console.log('test : ', test);
+    */
+
+    LineReaderSync = require("line-reader-sync")
+    lrs = new LineReaderSync('./Quiz/' + quizFile_name)
+    let test = lrs.toLines()
+    console.log(test);
+
+    for (let i = 1; i <= test.length; i++) {
+        if (i % 6 == 1) {
+            question.push(test[i]);
+            console.log("question :", question)
+        } else if (i % 6 == 2) option1.push(test[i]);
+        else if (i % 6 == 3) {
+            option2.push(test[i]);
+            console.log("option 2", option2)
+        } else if (i % 6 == 4) option3.push(test[i]);
+        else if (i % 6 == 5) option4.push(test[i]);
+        else if (i % 6 == 0) {
+            answer.push(test[i]);
+            console.log("answer", answer)
+        }
+    }
+
+
+
+
     const lastInsertedQuizID = await infoRepository.getLastInsertedQuizContentID();
     console.log("last quiz Id :", lastInsertedQuizID);
     let newQuiz_ID = lastInsertedQuizID.data[0].QuizID + 1;
-    lineReader.eachLine('Quiz/' + quizFile_name, (line, last) => {
 
 
-        if (i % 6 == 1) {
-            question.push(line);
-            console.log("question :", question)
-        } else if (i % 6 == 2) option1.push(line);
-        else if (i % 6 == 3) {
-            option2.push(line);
-            console.log("option 2", option2)
-        } else if (i % 6 == 4) option3.push(line);
-        else if (i % 6 == 5) option4.push(line);
-        else if (i % 6 == 0) {
-            answer.push(line);
-            console.log("answer", answer)
-        }
-        i++;
-    })
     console.log(" array length :", question.length);
+
+
 
     for (let j = 0; j < question.length; j++) {
         console.log("ADDING QUESTIONS");
