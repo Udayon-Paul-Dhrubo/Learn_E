@@ -272,7 +272,7 @@ exports.PostEditProfileView = async(req, res, next) => {
         })
     }
 }
-exports.createNewModule=async(req,res,next)=>{
+exports.createNewModule = async(req, res, next) => {
     console.log("CREATING A NEW MODULE");
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
@@ -282,25 +282,25 @@ exports.createNewModule=async(req,res,next)=>{
     console.log('here : ', courseId);
     const course_repo = await infoRepository.findCourseById(courseId);
     //firgure out a new module ID
-    const lastInsertedModule=await infoRepository.getLastInsertedModuleID();
-    console.log("new Module Id :",lastInsertedModule);
-   let newModule_ID=lastInsertedModule.data[0].Module_ID+1;
-    console.log("new Module Id :",newModule_ID);
+    const lastInsertedModule = await infoRepository.getLastInsertedModuleID();
+    console.log("new Module Id :", lastInsertedModule);
+    let newModule_ID = lastInsertedModule.data[0].Module_ID + 1;
+    console.log("new Module Id :", newModule_ID);
     //create a new module
     //insert into module table
-    const newModule=await infoRepository.addNewModule(newModule_ID,userId);
+    const newModule = await infoRepository.addNewModule(newModule_ID, userId);
 
-    
-    
-    
+
+
+
     //find out the serial it needs to be added
-    const serial=await infoRepository.findSerialOfLastInsertedModuleOfCourse(courseId);
+    const serial = await infoRepository.findSerialOfLastInsertedModuleOfCourse(courseId);
     console.log(serial);
-   let  serialNext=serial.data[0].Serial+1;
-    console.log("serial to be added : ",serialNext)
-    //insert into course modules
-    const ModuleAddedToCourse= await infoRepository.addModuleToCourse(courseId,newModule_ID,serialNext);
-    let url = '/teacher/user/' + userId +  '/add-course/' + courseId + '/'+newModule_ID+ '/';
+    let serialNext = serial.data[0].Serial + 1;
+    console.log("serial to be added : ", serialNext)
+        //insert into course modules
+    const ModuleAddedToCourse = await infoRepository.addModuleToCourse(courseId, newModule_ID, serialNext);
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + newModule_ID + '/';
     res.redirect(url);
 }
 exports.editProfileView = async(req, res, next) => {
@@ -358,7 +358,7 @@ exports.get_course_view = async(req, res, next) => {
             reviews: review_repo.data,
             topCourses: TopCourse_repo.data,
             contents: content_repo.data,
-            weekView :'false' 
+            weekView: 'false'
 
         })
     }
@@ -382,7 +382,7 @@ exports.get_pre_add_course = async(req, res, next) => {
             logged_in: 'true',
             userInfo: user_repo.data[0],
             create_button: 'false', ////
-            weekView :'false'
+            weekView: 'false'
         })
     }
 
@@ -443,7 +443,7 @@ exports.get_add_course = async(req, res, next) => {
             teachers_in: teachers_repo.data,
             req_teachers: [],
             req_teachers_show: 'false',
-            weekView :'false',
+            weekView: 'false',
             modules: Module_repo.data
 
         })
@@ -467,10 +467,10 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
 
     const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
 
-    const Module = await infoRepository.findModuleByModule_ID(moduleId,courseId);
+    const Module = await infoRepository.findModuleByModule_ID(moduleId, courseId);
     console.log(Module.data[0]);
-  //  const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
-   // const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    //  const content_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    // const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
@@ -497,6 +497,8 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             teachers_in: teachers_repo.data,
             req_teachers: [],
             req_teachers_show: 'false',
+            add_video_button: 'false',
+            add_quiz_button: 'false'
 
         })
     }
@@ -568,7 +570,7 @@ exports.get_add_course_add_teacher_show = async(req, res, next) => {
             teachers_in: teachers_repo.data,
             req_teachers: searched_teacers,
             req_teachers_show: 'true',
-            weekView :'false'
+            weekView: 'false'
         })
     }
 
@@ -596,6 +598,123 @@ exports.get_add_course_add_teacher = async(req, res, next) => {
     console.log(temp_repo);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId;
+    res.redirect(url);
+
+}
+
+
+exports.get_add_course_add_video = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+
+    const user_repo = await userRepository.findById(userId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+
+    const Module = await infoRepository.findModuleByModule_ID(moduleId, courseId);
+    console.log(Module.data[0]);
+    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'false',
+            create_button: 'true',
+            logged_in: 'true',
+            weekView: 'true',
+            videoView: 'false',
+            quizView: 'false',
+            gradeView: 'false',
+            userInfo: user_repo.data[0],
+            courseInfo: course_repo.data[0],
+            modules: Module_repo.data,
+            thisModule: Module.data[0],
+            VideoContents: VideoContent_repo.data,
+            QuizContent: QuizContent_repo.data[0],
+            teachers_in: teachers_repo.data,
+            req_teachers: [],
+            req_teachers_show: 'false',
+            add_video_button: 'true',
+            add_quiz_button: 'false'
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId;
+    res.redirect(url);
+
+}
+
+exports.post_add_course_add_video = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
+    res.redirect(url);
+}
+
+
+
+exports.get_add_course_add_quiz = async(req, res, next) => {
+
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+
+    const user_repo = await userRepository.findById(userId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+
+    const Module = await infoRepository.findModuleByModule_ID(moduleId, courseId);
+    console.log(Module.data[0]);
+    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'false',
+            create_button: 'true',
+            logged_in: 'true',
+            weekView: 'true',
+            videoView: 'false',
+            quizView: 'false',
+            gradeView: 'false',
+            userInfo: user_repo.data[0],
+            courseInfo: course_repo.data[0],
+            modules: Module_repo.data,
+            thisModule: Module.data[0],
+            VideoContents: VideoContent_repo.data,
+            QuizContent: QuizContent_repo.data[0],
+            teachers_in: teachers_repo.data,
+            req_teachers: [],
+            req_teachers_show: 'false',
+            add_video_button: 'false',
+            add_quiz_button: 'true'
+
+        })
+    }
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId;
+    res.redirect(url);
+
+}
+
+exports.post_add_course_add_quiz = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+    const moduleId = req.params.Module_ID;
+
+
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
     res.redirect(url);
 
 }

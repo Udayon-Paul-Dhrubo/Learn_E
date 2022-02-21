@@ -107,24 +107,24 @@
                                             <ul class="drp_down" id="drp_down">
 
                                                 <%index=0%>
-                                                <%for(let module of modules ){%>
-                                                    <%index=index+1%>
-                                                        
-                
+                                                    <%for(let module of modules ){%>
+                                                        <%index=index+1%>
+
+
                                                             <div style="margin-top: 1rem;">
                                                                 <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=module.Module_ID%>" class="link">
                                                                     Module <%=index%>
                                                                 </a>
                                                             </div>
-                
-                                                       
-                                                        <%}%>
 
-                                                <div style="margin-top: 1rem;">
-                                                    <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/newModule" class="link">
-                                                        <i class="fa fa-plus-circle"></i> New
-                                                    </a>
-                                                </div>
+
+                                                            <%}%>
+
+                                                                <div style="margin-top: 1rem;">
+                                                                    <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/newModule" class="link">
+                                                                        <i class="fa fa-plus-circle"></i> New
+                                                                    </a>
+                                                                </div>
 
                                             </ul>
 
@@ -149,100 +149,124 @@
 
                                 <!-- add new -->
                                 <%if(weekView=='true'){%>
-                                <div class="create-new others pull-right" id="week1">
-                                    <div class="info">
-                                        <h2>Week <%=thisModule.Serial%></h2>
-                                        <label style="margin-bottom: 0;"><h5>Description : </h5></label>
+                                    <div class="create-new others pull-right" id="week1">
+                                        <div class="info">
+                                            <h2>Week
+                                                <%=thisModule.Serial%>
+                                            </h2>
+                                            <label style="margin-bottom: 0;"><h5>Description : </h5></label>
 
-                                        <form>
-                                            <input placeholder="WEEK <%=thisModule.Serial%>" name="week_description" id="week_description" type="text" style="width: 60%; margin-top: 0;">
-                                            <button type="submit" class="btn btn-secondary">Save</button>
-                                        </form>
+                                            <form>
+                                                <input placeholder="WEEK <%=thisModule.Serial%>" name="week_description" id="week_description" type="text" style="width: 60%; margin-top: 0;">
+                                                <button type="submit" class="btn btn-secondary">Save</button>
+                                            </form>
 
-                                        <h5>#Week Lessons</h5>
-                                    </div>
+                                            <h5>#Week Lessons</h5>
+                                        </div>
 
 
-                                    <!-- week lesson-->
-                                    <div class="course-table ">
+                                        <!-- week lesson-->
+                                        <div class="course-table ">
 
-                                        <table class="table ">
-                                            <thead>
+                                            <table class="table ">
+                                                <thead>
 
-                                                <tr>
-                                                    <th>Type</th>
-                                                    <th>Lesson Title</th>
-                                                    <th>Status</th>
-                                                </tr>
-
-                                            </thead>
-                                            <tbody>
-
-                                                <%for(content of VideoContents){%>
-                                                    <tr style="background-color:rgb(196, 228, 196);">
-                                                        <td><i class="fa fa-play-circle"></i></td>
-                                                        <td>
-                                                            <a href="">
-                                                                <%=content.Description%>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <%=content.Duration%>
-                                                        </td>
-                                                        <td><i class="fa fa-check "></i></td>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Lesson Title</th>
+                                                        <th>Status</th>
                                                     </tr>
-                                                    <% } %>
 
-                                               <%%>
-                                                    <tr style="background-color:rgb(196, 228, 196);">
-                                                        <td><i class="fa fa-question-circle"></i>
-                                                        </td>
-                                                        
-                                                            <td> <a href="">
+                                                </thead>
+                                                <tbody>
+
+                                                    <%for(content of VideoContents){%>
+                                                        <tr style="background-color:rgb(196, 228, 196);">
+                                                            <td><i class="fa fa-play-circle"></i></td>
+                                                            <td>
+                                                                <a href="">
+                                                                    <%=content.Description%>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <%=content.Duration%>
+                                                            </td>
+                                                            <td><i class="fa fa-check "></i></td>
+                                                        </tr>
+                                                        <% } %>
+
+                                                            <%%>
+                                                                <tr style="background-color:rgb(196, 228, 196);">
+                                                                    <td><i class="fa fa-question-circle"></i>
+                                                                    </td>
+
+                                                                    <td> <a href="">
                                                                 Quiz Based on this module</a></td>
-                                                        <td>31 Min</td>
-                                                        <td><i class="fa fa-check"></i></td>
-                                                    </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <button class="btn btn-primary"> <i class="fa fa-plus-circle"> Video</i></button> /
-                                                        <button class="btn btn-primary"> <i class="fa fa-plus"> Quiz</i></button>
-
-                                                       
-                                                     <form> <ul class="drp_down" id="drp_down">
-                                                        <input type="file">  </ul></form>
-                                                       
-                                                    </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><i class="fa fa-play-circle"></i></td>
-                                                    <form>
-                                                        <td>
-                                                            <input type="file">
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-secondary"><i class="fa fa-check"></i></a>
-                                                    </form>/
-                                                    <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
-                                                    </td>
-                                                </tr>
+                                                                    <td>31 Min</td>
+                                                                    <td><i class="fa fa-check"></i></td>
+                                                                </tr>
 
 
-                                            </tbody>
+                                                                <% if(add_quiz_button == 'false' && add_video_button == 'false') { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video" class="btn btn-primary"> <i class="fa fa-plus-circle"> Video</i></a> /
+                                                                            <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz" class="btn btn-primary"> <i class="fa fa-plus-circle"> Quiz</i></a>
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <%  } else{ %>
 
-                                        </table>
+                                                                        <% if(add_video_button == 'true'){%>
+
+                                                                            <tr>
+                                                                                <td><i class="fa fa-play-circle"></i></td>
+                                                                                <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video">
+                                                                                    <td>
+                                                                                        <input type="file">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a class="btn btn-secondary"><i class="fa fa-check"></i></a>
+                                                                                </form>/
+                                                                                <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <% } else if(add_quiz_button == 'true') {%>
+
+                                                                                <tr>
+                                                                                    <td><i class="fa fa-play-circle"></i></td>
+                                                                                    <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz">
+                                                                                        <td>
+                                                                                            <input type="file">
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a class="btn btn-secondary"><i class="fa fa-check"></i></a>
+                                                                                    </form>/
+                                                                                    <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <% } %>
+                                                                                    <% } %>
+
+
+
+
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
+                                        <!-- week lesson ends -->
+
                                     </div>
-
-
-                                    <!-- week lesson ends -->
-
-                                </div>
-                                <%}%>
-                                <!-- add new ends -->
+                                    <%}%>
+                                        <!-- add new ends -->
 
 
 
@@ -250,7 +274,7 @@
 
 
 
-                                <% } %>
+                                        <% } %>
                     </div>
                 </section>
 
