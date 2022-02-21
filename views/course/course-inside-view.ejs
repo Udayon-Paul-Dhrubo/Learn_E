@@ -16,10 +16,12 @@
                                 </a>
                             </div>
 
+
                             <ul class="drp_down" id="drp_down">
                                 <%index=0%>
                                     <%for(let module of modules ){%>
                                         <%index=index+1%>
+
                                             <div style="margin-top: 1rem;">
                                                 <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=module.Module_ID%>" class="link">
                                                     Module <%=index%>
@@ -28,7 +30,6 @@
                                             <%}%>
 
                             </ul>
-
 
                         </li>
                         <!--dynamic overview ends -->
