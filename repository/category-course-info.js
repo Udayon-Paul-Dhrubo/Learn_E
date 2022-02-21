@@ -105,9 +105,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    findModuleByModule_ID = async function(Module_ID) {
-        const query = 'SELECT * FROM "Module"  WHERE "Module_ID"= :1';
-        const params = [Module_ID];
+    findModuleByModule_ID = async function(Module_ID,Course_ID) {
+        const query = 'SELECT * FROM "Module" JOIN "CourseModules" USING ("Module_ID") WHERE  "Module_ID"= :1 AND "Course_ID"= :2 ' ;
+        const params = [Module_ID,Course_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
@@ -185,6 +185,32 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const query = 'select "Content_ID" from "Completion" where "Course_ID" = :1 and "Student_ID" = :1 and "Module_ID" = :1';
         const params = [courseId, studentId, ModuleId];
         const result = await this.query(query, params, 'false');
+        return result;
+    }
+    getLastInsertedModuleID= async function() {
+        const query = 'SELECT MAX("Module_ID") AS "Module_ID" FROM "Module" ';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    addNewModule= async function(Module_ID,Teacher_ID) {
+        const query = 'INSERT INTO "Module"("Module_ID","Teacher_ID") VALUES( :1, :2) ';
+        const params = [Module_ID,Teacher_ID];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+    
+    findSerialOfLastInsertedModuleOfCourse=async function(courseId) {
+        const query = ' SELECT MAX("Serial")  AS "Serial","Course_ID" FROM "CourseModules" WHERE "Course_ID"= :1   GROUP BY "Course_ID" ';
+        const params = [courseId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+    addModuleToCourse= async function(courseId, ModuleId,Serial) {
+        const query = 'INSERT INTO "CourseModules"("Course_ID","Module_ID","Serial") VALUES(:1,:2,:3)';
+        const params = [courseId, ModuleId,Serial];
+        const result = await this.query(query, params, 'true');
         return result;
     }
 
