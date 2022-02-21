@@ -453,7 +453,7 @@ exports.get_add_course = async(req, res, next) => {
     res.redirect(url);
 }
 exports.getSingleCourseInsideModuleView = async(req, res, next) => {
-    console.log("single course inside view")
+    console.log("single course inside MODULE VIEW view")
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
 
@@ -636,7 +636,7 @@ exports.get_add_course_add_video = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
-            QuizContent: QuizContent_repo.data[0],
+            QuizContent: QuizContent_repo.data,
             teachers_in: teachers_repo.data,
             req_teachers: [],
             req_teachers_show: 'false',
@@ -655,6 +655,21 @@ exports.post_add_course_add_video = async(req, res, next) => {
     const userId = req.params.ID;
     const courseId = req.params.CRSID;
     const moduleId = req.params.Module_ID;
+    const title = req.body.title;
+    console.log(title);
+    const description = req.body.description;
+    console.log("Description : ",description);
+  //find out content id to be added
+  //insert into video content with the module id
+  const lastInsertedVideo = await infoRepository.getLastInsertedVideoContentID();
+  console.log("last Video Id :", lastInsertedVideo);
+  let newVideo_ID = lastInsertedVideo.data[0].VideoID + 1;
+  console.log("new Video Id :", newVideo_ID);
+    var file = req.files.uploaded_video;
+    var video_name = file.name;
+    console.log(video_name);
+    file.mv('videos/' + file.name);
+    const addVideo=await infoRepository.addNewVideo(newVideo_ID,moduleId,title,description,video_name);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
     res.redirect(url);
@@ -694,7 +709,7 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
-            QuizContent: QuizContent_repo.data[0],
+            QuizContent: QuizContent_repo.data,
             teachers_in: teachers_repo.data,
             req_teachers: [],
             req_teachers_show: 'false',
@@ -709,11 +724,39 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
 }
 
 exports.post_add_course_add_quiz = async(req, res, next) => {
+    console.log("INSIDE QUIZ")
     const userId = req.params.ID;
     const courseId = req.params.CRSID;
     const moduleId = req.params.Module_ID;
+    var file = req.files.quizFile;
+    var quizFile_name = file.name;
+    console.log(quizFile_name);
+    file.mv('Quiz/' + quizFile_name);
+    let question=[],option1=[],option2=[],option3=[],option4=[],answer=[];
+    const lineReader = require('line-reader');
+   let i=1,questionNo=1;
+   const lastInsertedQuizID = await infoRepository.getLastInsertedQuizContentID();
+  console.log("last quiz Id :", lastInsertedQuizID);
+  let newQuiz_ID = lastInsertedQuizID.data[0].QuizID + 1;
+lineReader.eachLine('Quiz/'+quizFile_name,(line,last)=>{
+    
 
+   if(i%6==1){question.push(line); console.log("question :",question)}
+  else  if(i%6==2)option1.push(line);
+  else  if(i%6==3){option2.push(line); console.log("option 2",option2)}
+   else if(i%6==4)option3.push(line);
+ else  if(i%6==5)option4.push(line);
+   else if(i%6==0){
+       answer.push(line);
+       console.log("answer",answer)
+   }i++;
+})
+console.log(" array length :",question.length);
 
+for( let j=0 ;j<question.length;j++){
+    console.log("ADDING QUESTIONS");
+    const added = await infoRepository.addQuizQuestion(newQuiz_ID,moduleId,question[j],option1[j],option2[j],option3[j],option4[j],answer[j],(j+1));
+}
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
     res.redirect(url);
 

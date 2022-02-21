@@ -220,12 +220,26 @@
                                                                     <%  } else{ %>
 
                                                                         <% if(add_video_button == 'true'){%>
-
-                                                                            <tr>
-                                                                                <td><i class="fa fa-play-circle"></i></td>
-                                                                                <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video">
-                                                                                    <td>
-                                                                                        <input type="file">
+                                                                            
+                                                                            
+                                                                                <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video" enctype="multipart/form-data">
+                                                                                   
+                                                                                   <tr><td>  <div class="form-group">
+                                                                                    <label>Title</label>
+                                
+                                                                                    <input type="text" name="title" id="title" class="form-control" placeholder="Add a Title for this Content">
+                                                                                </div></td>
+                                                                                   </tr>
+                                                                                   <tr><td>  <div class="form-group">
+                                                                                    <label>Description</label>
+                                
+                                                                                    <input type="text" name="description" id="description" class="form-control" placeholder="What's this topic based on?">
+                                                                                </div></td>
+                                                                                   </tr>
+                                                                                   <tr>
+                                                                                    <td><i class="fa fa-play-circle"></i></td>
+                                                                                   <td>
+                                                                                        <input type="file" runat="Server" name="uploaded_video" enctype="multipart/form-data" accept="">
                                                                                     </td>
                                                                                     <td>
                                                                                         <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
@@ -238,9 +252,10 @@
 
                                                                                 <tr>
                                                                                     <td><i class="fa fa-question-circle"></i></td>
-                                                                                    <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz">
-                                                                                        <td>
-                                                                                            <input type="file">
+                                                                                    <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz" enctype="multipart/form-data">
+                                                                                       
+                                                                                       <td>HELLO WORLD</td> <td>
+                                                                                            <input type="file" name="quizFile" runat="Server" >
                                                                                         </td>
                                                                                         <td>
                                                                                             <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
