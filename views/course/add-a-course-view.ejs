@@ -106,12 +106,22 @@
 
                                             <ul class="drp_down" id="drp_down">
 
-                                                <div style="margin-top: 1rem;">
-                                                    <a href="" class="link"> Week 1 </a>
-                                                </div>
+                                                <%index=0%>
+                                                <%for(let module of modules ){%>
+                                                    <%index=index+1%>
+                                                        
+                
+                                                            <div style="margin-top: 1rem;">
+                                                                <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=module.Module_ID%>" class="link">
+                                                                    Module <%=index%>
+                                                                </a>
+                                                            </div>
+                
+                                                       
+                                                        <%}%>
 
                                                 <div style="margin-top: 1rem;">
-                                                    <a href="" class="link">
+                                                    <a href="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/newModule" class="link">
                                                         <i class="fa fa-plus-circle"></i> New
                                                     </a>
                                                 </div>
@@ -138,13 +148,14 @@
 
 
                                 <!-- add new -->
+                                <%if(weekView=='true'){%>
                                 <div class="create-new others pull-right" id="week1">
                                     <div class="info">
-                                        <h2>Week 2</h2>
+                                        <h2>Week <%=thisModule.Serial%></h2>
                                         <label style="margin-bottom: 0;"><h5>Description : </h5></label>
 
                                         <form>
-                                            <input placeholder="2nd week" name="week_description" id="week_description" type="text" style="width: 60%; margin-top: 0;">
+                                            <input placeholder="WEEK <%=thisModule.Serial%>" name="week_description" id="week_description" type="text" style="width: 60%; margin-top: 0;">
                                             <button type="submit" class="btn btn-secondary">Save</button>
                                         </form>
 
@@ -167,23 +178,41 @@
                                             </thead>
                                             <tbody>
 
-                                                <tr>
-                                                    <td><i class="fa fa-play-circle"></i></td>
-                                                    <td> </td>
-                                                    <td><i class="fa fa-close "></i></td>
-                                                </tr>
+                                                <%for(content of VideoContents){%>
+                                                    <tr style="background-color:rgb(196, 228, 196);">
+                                                        <td><i class="fa fa-play-circle"></i></td>
+                                                        <td>
+                                                            <a href="">
+                                                                <%=content.Description%>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <%=content.Duration%>
+                                                        </td>
+                                                        <td><i class="fa fa-check "></i></td>
+                                                    </tr>
+                                                    <% } %>
 
-
-                                                <tr>
-                                                    <td><i class="fa fa-question-circle"></i></td>
-                                                    <td> </td>
-                                                    <td><i class="fa fa-close "></i></td>
-                                                </tr>
+                                               <%%>
+                                                    <tr style="background-color:rgb(196, 228, 196);">
+                                                        <td><i class="fa fa-question-circle"></i>
+                                                        </td>
+                                                        
+                                                            <td> <a href="">
+                                                                Quiz Based on this module</a></td>
+                                                        <td>31 Min</td>
+                                                        <td><i class="fa fa-check"></i></td>
+                                                    </tr>
 
                                                 <tr>
                                                     <td>
                                                         <button class="btn btn-primary"> <i class="fa fa-plus-circle"> Video</i></button> /
                                                         <button class="btn btn-primary"> <i class="fa fa-plus"> Quiz</i></button>
+
+                                                       
+                                                     <form> <ul class="drp_down" id="drp_down">
+                                                        <input type="file">  </ul></form>
+                                                       
                                                     </td>
                                                     <td></td>
                                                     <td></td>
@@ -212,6 +241,7 @@
                                     <!-- week lesson ends -->
 
                                 </div>
+                                <%}%>
                                 <!-- add new ends -->
 
 

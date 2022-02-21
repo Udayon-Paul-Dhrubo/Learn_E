@@ -107,8 +107,10 @@ exports.postSignUp = async(req, res, next) => {
 
 
     const name = req.body.name;
+    console.log(name);
     const email = req.body.email;
     const pass = req.body.pass;
+    console.log(pass);
     const re_pass = req.body.re_pass;
     //  const img = req.body.uploaded_image;
     const student = req.body.student;
