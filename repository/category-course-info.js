@@ -241,13 +241,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
 
 
     get_ansQues_by_courseId = async function(courseId) {
-        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", ' +
-            'select (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", ' +
-            '"Question", "Answer" ' +
-            'from "FAQ" f ' +
-            ' where "Course_ID" = :1 and "Answer" is not null;';
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Answer" is not null';
         const params = [courseId];
         const result = await this.query(query, params, 'false');
         return result;
@@ -255,35 +249,36 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     get_Ques_by_courseId = async function(courseId) {
-        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", ' +
-            '"Question", "Question_ID"' +
-            'from "FAQ" f ' +
-            ' where "Course_ID" = :1 and "Answer" is null;';
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Answer" is null';
         const params = [courseId];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
-    get_ansQues_by_courseId_studentId = async function(courseId, studentId) {
-        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", ' +
-            'select (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", ' +
-            '"Question", "Answer" ' +
-            'from "FAQ" f ' +
-            ' where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is not null;';
+    get_others_ansQues_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" <> :2 and "Answer" is not null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+
+    }
+
+    get_others_Ques_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" <> :2  and "Answer" is null';
         const params = [courseId, studentId];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
-    get_Ques_by_courseId = async function(courseId, studentId) {
-        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", ' +
-            '(select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", ' +
-            '"Question", "Question_ID"' +
-            'from "FAQ" f ' +
-            ' where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is null;';
+    get_ansQues_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is not null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    get_Ques_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is null';
         const params = [courseId, studentId];
         const result = await this.query(query, params, 'false');
         return result;
@@ -291,21 +286,21 @@ class Category_Course_Teacher_Info_Repository extends Repository {
 
     get_last_questionId_in_faq = async function() {
 
-        const query = 'select max("Question_ID") from FAQ;';
+        const query = 'select max("Question_ID") "id" from FAQ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
     insert_into_FAQ = async function(quesId, courseId, studentId, question) {
-        const query = 'insert into "FAQ"("Question_ID", "Course_ID", "Student_ID", "Question") values(:1, :2, :3, :4);';
+        const query = 'insert into "FAQ"("Question_ID", "Course_ID", "Student_ID", "Question") values(:1, :2, :3, :4)';
         const params = [quesId, courseId, studentId, question];
         const result = await this.query(query, params, 'true');
         return result;
     }
 
     giveAnsToFaq_by_quesId = async function(quesId, answer, teacherId) {
-        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1;'
+        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1'
         const params = [quesId, answer, teacherId];
         const result = await this.query(query, params, 'true');
         return result;

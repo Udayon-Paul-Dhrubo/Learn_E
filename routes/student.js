@@ -23,6 +23,7 @@ router.get('/user/:ID/course-inside-view/:CRSID', studentController.getSingleCou
 
 //FAQ
 router.get('/user/:ID/course-inside-view/:CRSID/FAQ', studentController.getSingleCourseInsideView_FAQ)
+router.post('/user/:ID/course-inside-view/:CRSID/FAQ', studentController.postSingleCourseInsideView_FAQ)
 
 //FAQ
 

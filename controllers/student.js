@@ -601,19 +601,22 @@ exports.getTeachers = async(req, res, next) => {
 
 exports.getSingleCourseInsideView_FAQ = async(req, res, next) => {
     const userId = req.params.ID;
-    console.log('userId : ', userId);
     const courseId = req.params.CRSID;
-    console.log('courseId : ', courseId);
 
     const user_repo = await userRepository.findById(userId);
-    console.log('user_repo : ', user_repo)
     const course_repo = await infoRepository.findCourseById(courseId);
-    console.log('course_repo : ', course_repo)
-
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
-    console.log('Module_repo : ', Module_repo)
 
-    //get prev FAQ(s) repo
+    const others_ansQues_repo = await infoRepository.get_others_ansQues_by_courseId_studentId(courseId, userId);
+    console.log('others ansQues : ', others_ansQues_repo, );
+    const others_Ques_repo = await infoRepository.get_others_Ques_by_courseId_studentId(courseId, userId);
+    console.log('others Ques : ', others_Ques_repo);
+
+    const mine_ansQues_repo = await infoRepository.get_ansQues_by_courseId_studentId(courseId, userId);
+    console.log('mine ans Ques : ', mine_ansQues_repo);
+    const mine_Ques_repo = await infoRepository.get_Ques_by_courseId_studentId(courseId, userId);
+    console.log('mine Ques : ', mine_Ques_repo);
+
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -628,12 +631,32 @@ exports.getSingleCourseInsideView_FAQ = async(req, res, next) => {
             faqView: 'true',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
-            modules: Module_repo.data
+            modules: Module_repo.data,
+            others_ansQues: others_ansQues_repo.data,
+            others_Ques: others_Ques_repo.data,
+            mine_ansQues: mine_ansQues_repo.data,
+            mine_Ques: mine_Ques_repo.data,
 
         })
     }
+}
 
 
+exports.postSingleCourseInsideView_FAQ = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
 
+    const question = req.body.question_inserted;
+    console.log('question : ', question);
+
+    const id_repo = await infoRepository.get_last_questionId_in_faq();
+    console.log('id_repo : ', id_repo);
+    let id = id_repo.data[0].id + 1;
+    console.log('id: ', id);
+    const insert_repo = await infoRepository.insert_into_FAQ(id, courseId, userId, question);
+    console.log('insert_repo : ', insert_repo);
+
+    let url = '/student/user/' + userId + '/course-inside-view/' + courseId + '/FAQ';
+    res.redirect(url);
 
 }
