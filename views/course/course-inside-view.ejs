@@ -11,7 +11,7 @@
                         <!--dynamic overview -->
                         <li>
                             <div class="over">
-                                <a href="#" class="link" onclick="myFunction()">
+                                <a href="" class="link" onclick="myFunction()">
                                     Overview <i class="fas fa-chevron-down"></i>
                                 </a>
                             </div>
@@ -34,7 +34,7 @@
                         <!--dynamic overview ends -->
 
                         <li> <a href="" class="link"> Grades </a> </li>
-                        <li> <a href="" class="link"> FAQ </a> </li>
+                        <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/FAQ" class="link"> FAQ </a> </li>
 
                         <li></li>
                         <li></li>
@@ -549,6 +549,99 @@
                                                 <h1>Hello from grades.</h1>
                                             </div>
                                             <% } %>
+
+                                        <% if(faqView == 'true'){ %>
+                                            <div class='faqs others' id="faqs">
+                                                <div class="otherStudents">
+                                                    <h4>others faq</h4>
+
+                                                    <div class="container-fluid pull-left qa-boxes">
+                                                    
+                                                        <div class="container-fluid pull-left qas">
+
+                                                            <div class="question-box">
+                                                                <p>Question 1</p>
+                                                            </div>
+
+
+
+                                                            <div class="ans-box">
+                                                                <p>Answer of 1</p>
+                                                            </div>
+                                                            <div class="question-box">
+                                                                <p>Question 1</p>
+                                                            </div>
+                                                            <div class="ans-box">
+                                                                <p>Answer of 1</p>
+                                                            </div>
+                                                            <div class="question-box">
+                                                                <p>Question 1</p>
+                                                            </div>                                                           
+
+
+                                                        </div>
+                                                    
+                                                    </div>
+
+                                                </div>
+                                                <hr >
+                                                <div class="mine">
+                                                    <h4>mine faq</h4>
+                                                    <div class="container-fluid pull-left qa-boxes">
+                                                    
+                                                    <div class="container-fluid pull-left qas">
+
+                                                        <div class="question-box">
+
+                                                            <div class="row">
+                                                                <div class="col-md-.5">
+                                                                    <span><img src="/img/team-4.jpg" style="height: 40px; width: 40px; border-radius: 50px; border: .3px solid;"></span>
+                                                                </div>
+                                                                <div class="col-md-1 pull-left" style="display: inline; font-size: smaller;">
+                                                                    Udayon Paul Dhrubo
+                                                                </div>
+                                                                <div class="col-md-9 pull-right" style="display: inline;">
+                                                                    
+                                                                    <small>
+                                                                        Question : ( 21/1/2 )
+                                                                    <br>
+                                                                    
+                                                                        <strong>
+                                                                            blah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blah
+                                                                        </strong>
+                                                                    
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            
+                                                            
+                                                        </div>
+
+
+
+                                                        <div class="ans-box">
+                                                            <p>Answer of 1</p>
+                                                        </div>
+                                                        <div class="question-box">
+                                                            <p>Question 1</p>
+                                                        </div>
+                                                        <div class="ans-box">
+                                                            <p>Answer of 1</p>
+                                                        </div>
+                                                        <div class="question-box">
+                                                            <p>Question 1</p>
+                                                        </div>                                                           
+
+
+                                                    </div>
+                                                
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                        <% } %>
 
 
                                                 <%- include('../includes/footer.ejs') %>

@@ -174,6 +174,79 @@ ul {
     justify-content: center;
 }
 
+.faqs {
+    height: 270px;
+    width: calc(100% - 20%);
+    display: flex;
+    justify-content: center;
+}
+
+.faqs .otherStudents {
+    position: absolute;
+    top: 14%;
+    left: 25%;
+    padding: 0.5rem;
+    text-align: start;
+    margin-top: 3rem;
+    padding: 0;
+}
+
+.qa-boxes {
+    margin-top: 0;
+    height: 370px;
+    padding: 0;
+}
+
+.qas {
+    width: 1000px;
+    height: 370px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    padding: 0;
+}
+
+.question-box {
+    border: 1px solid;
+    width: 1000px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    height: auto;
+    padding: 5px;
+    background-color: rgb(238, 227, 227);
+}
+
+.ans-box {
+    height: auto;
+    border: 1px solid;
+    width: 970px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    margin-left: 30px;
+    padding: 5px;
+    background-color: rgb(204, 230, 204);
+}
+
+.faqs hr {
+    position: absolute;
+    left: 25%;
+    right: 5%;
+    text-align: start;
+    margin-top: 3rem;
+    width: 1100px;
+    border: .3px solid;
+    top: 580px;
+}
+
+.faqs .mine {
+    position: absolute;
+    top: 582px;
+    left: 25%;
+    padding: 0.5rem;
+    text-align: start;
+    margin-top: 3rem;
+    height: 100px;
+}
+
 h1 {
     position: absolute;
     top: 15%;

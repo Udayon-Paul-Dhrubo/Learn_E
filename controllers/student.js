@@ -288,6 +288,7 @@ exports.getSingleCourseInsideView = async(req, res, next) => {
             videoView: 'false',
             quizView: 'false',
             gradeView: 'false',
+            faqView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data
@@ -336,6 +337,7 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             videoView: 'false',
             quizView: 'false',
             gradeView: 'false',
+            faqView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
@@ -377,6 +379,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
             videoView: 'true',
             quizView: 'false',
             gradeView: 'false',
+            faqView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
@@ -420,6 +423,7 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
             videoView: 'false',
             quizView: 'true',
             gradeView: 'false',
+            faqView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
@@ -482,6 +486,7 @@ exports.postSingleCourseQuizContentView = async(req, res, next) => {
             videoView: 'false',
             quizView: 'true',
             gradeView: 'false',
+            faqView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
@@ -590,5 +595,45 @@ exports.getTeachers = async(req, res, next) => {
 
     const url = '/student/user/' + userId + '/';
     res.redirect(url)
+
+}
+
+
+exports.getSingleCourseInsideView_FAQ = async(req, res, next) => {
+    const userId = req.params.ID;
+    console.log('userId : ', userId);
+    const courseId = req.params.CRSID;
+    console.log('courseId : ', courseId);
+
+    const user_repo = await userRepository.findById(userId);
+    console.log('user_repo : ', user_repo)
+    const course_repo = await infoRepository.findCourseById(courseId);
+    console.log('course_repo : ', course_repo)
+
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    console.log('Module_repo : ', Module_repo)
+
+    //get prev FAQ(s) repo
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView: 'false',
+            videoView: 'false',
+            quizView: 'false',
+            gradeView: 'false',
+            faqView: 'true',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules: Module_repo.data
+
+        })
+    }
+
+
+
 
 }
