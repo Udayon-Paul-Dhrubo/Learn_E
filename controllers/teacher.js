@@ -493,7 +493,7 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             modules: Module_repo.data,
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
-            QuizContent: QuizContent_repo.data[0],
+            QuizContent: QuizContent_repo.data,
             teachers_in: teachers_repo.data,
             req_teachers: [],
             req_teachers_show: 'false',
