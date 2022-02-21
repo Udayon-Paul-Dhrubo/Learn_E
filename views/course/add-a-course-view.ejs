@@ -175,7 +175,7 @@
                                                         <th>Type</th>
                                                         <th>Lesson Title</th>
                                                         <th>Status</th>
-                                                    </tr>                                        
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
 
@@ -194,51 +194,36 @@
                                                         </tr>
                                                         <% } %>
 
-                                                     <%if(QuizContent.length>0){%>
-                                                        <tr style="background-color:rgb(196, 228, 196);">
-                                                            <td>
-                                                              <i class="fa fa-question-circle"></i>
-                                                            </td>                                                        
-                                                            <td> 
-                                                              <a href=""> Quiz Based on this module</a></td>
-                                                            <td>31 Min</td>
-                                                            <td><i class="fa fa-check"></i></td>
-                                                          </tr>
-                                                      <%}%>
+                                                            <% if(QuizContent.length>0){ %>
+                                                                <tr style="background-color:rgb(196, 228, 196);">
+                                                                    <td>
+                                                                        <i class="fa fa-question-circle"></i>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href=""> Quiz Based on this module</a></td>
+                                                                    <td>31 Min</td>
+                                                                    <td><i class="fa fa-check"></i></td>
+                                                                </tr>
+                                                                <%}%>
 
 
 
-                                                                <% if(add_quiz_button == 'false' && add_video_button == 'false') { %>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video" class="btn btn-primary"> <i class="fa fa-plus-circle"> Video</i></a> /
-                                                                            <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz" class="btn btn-primary"> <i class="fa fa-plus-circle"> Quiz</i></a>
-                                                                        </td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <%  } else{ %>
+                                                                    <% if(add_quiz_button == 'false' && add_video_button == 'false') { %>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video" class="btn btn-primary"> <i class="fa fa-plus-circle"> Video</i></a> /
+                                                                                <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz" class="btn btn-primary"> <i class="fa fa-plus-circle"> Quiz</i></a>
+                                                                            </td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <%  } else{ %>
 
-                                                                        <% if(add_video_button == 'true'){%>
-
-                                                                            <tr>
-                                                                                <td><i class="fa fa-play-circle"></i></td>
-                                                                                <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video">
-                                                                                    <td>
-                                                                                        <input type="file">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
-                                                                                </form>/
-                                                                                <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <% } else if(add_quiz_button == 'true') {%>
+                                                                            <% if(add_video_button == 'true'){%>
 
                                                                                 <tr>
-                                                                                    <td><i class="fa fa-question-circle"></i></td>
-                                                                                    <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz">
+                                                                                    <td><i class="fa fa-play-circle"></i></td>
+                                                                                    <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-video">
                                                                                         <td>
                                                                                             <input type="file">
                                                                                         </td>
@@ -249,8 +234,23 @@
                                                                                     </td>
                                                                                 </tr>
 
-                                                                                <% } %>
+                                                                                <% } else if(add_quiz_button == 'true') {%>
+
+                                                                                    <tr>
+                                                                                        <td><i class="fa fa-question-circle"></i></td>
+                                                                                        <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz">
+                                                                                            <td>
+                                                                                                <input type="file">
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
+                                                                                        </form>/
+                                                                                        <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
+
                                                                                     <% } %>
+                                                                                        <% } %>
 
 
 
