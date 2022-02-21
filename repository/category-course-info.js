@@ -300,7 +300,7 @@ class Category_Course_Teacher_Info_Repository extends Repository {
     }
 
     giveAnsToFaq_by_quesId = async function(quesId, answer, teacherId) {
-        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1'
+        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1 ';
         const params = [quesId, answer, teacherId];
         const result = await this.query(query, params, 'true');
         return result;
