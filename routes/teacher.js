@@ -32,6 +32,11 @@ router.post('/user/:ID/add-course/pre', teacherController.post_pre_add_course)
 
 
 router.get('/user/:ID/add-course/:CRSID', teacherController.get_add_course)
+    //FAQ
+router.get('/user/:ID/add-course/:CRSID/FAQ', teacherController.get_add_course_FAQ)
+router.post('/user/:ID/add-course/:CRSID/FAQ', teacherController.post_add_course_FAQ)
+
+//FAQ
 router.get('/user/:ID/add-course/:CRSID/newModule', teacherController.createNewModule);
 router.get('/user/:ID/add-course/:CRSID/:Module_ID', teacherController.getSingleCourseInsideModuleView)
 router.post('/user/:ID/add-course/:CRSID/search-teacher', teacherController.post_search_add_course)

@@ -105,9 +105,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    findModuleByModule_ID = async function(Module_ID,Course_ID) {
-        const query = 'SELECT * FROM "Module" JOIN "CourseModules" USING ("Module_ID") WHERE  "Module_ID"= :1 AND "Course_ID"= :2 ' ;
-        const params = [Module_ID,Course_ID];
+    findModuleByModule_ID = async function(Module_ID, Course_ID) {
+        const query = 'SELECT * FROM "Module" JOIN "CourseModules" USING ("Module_ID") WHERE  "Module_ID"= :1 AND "Course_ID"= :2 ';
+        const params = [Module_ID, Course_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
@@ -187,53 +187,114 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    getLastInsertedModuleID= async function() {
+    getLastInsertedModuleID = async function() {
         const query = 'SELECT MAX("Module_ID") AS "Module_ID" FROM "Module" ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;
     }
 
-    addNewModule= async function(Module_ID,Teacher_ID) {
+    addNewModule = async function(Module_ID, Teacher_ID) {
         const query = 'INSERT INTO "Module"("Module_ID","Teacher_ID") VALUES( :1, :2) ';
-        const params = [Module_ID,Teacher_ID];
+        const params = [Module_ID, Teacher_ID];
         const result = await this.query(query, params, 'true');
         return result;
     }
-    
-    findSerialOfLastInsertedModuleOfCourse=async function(courseId) {
+
+    findSerialOfLastInsertedModuleOfCourse = async function(courseId) {
         const query = ' SELECT MAX("Serial")  AS "Serial","Course_ID" FROM "CourseModules" WHERE "Course_ID"= :1   GROUP BY "Course_ID" ';
         const params = [courseId];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    addModuleToCourse= async function(courseId, ModuleId,Serial) {
+    addModuleToCourse = async function(courseId, ModuleId, Serial) {
         const query = 'INSERT INTO "CourseModules"("Course_ID","Module_ID","Serial") VALUES(:1,:2,:3)';
-        const params = [courseId, ModuleId,Serial];
+        const params = [courseId, ModuleId, Serial];
         const result = await this.query(query, params, 'true');
         return result;
     }
-    getLastInsertedVideoContentID= async function() {
+    getLastInsertedVideoContentID = async function() {
         const query = 'SELECT MAX("VideoContent_ID") AS "VideoID" FROM "Video_Content" ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    getLastInsertedQuizContentID= async function() {
+    getLastInsertedQuizContentID = async function() {
         const query = 'SELECT MAX("QuizContent_ID") AS "QuizID" FROM "Quiz_Content" ';
         const params = [];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    addNewVideo= async function(VideoContent_ID, ModuleId,Title,description,Video_Name) {
+    addNewVideo = async function(VideoContent_ID, ModuleId, Title, description, Video_Name) {
         const query = 'INSERT INTO "Video_Content"("VideoContent_ID","Module_ID","Topic","Description","Video") VALUES(:1,:2,:3,:4, :5)';
-        const params = [VideoContent_ID, ModuleId,Title,description,Video_Name];
+        const params = [VideoContent_ID, ModuleId, Title, description, Video_Name];
         const result = await this.query(query, params, 'true');
         return result;
     }
-    addQuizQuestion= async function(QuizContent_ID, ModuleId,question,option1,option2,option3,option4,answer,question_ID) {
+    addQuizQuestion = async function(QuizContent_ID, ModuleId, question, option1, option2, option3, option4, answer, question_ID) {
         const query = 'INSERT INTO "Quiz_Content"("QuizContent_ID","Module_ID","Question","Option1","Option2","Option3","Option4","Answer","Question_ID") VALUES(:1,:2,:3,:4, :5,:6,:7,:8,:9)';
-        const params = [QuizContent_ID, ModuleId,question,option1,option2,option3,option4,answer,question_ID];
+        const params = [QuizContent_ID, ModuleId, question, option1, option2, option3, option4, answer, question_ID];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+
+
+
+    get_ansQues_by_courseId = async function(courseId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Answer" is not null';
+        const params = [courseId];
+        const result = await this.query(query, params, 'false');
+        return result;
+
+    }
+
+    get_Ques_by_courseId = async function(courseId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Answer" is null';
+        const params = [courseId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    get_others_ansQues_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" <> :2 and "Answer" is not null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+
+    }
+
+    get_others_Ques_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" <> :2  and "Answer" is null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    get_ansQues_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", (select "Name" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Name", (select "image" from "User" where "User_ID" = f."Teacher_ID") "Teacher_Image", "Question", "Answer" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is not null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    get_Ques_by_courseId_studentId = async function(courseId, studentId) {
+        const query = 'select (select "Name" from "User" where "User_ID" = f."Student_ID") "Student_Name", (select "image" from "User" where "User_ID" = f."Student_ID") "Student_Image", "Question", "Question_ID" from "FAQ" f  where "Course_ID" = :1 and "Student_ID" = :2 and "Answer" is null';
+        const params = [courseId, studentId];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    get_last_questionId_in_faq = async function() {
+
+        const query = 'select max("Question_ID") "id" from FAQ';
+        const params = [];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
+
+    insert_into_FAQ = async function(quesId, courseId, studentId, question) {
+        const query = 'insert into "FAQ"("Question_ID", "Course_ID", "Student_ID", "Question") values(:1, :2, :3, :4)';
+        const params = [quesId, courseId, studentId, question];
         const result = await this.query(query, params, 'true');
         return result;
     }
@@ -251,11 +312,13 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
+    giveAnsToFaq_by_quesId = async function(quesId, answer, teacherId) {
+        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1 ';
+        const params = [quesId, answer, teacherId];
 
-    
-
-
-
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
 
 
 

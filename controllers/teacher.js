@@ -444,7 +444,8 @@ exports.get_add_course = async(req, res, next) => {
             req_teachers: [],
             req_teachers_show: 'false',
             weekView: 'false',
-            modules: Module_repo.data
+            modules: Module_repo.data,
+            showFAQ: 'false'
 
         })
     }
@@ -452,6 +453,70 @@ exports.get_add_course = async(req, res, next) => {
     let url = '/teacher/user/' + userId + '/';
     res.redirect(url);
 }
+
+exports.get_add_course_FAQ = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+
+    const user_repo = await userRepository.findById(userId);
+    const course_repo = await infoRepository.findCourseById(courseId);
+    const teachers_repo = await infoRepository.findCourseTeacherById(courseId);
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+
+    const ansQues_repo = await infoRepository.get_ansQues_by_courseId(courseId);
+    console.log('ansQues_repo : ', ansQues_repo);
+
+    const Ques_repo = await infoRepository.get_Ques_by_courseId(courseId);
+    console.log('Ques_repo : ', Ques_repo);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/add-a-course-view.ejs', {
+            pageTitle: 'Add Course',
+            path: '/addCourse',
+            isStudent: 'false',
+            logged_in: 'true',
+            userInfo: user_repo.data[0],
+            courseInfo: course_repo.data[0],
+            create_button: 'true',
+            teachers_in: teachers_repo.data,
+            req_teachers: [],
+            req_teachers_show: 'false',
+            weekView: 'false',
+            modules: Module_repo.data,
+            showFAQ: 'true',
+            ansQues: ansQues_repo.data,
+            Ques: Ques_repo.data
+
+        })
+    }
+
+    let url = '/teacher/user/' + userId + '/';
+    res.redirect(url);
+
+
+
+}
+
+exports.post_add_course_FAQ = async(req, res, next) => {
+    const userId = req.params.ID;
+    const courseId = req.params.CRSID;
+
+    const answer = req.body.answer_inserted;
+    const questionId = req.body.question_id;
+
+    console.log('answer', answer);
+    console.log('question id : ', questionId);
+
+    const insert_repo = await infoRepository.giveAnsToFaq_by_quesId(questionId, answer, userId);
+    console.log('insert_repo', insert_repo);
+
+    let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/FAQ';
+    res.redirect(url);
+
+
+
+}
+
 exports.getSingleCourseInsideModuleView = async(req, res, next) => {
     console.log("single course inside MODULE VIEW view")
     const userId = req.params.ID;
@@ -498,7 +563,8 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             req_teachers: [],
             req_teachers_show: 'false',
             add_video_button: 'false',
-            add_quiz_button: 'false'
+            add_quiz_button: 'false',
+            showFAQ: 'false'
 
         })
     }
@@ -570,7 +636,8 @@ exports.get_add_course_add_teacher_show = async(req, res, next) => {
             teachers_in: teachers_repo.data,
             req_teachers: searched_teacers,
             req_teachers_show: 'true',
-            weekView: 'false'
+            weekView: 'false',
+            showFAQ: 'false'
         })
     }
 
@@ -641,7 +708,8 @@ exports.get_add_course_add_video = async(req, res, next) => {
             req_teachers: [],
             req_teachers_show: 'false',
             add_video_button: 'true',
-            add_quiz_button: 'false'
+            add_quiz_button: 'false',
+            showFAQ: 'false'
 
         })
     }
@@ -658,18 +726,18 @@ exports.post_add_course_add_video = async(req, res, next) => {
     const title = req.body.title;
     console.log(title);
     const description = req.body.description;
-    console.log("Description : ",description);
-  //find out content id to be added
-  //insert into video content with the module id
-  const lastInsertedVideo = await infoRepository.getLastInsertedVideoContentID();
-  console.log("last Video Id :", lastInsertedVideo);
-  let newVideo_ID = lastInsertedVideo.data[0].VideoID + 1;
-  console.log("new Video Id :", newVideo_ID);
+    console.log("Description : ", description);
+    //find out content id to be added
+    //insert into video content with the module id
+    const lastInsertedVideo = await infoRepository.getLastInsertedVideoContentID();
+    console.log("last Video Id :", lastInsertedVideo);
+    let newVideo_ID = lastInsertedVideo.data[0].VideoID + 1;
+    console.log("new Video Id :", newVideo_ID);
     var file = req.files.uploaded_video;
     var video_name = file.name;
     console.log(video_name);
     file.mv('videos/' + file.name);
-    const addVideo=await infoRepository.addNewVideo(newVideo_ID,moduleId,title,description,video_name);
+    const addVideo = await infoRepository.addNewVideo(newVideo_ID, moduleId, title, description, video_name);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
     res.redirect(url);
@@ -689,10 +757,11 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
 
     const Module = await infoRepository.findModuleByModule_ID(moduleId, courseId);
-    console.log(Module.data[0]);
-    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
-    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
 
+    const VideoContent_repo = await infoRepository.findContentsOfSingleModule(moduleId);
+    console.log('video : ', VideoContent_repo);
+    const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    console.log('quiz : ', QuizContent_repo)
     if (user_repo.success && course_repo.success) {
         return res.render('course/add-a-course-view.ejs', {
             pageTitle: 'Course',
@@ -714,7 +783,8 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
             req_teachers: [],
             req_teachers_show: 'false',
             add_video_button: 'false',
-            add_quiz_button: 'true'
+            add_quiz_button: 'true',
+            showFAQ: 'false'
 
         })
     }
@@ -722,6 +792,7 @@ exports.get_add_course_add_quiz = async(req, res, next) => {
     res.redirect(url);
 
 }
+
 
 exports.post_add_course_add_quiz = async(req, res, next) => {
     console.log("INSIDE QUIZ")
@@ -731,32 +802,76 @@ exports.post_add_course_add_quiz = async(req, res, next) => {
     var file = req.files.quizFile;
     var quizFile_name = file.name;
     console.log(quizFile_name);
-    file.mv('Quiz/' + quizFile_name);
-    let question=[],option1=[],option2=[],option3=[],option4=[],answer=[];
-    const lineReader = require('line-reader');
-   let i=1,questionNo=1;
-   const lastInsertedQuizID = await infoRepository.getLastInsertedQuizContentID();
-  console.log("last quiz Id :", lastInsertedQuizID);
-  let newQuiz_ID = lastInsertedQuizID.data[0].QuizID + 1;
-lineReader.eachLine('Quiz/'+quizFile_name,(line,last)=>{
-    
+    file.mv('./Quiz/' + quizFile_name);
 
-   if(i%6==1){question.push(line); console.log("question :",question)}
-  else  if(i%6==2)option1.push(line);
-  else  if(i%6==3){option2.push(line); console.log("option 2",option2)}
-   else if(i%6==4)option3.push(line);
- else  if(i%6==5)option4.push(line);
-   else if(i%6==0){
-       answer.push(line);
-       console.log("answer",answer)
-   }i++;
-})
-console.log(" array length :",question.length);
 
-for( let j=0 ;j<question.length;j++){
-    console.log("ADDING QUESTIONS");
-    const added = await infoRepository.addQuizQuestion(newQuiz_ID,moduleId,question[j],option1[j],option2[j],option3[j],option4[j],answer[j],(j+1));
-}
+    let question = [],
+        option1 = [],
+        option2 = [],
+        option3 = [],
+        option4 = [],
+        answer = [];
+
+    /*
+        const lineReader = require('line-reader');
+        let i = 1;
+
+        const test = await lineReader.eachLine('./Quiz/' + quizFile_name, (line, last) => {
+            if (i % 6 == 1) {
+                question.push(line);
+                console.log("question :", question)
+            } else if (i % 6 == 2) option1.push(line);
+            else if (i % 6 == 3) {
+                option2.push(line);
+                console.log("option 2", option2)
+            } else if (i % 6 == 4) option3.push(line);
+            else if (i % 6 == 5) option4.push(line);
+            else if (i % 6 == 0) {
+                answer.push(line);
+                console.log("answer", answer)
+            }
+            i++;
+        })
+        console.log('test : ', test);
+    */
+
+    LineReaderSync = require("line-reader-sync")
+    lrs = new LineReaderSync('./Quiz/' + quizFile_name)
+    let test = lrs.toLines()
+    console.log(test);
+
+    for (let i = 1; i <= test.length; i++) {
+        if (i % 6 == 1) {
+            question.push(test[i - 1]);
+            console.log("question :", question)
+        } else if (i % 6 == 2) option1.push(test[i - 1]);
+        else if (i % 6 == 3) {
+            option2.push(test[i - 1]);
+            console.log("option 2", option2)
+        } else if (i % 6 == 4) option3.push(test[i - 1]);
+        else if (i % 6 == 5) option4.push(test[i - 1]);
+        else if (i % 6 == 0) {
+            answer.push(test[i - 1]);
+            console.log("answer", answer)
+        }
+    }
+
+
+
+
+    const lastInsertedQuizID = await infoRepository.getLastInsertedQuizContentID();
+    console.log("last quiz Id :", lastInsertedQuizID);
+    let newQuiz_ID = lastInsertedQuizID.data[0].QuizID + 1;
+
+
+    console.log(" array length :", question.length);
+
+
+
+    for (let j = 0; j < question.length; j++) {
+        console.log("ADDING QUESTIONS");
+        const added = await infoRepository.addQuizQuestion(newQuiz_ID, moduleId, question[j], option1[j], option2[j], option3[j], option4[j], answer[j], (j + 1));
+    }
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
     res.redirect(url);
 
