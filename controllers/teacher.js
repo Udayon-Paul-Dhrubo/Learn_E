@@ -348,7 +348,11 @@ exports.get_course_view = async(req, res, next) => {
     console.log("REVIEWS :", review_repo);
     const TopCourse_repo = await infoRepository.getTopCourses();
     console.log(TopCourse_repo);
-
+    var isOwned;
+    const owned = await infoRepository.isOwned(courseId, userId);
+    if (owned.data.length == 0) isOwned = false;
+    else
+        isOwned = true;
 
     if (user_repo.success && course_repo.success && content_repo.success) {
         return res.render('course/course-view.ejs', {
@@ -362,7 +366,8 @@ exports.get_course_view = async(req, res, next) => {
             reviews: review_repo.data,
             topCourses: TopCourse_repo.data,
             contents: content_repo.data,
-            weekView: 'false'
+            weekView: 'false',
+            owned:isOwned
 
         })
     }

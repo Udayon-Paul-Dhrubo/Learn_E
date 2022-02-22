@@ -41,11 +41,14 @@ exports.postLogIn = async(req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
 
-    const user_repo = await userRepository.findByEmail(email);
-    console.log(user_repo);
+    const user_repo = await userRepository.findByEmail(email,pass);
+   // console.log(user_repo.data[0]);
 
-
-    let msg = 'No account found!! Register Please..';
+    if(user_repo.data.length==0){
+    let msg = 'No account found!! Register Please..';}
+    else{
+      
+    
     if (user_repo.success && user_repo.data.length > 0) {
 
         const student_repo = await userRepository.isStudent(email);
@@ -71,8 +74,11 @@ exports.postLogIn = async(req, res, next) => {
     }
 
 
+    }
 
-    msg = 'Something went wrong'
+
+ 
+    msg = 'No account found with this user email and password.Please try again';
 
 
 
@@ -84,6 +90,7 @@ exports.postLogIn = async(req, res, next) => {
         error: true,
         isStudent: 'false',
         logged_in: 'false',
+        eror:'true',
         errorMessage: msg
     })
 }

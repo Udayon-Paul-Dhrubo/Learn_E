@@ -60,11 +60,18 @@
                                     </div>
 
                                     <div class="course-button ">
+                                        <%if(isStudent=='true' ){%>
                                         <%if(purchased==false){%>
                                             <a href="<%= url + '/course-inside-view/' +  course.course_id %>" class="btn btn-primary btn-block inline-block ">TAKE</a>
                                             <%} else { %>
                                                 <a href="<%= url + '/course-inside-view/' +  course.course_id %>" class="btn btn-primary btn-block inline-block ">VIEW</a>
                                                 <%}%>
+                                                <%}else{%>
+
+                                                    <%if(owned==true){%>
+                                                        <a href="<%= url + '/add-course/' +  course.course_id %>" class="btn btn-primary btn-block inline-block ">EDIT COURSE</a>
+                                                        <%}%>
+                                                    <%}%>
                                     </div>
 
                                 </div>
