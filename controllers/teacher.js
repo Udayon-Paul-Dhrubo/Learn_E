@@ -842,16 +842,16 @@ exports.post_add_course_add_quiz = async(req, res, next) => {
 
     for (let i = 1; i <= test.length; i++) {
         if (i % 6 == 1) {
-            question.push(test[i]);
+            question.push(test[i - 1]);
             console.log("question :", question)
-        } else if (i % 6 == 2) option1.push(test[i]);
+        } else if (i % 6 == 2) option1.push(test[i - 1]);
         else if (i % 6 == 3) {
-            option2.push(test[i]);
+            option2.push(test[i - 1]);
             console.log("option 2", option2)
-        } else if (i % 6 == 4) option3.push(test[i]);
-        else if (i % 6 == 5) option4.push(test[i]);
+        } else if (i % 6 == 4) option3.push(test[i - 1]);
+        else if (i % 6 == 5) option4.push(test[i - 1]);
         else if (i % 6 == 0) {
-            answer.push(test[i]);
+            answer.push(test[i - 1]);
             console.log("answer", answer)
         }
     }
