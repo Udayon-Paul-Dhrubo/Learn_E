@@ -82,6 +82,12 @@ class UserRepository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
+    getGrades = async function(user_ID,course_ID) {
+        const query = 'SELECT * FROM "Grades" WHERE "Student_ID"= :1 AND "Course_ID"= :2';
+        const params = [user_ID,course_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
 
 
 }

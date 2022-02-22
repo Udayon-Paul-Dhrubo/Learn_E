@@ -137,9 +137,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    createNewPurchase = async function(course_ID, student_ID) {
-        const query = 'INSERT INTO "PurchaseHistory"("Student_ID","Course_ID") VALUES(:1 , :2) ';
-        const params = [student_ID, course_ID];
+    createNewPurchase = async function(course_ID, student_ID,content) {
+        const query = 'INSERT INTO "PurchaseHistory"("Student_ID","Course_ID","ContentCompleted") VALUES(:1 , :2, :3) ';
+        const params = [student_ID, course_ID,content];
         const result = await this.query(query, params, 'true');
         return result;
     }
@@ -237,6 +237,20 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'true');
         return result;
     }
+
+    addGrade= async function(QuizContent_ID,Student_ID,Questions,Correct_Answers,course_ID,quizTopic) {
+        const query = 'INSERT INTO "Grades"("Quiz_ID","Student_ID","Total_Questions","Correct_Answers","Course_ID","Topic") VALUES(:1,:2,:3,:4, :5, :6)';
+        const params = [QuizContent_ID,Student_ID,Questions,Correct_Answers,course_ID,quizTopic];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+    updateQuizCorrectAnswer=async function(QuizContent_ID,Student_ID){
+        const query='UPDATE "Grades" SET "Correct_Answers"="Correct_Answers"+1  WHERE "Quiz_ID"= :1 AND "Student_ID"= :2 AND "Correct_Answers"<"Total_Questions" ';
+        const params = [QuizContent_ID,Student_ID];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+
 
     
 

@@ -256,7 +256,7 @@ exports.get_Category_view = async(req, res, next) => {
 
 }
 exports.getSingleCourseInsideView = async(req, res, next) => {
-
+  console.log("inside course view")
 
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
@@ -270,7 +270,8 @@ exports.getSingleCourseInsideView = async(req, res, next) => {
     console.log('here : Module_repo ', Module_repo);
     const purchased = await infoRepository.isPurchased(courseId, userId);
     if (purchased.data.length == 0) {
-        const newPurchase = await infoRepository.createNewPurchase(courseId, userId);
+        let completedContent=0;
+        const newPurchase = await infoRepository.createNewPurchase(courseId, userId,completedContent);
         console.log("new purchase : ", courseId, userId);
         console.log("new purchase repo : ", newPurchase.success);
     }
@@ -386,7 +387,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
     }
 }
 exports.getSingleCourseQuizContentView = async(req, res, next) => {
-
+       console.log("get single course quiz content view ");
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
 
@@ -405,6 +406,14 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    if(QuizContent_repo.data.length>0){
+        //insert into grade with student ID, QUIZID, HOW MANY QUESTIONS
+        const QUIZID= QuizContent_repo.data[0].QuizContent_ID;
+        const quizTopic=Module.data[0].Topics;
+        console.log("Topic : ",quizTopic);
+        const answer=0;
+        const insertGrade=await infoRepository.addGrade(QUIZID,userId,QuizContent_repo.data.length,answer,courseId,quizTopic);
+    }
 
 
 
@@ -431,6 +440,42 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
         })
     }
 }
+exports.getGrades=async(req,res,next)=>{
+    console.log("INSIDE GRADES");
+    const userId = req.params.ID;
+    const user_repo = await userRepository.findById(userId);
+
+
+    const courseId = req.params.CRSID;
+//const moduleId = req.params.Module_ID;
+  //  const serial = req.params.SERIAL;
+
+    const course_repo = await infoRepository.findCourseById(courseId);
+
+    const Module_repo = await infoRepository.findModulesByCourseId(courseId);
+    const getGrades=await userRepository.getGrades(userId,courseId);
+
+    console.log(getGrades);
+
+    if (user_repo.success && course_repo.success) {
+        return res.render('course/course-inside-view.ejs', {
+            pageTitle: 'Course',
+            path: '/insideCourse',
+            isStudent: 'true',
+            logged_in: 'true',
+            weekView: 'false',
+            videoView: 'false',
+            quizView: 'false',
+            gradeView: 'true',
+            userInfo: user_repo.data[0],
+            course: course_repo.data[0],
+            modules: Module_repo.data,
+            grades:getGrades.data
+
+        })
+    }
+
+}
 exports.postSingleCourseQuizContentView = async(req, res, next) => {
 
     const userId = req.params.ID;
@@ -451,6 +496,8 @@ exports.postSingleCourseQuizContentView = async(req, res, next) => {
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    const quizID=QuizContent_repo.data[0].QuizContent_ID;
+    console.log("QUIZ ID : ",quizID);
 
     const Ans = QuizContent_repo.data[serial - 1].Answer;
 
@@ -467,7 +514,12 @@ exports.postSingleCourseQuizContentView = async(req, res, next) => {
     if (ans2 == 1) given_ans = 2;
     if (ans3 == 1) given_ans = 3;
     if (ans4 == 1) given_ans = 4;
+    
     console.log(QuizContent_repo.data.length);
+   if(Ans==given_ans){
+        //update correct answer
+        const updateCorrectAnswer=await infoRepository.updateQuizCorrectAnswer(quizID,userId);
+ }
 
 
     if (user_repo.success && course_repo.success) {
