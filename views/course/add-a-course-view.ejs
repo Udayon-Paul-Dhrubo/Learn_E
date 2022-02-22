@@ -175,7 +175,7 @@
                                                         <th>Type</th>
                                                         <th>Lesson Title</th>
                                                         <th>Status</th>
-                                                    </tr>                                        
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
 
@@ -193,6 +193,7 @@
                                                             <td><i class="fa fa-check "></i></td>
                                                         </tr>
                                                         <% } %>
+
 
                                                      <%if(QuizContent.length>0){%>
                                                         <tr style="background-color:rgb(196, 228, 196);">
@@ -256,6 +257,7 @@
                                                                                        
                                                                                        <td>HELLO WORLD</td> <td>
                                                                                             <input type="file" name="quizFile" runat="Server" >
+
                                                                                         </td>
                                                                                         <td>
                                                                                             <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
@@ -264,8 +266,23 @@
                                                                                     </td>
                                                                                 </tr>
 
-                                                                                <% } %>
+                                                                                <% } else if(add_quiz_button == 'true') {%>
+
+                                                                                    <tr>
+                                                                                        <td><i class="fa fa-question-circle"></i></td>
+                                                                                        <form method="POST" action="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>/add-quiz">
+                                                                                            <td>
+                                                                                                <input type="file">
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <button type="submit" class="btn btn-secondary"><i class="fa fa-check"></i></button>
+                                                                                        </form>/
+                                                                                        <a href="/teacher/user/<%= userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/<%=thisModule.Module_ID%>" class="btn btn-secondary"><i class="fa fa-close"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
+
                                                                                     <% } %>
+                                                                                        <% } %>
 
 
 
