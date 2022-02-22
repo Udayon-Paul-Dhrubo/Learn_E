@@ -58,7 +58,7 @@ class UserRepository extends Repository {
         return result;
     }
     coursesTaken = async function(user_ID) {
-        const query = 'SELECT * FROM ( "Student"  JOIN "PurchaseHistory" ON("Student_id"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Student_ID"= : 1';
+        const query = 'SELECT  "Title","Course_ID","Rating",GET_PROGRESS("Course_ID",201805112) AS PROGRESS FROM ( "Student"  JOIN "PurchaseHistory" ON("Student_id"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Student_ID"= : 1';
         const params = [user_ID];
         const result = await this.query(query, params, 'false');
         return result;

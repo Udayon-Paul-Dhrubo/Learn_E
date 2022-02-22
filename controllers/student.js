@@ -471,6 +471,7 @@ exports.getGrades=async(req,res,next)=>{
             logged_in: 'true',
             weekView: 'false',
             videoView: 'false',
+            faqView: 'false',
             quizView: 'false',
             gradeView: 'true',
             userInfo: user_repo.data[0],
