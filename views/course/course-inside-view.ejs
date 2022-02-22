@@ -34,8 +34,10 @@
                         </li>
                         <!--dynamic overview ends -->
 
-                        <li> <a href="" class="link"> Grades </a> </li>
+
+                        <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Grades" class="link"> Grades </a> </li>                             
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/FAQ" class="link"> FAQ </a> </li>
+
 
                         <li></li>
                         <li></li>
@@ -557,8 +559,44 @@
                                     <% } %>
 
                                         <% if( gradeView=='true' ) { %>
-                                            <div class='grades others' id="grades">
-                                                <h1>Hello from grades.</h1>
+                                            <div class="week others pull-right" id="grade">
+                                                <div class="info">
+                        
+                        
+                                                    <h2>Grades </h2>
+                                                    
+                                                </div>
+                        
+                        
+                                                <!-- week lesson-->
+                                                <div class="course-table ">
+                        
+                                                    <table class="table ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Quiz Topic</th>
+                                                                <th>Total Questions</th>
+                                                                <th>Correct Answers</th>
+                                                            </tr>
+                                                        </thead>
+                        
+                                                        <tbody>
+                                                            <%for(grade of grades)%>
+                                                             <tr>
+                                                            
+                                                            <td>
+                                                            
+                                                                    <%=grade.Topic%>
+                                                                
+                                                            </td>
+                                                            <td>
+                                                                <%=grade.Total_Questions%>
+                                                            </td>
+                                                            <td><%=grade.Correct_Answers%></i></td>
+                                                        </tr>
+                                                        </tbody>
+                                                        </table>
+                                                        </div>
                                             </div>
                                             <% } %>
 

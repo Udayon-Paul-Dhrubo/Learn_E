@@ -21,11 +21,15 @@ router.get('/user/:ID/category-view/:CATEGORY/:START', studentController.get_Cat
 router.get('/user/:ID/course-view/:CRSID', studentController.get_course_view)
 router.get('/user/:ID/course-inside-view/:CRSID', studentController.getSingleCourseInsideView)
 
+router.get('/user/:ID/course-inside-view/:CRSID/Grades', studentController.getGrades)
+
+
 //FAQ
 router.get('/user/:ID/course-inside-view/:CRSID/FAQ', studentController.getSingleCourseInsideView_FAQ)
 router.post('/user/:ID/course-inside-view/:CRSID/FAQ', studentController.postSingleCourseInsideView_FAQ)
 
 //FAQ
+
 
 router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID', studentController.getSingleCourseInsideModuleView)
 router.get('/user/:ID/course-inside-view/:CRSID/:Module_ID/video/:VideoContent_ID', studentController.getSingleCourseVideoContentView)
