@@ -295,12 +295,16 @@ exports.createNewModule = async(req, res, next) => {
 
     //find out the serial it needs to be added
     const serial = await infoRepository.findSerialOfLastInsertedModuleOfCourse(courseId);
-    console.log(serial);
-    let serialNext = serial.data[0].Serial + 1;
+   
+    let serialNext;
+    if(serial.data.length==0)serialNext=1;
+
+    else{ serialNext = serial.data[0].Serial + 1;}
     console.log("serial to be added : ", serialNext)
         //insert into course modules
     const ModuleAddedToCourse = await infoRepository.addModuleToCourse(courseId, newModule_ID, serialNext);
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + newModule_ID + '/';
+    console.log(url);
     res.redirect(url);
 }
 exports.editProfileView = async(req, res, next) => {
@@ -507,7 +511,7 @@ exports.post_add_course_FAQ = async(req, res, next) => {
     console.log('answer', answer);
     console.log('question id : ', questionId);
 
-    const insert_repo = await infoRepository.giveAnsToFaq_by_quesId(questionId, answer, userId);
+    const insert_repo = await infoRepository.giveAnsToFaq_by_quesId(answer, userId,questionId);
     console.log('insert_repo', insert_repo);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/FAQ';

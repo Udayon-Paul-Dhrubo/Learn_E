@@ -312,9 +312,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    giveAnsToFaq_by_quesId = async function(quesId, answer, teacherId) {
-        const query = 'update "FAQ" set "Answer" = :2, "Teacher_ID" = :3 where "Question_ID" = :1 ';
-        const params = [quesId, answer, teacherId];
+    giveAnsToFaq_by_quesId = async function(answer, teacherId,quesId) {
+        const query = 'update "FAQ" set "Answer" = :1, "Teacher_ID" = :2 where "Question_ID" = :3 ';
+        const params = [ answer, teacherId,quesId];
 
         const result = await this.query(query, params, 'true');
         return result;
