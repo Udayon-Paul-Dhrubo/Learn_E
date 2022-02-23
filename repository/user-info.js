@@ -11,9 +11,9 @@ class UserRepository extends Repository {
         return result;
     }
 
-    findByEmail = async function(userEmail,pass) {
+    findByEmail = async function(userEmail, pass) {
         const query = 'select * from "User" where "Email" = :1 AND "Password"= :2 ';
-        const params = [userEmail,pass];
+        const params = [userEmail, pass];
         const result = await this.query(query, params, 'false');
         return result;
     }
@@ -58,14 +58,14 @@ class UserRepository extends Repository {
         return result;
     }
     coursesTaken = async function(user_ID) {
-        const query = 'SELECT  "Title","Course_ID","Rating",GET_PROGRESS("Course_ID",201805112) AS PROGRESS FROM ( "Student"  JOIN "PurchaseHistory" ON("Student_id"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Student_ID"= : 1';
+        const query = 'SELECT  "Title","Course_ID","Rating",GET_PROGRESS("Course_ID", :1) AS PROGRESS FROM ( "Student"  JOIN "PurchaseHistory" ON("Student_id"="Student_ID")) JOIN "Course" ON("course_id"="Course_ID") WHERE "Student_ID"= : 1';
         const params = [user_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    getReviewByStudent=async function(course_id,user_ID){
+    getReviewByStudent = async function(course_id, user_ID) {
         const query = 'select * from "Rating" WHERE "Course_ID"=:1 AND "Student_ID"=:2 ';
-        const params = [course_id,user_ID];
+        const params = [course_id, user_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
@@ -82,15 +82,15 @@ class UserRepository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    searchTeacherByTeacherName= async function(teacher_Name) {
-        const query ='SELECT * FROM ("User"  JOIN "Teacher" ON("User_ID"="Teacher_ID")) WHERE "Name"= :1';
+    searchTeacherByTeacherName = async function(teacher_Name) {
+        const query = 'SELECT * FROM ("User"  JOIN "Teacher" ON("User_ID"="Teacher_ID")) WHERE "Name"= :1';
         const params = [teacher_Name];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    getGrades = async function(user_ID,course_ID) {
+    getGrades = async function(user_ID, course_ID) {
         const query = 'SELECT * FROM "Grades" WHERE "Student_ID"= :1 AND "Course_ID"= :2';
-        const params = [user_ID,course_ID];
+        const params = [user_ID, course_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
