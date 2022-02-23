@@ -10,11 +10,29 @@
 
                         <% if(create_button=='false' ) { %>
 
-                            <form method="post" action="/teacher/user/<%= userInfo.User_ID %>/add-course/pre">
+                            <form method="post" action="/teacher/user/<%= userInfo.User_ID %>/add-course/pre" enctype="multipart/form-data" >
                                 <div class="container" style="align-items: center;">
                                     <label for="course_name" style="width: 100%;"><strong>TITLE</strong></label>
                                     <input type="text" name="course_name" id="course_name" placeholder="Course Name" style="width: 80%;" />
                                     <br>
+                                    <label for="course_name" style="width: 100%;"><strong>DESCRIPTION</strong></label>
+                                    <input type="text" name="description" id="description" placeholder="Course Description" style="width: 80%;" />
+                                    <br>
+                                    <label for="course_name" style="width: 100%;"><strong>LEVEL</strong></label>
+                                    <input type="text" name="level" id="level" placeholder="Course Level" style="width: 80%;" />
+                                    <br>
+                                    <label for="course_name" style="width: 100%;"><strong>CATEFORY</strong></label>
+                                    <input type="text" name="catagory" id="catagory" placeholder="Which category does this course belong to?" style="width: 80%;" />
+                                    <br>
+                                    <label for="course_name" style="width: 100%;"><strong>SET PRICE LIMIT</strong></label>
+                                    <input type="text" name="price" id="price" placeholder="Border line price range..." style="width: 80%;" />
+                                    <br><br>
+        
+                                    <label for="course_name" style="width: 100%;"><strong>COURSE IMAGE</strong></label>
+                                    
+                                            <input runat="Server" type="file" name="uploaded_image" enctype="multipart/form-data" accept="" />
+                                    <br>
+                                    
                                     <button class="btn btn-primary" type="submit" style="margin-top: 3rem;">Create
                                         New</button>
                                 </div>

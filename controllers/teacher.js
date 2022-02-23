@@ -410,9 +410,22 @@ exports.post_pre_add_course = async(req, res, next) => {
     console.log(new_id)
 
     const title = req.body.course_name;
-    console.log(title);
+    const description=req.body.description;
+    const level=req.body.level;
+    const category=req.body.catagory;
+    const price=req.body.price;
+    console.log(title,description,level,category,price);
+    console.log(req.body.uploaded_image);
+    console.log(typeof(req.body.uploaded_image));
+    if (req.files) console.log("some file was uploaded ");
+    else console.log("no file found");
+    var file = req.files.uploaded_image;
+    var img_name = file.name;
+    console.log(img_name);
+    file.mv('public/img/' + file.name);
+    const enrolled=0;const rating=0;
 
-    const course_repo = await infoRepository.add_new_course(new_id, title);
+    const course_repo = await infoRepository.add_new_course(new_id, title,description,level,category,price,img_name,enrolled,rating);
     console.log(course_repo);
 
     const add_repo = await infoRepository.add_teacher_into_new_course(userId, new_id);
