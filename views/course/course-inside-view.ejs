@@ -35,10 +35,10 @@
                         <!--dynamic overview ends -->
 
 
-                        <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Grades" class="link"> Grades </a> </li>                             
+                        <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Grades" class="link"> Grades </a> </li>
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/FAQ" class="link"> FAQ </a> </li>
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Review" class="link"> Review This Course </a> </li>
-                         
+
                         <li></li>
                         <li></li>
                         <li></li>
@@ -124,32 +124,32 @@
                                                     </tr>
                                                     <% } %>
                                                         <%}%>
-                                                        <%if(quizContentExistence!=0){%>
-                                                            <!-- for loop -->
-                                                            <% let isOk2='false' ; for(let completedContent of
+                                                            <%if(quizContentExistence!=0){%>
+                                                                <!-- for loop -->
+                                                                <% let isOk2='false' ; for(let completedContent of
                                                                 completedContents){
                                                                 if(completedContent.Content_ID==QuizContent.QuizContent_ID)
                                                                 { isOk2='true' ; break; } } %>
-                                                                <% if(isOk2=='false' ) {%>
-                                                                    
-                                                                    <tr>
-                                                                        <td><i class="fa fa-question-circle"></i></td>
-                                                                        <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
+                                                                    <% if(isOk2=='false' ) {%>
+
+                                                                        <tr>
+                                                                            <td><i class="fa fa-question-circle"></i></td>
+                                                                            <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
                                                                                 Quiz Based on this module</a></td>
 
-                                                                        <td><i class="fa fa-close"></i></td>
-                                                                    </tr>
-                                                                    <% } else { %>
-                                                                        <tr style="background-color:rgb(196, 228, 196);">
-                                                                            <td><i class="fa fa-question-circle"></i>
-                                                                            </td>
-                                                                            <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
+                                                                            <td><i class="fa fa-close"></i></td>
+                                                                        </tr>
+                                                                        <% } else { %>
+                                                                            <tr style="background-color:rgb(196, 228, 196);">
+                                                                                <td><i class="fa fa-question-circle"></i>
+                                                                                </td>
+                                                                                <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
                                                                                     Quiz Based on this module</a></td>
 
-                                                                            <td><i class="fa fa-check"></i></td>
-                                                                        </tr>
-                                                                        <% } %>
-                                                                        <%}%>
+                                                                                <td><i class="fa fa-check"></i></td>
+                                                                            </tr>
+                                                                            <% } %>
+                                                                                <%}%>
 
                                 </tbody>
 
@@ -159,155 +159,153 @@
 
                     </div>
                     <% } %>
-                    <% if( reviewView=='true' ) {%>
+                        <% if( reviewView=='true' ) {%>
 
-                        <%if(reviewExistence==true){%>
-                            <div class="Rating-box">                                            
-                                <div class="row">
-                                    <div class="col-md-.5">
-                                        <span><img src="/img/<%= userInfo.image %>"
+                            <div class="Rating">
+
+                                <%if(reviewExistence==true){%>
+                                    <div class="rating-box question-box">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <span><img src="/img/<%= userInfo.image %>"
                                                 style="height: 40px; width: 40px; border-radius: 50px; border: .3px solid;"></span>
-                                    </div>
-                                   
-                                    <div class="col-md-9 pull-right" style="display: inline;">                                                    
-                                        <small> Your Rating for this course : <br>                                                                                  
+                                            </div>
+
+                                            <div class="col-md-2 pull-left" style="display: inline;">
+                                                <small> Your Rating : <br>                                                                                  
                                             <strong> <%= ownReview.Rating %> </strong>                                                                                   
                                         </small>
-                                    </div>
-                                </div>                                            
-                            </div>
-                            <div class="Riview -box">                                            
-                                <div class="row">
-                                   
-                                   
-                                    <div class="col-md-9 pull-right" style="display: inline;">                                                    
-                                        <small> Your Review for this course : <br>                                                                                  
-                                            <strong> <%= ownReview.Review %> </strong>                                                                                   
-                                        </small>
-                                    </div>
-                                </div>                                            
-                            </div>
-                            <%}else{%>
-                                <h1>HELLO WORLD</h1>
-                                <div class="question-box">                                                        
-                                    <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Review" >
-                                        <label for="rating" style="width: 100%;">Rating  : </label>
-                                        <input name="rating" id="rating" placeholder="What Rating would you give this course? " style="width: 100%; height: 3rem;">
-                                        <label for="Review" style="width: 100%;">Write A Review : </label>
-                                        <input name="review" id="review" placeholder="What's your thought on this course ? " style="width: 100%; height: 3rem;">
-                                        <button type="submit" class="btn btn-success" style="margin-top: 5px;">Confirm</button>
-                                            </form>
-                                    </div>
-                                <%}%>
-                        <%}%>
-
-                        <% if( videoView=='true' ) {%>
-                            <div class="videos others" id="videos">
-                                <div class="video_container">
-                                    <div class="video">
-
-
-                                        <h2 style="color: #041562;">Video Topic</h2>
-
-                                        <div class="info">
-                                            <div class="discuss">
-                                                <i class="fas fa-comments"></i> Discuss
+                                            </div>
+                                            <div class="col-md-7 pull-right" style="display: inline;">
+                                                <small> Your Review : <br>                                                                                  
+                                                    <strong> <%= ownReview.Review %> </strong>                                                                                   
+                                                </small>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <video width="720" height="500" controls>
+                                    <%}else{%>
+                                        <h1>HELLO WORLD</h1>
+                                        <div class="rating-box question-box">
+                                            <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Review">
+                                                <label for="rating" style="width: 100%;">Rating  : </label>
+                                                <input name="rating" id="rating" placeholder="What Rating would you give this course? " style="width: 100%; height: 3rem;">
+                                                <label for="Review" style="width: 100%;">Write A Review : </label>
+                                                <input name="review" id="review" placeholder="What's your thought on this course ? " style="width: 100%; height: 3rem;">
+                                                <button type="submit" class="btn btn-success" style="margin-top: 5px;">Confirm</button>
+                                            </form>
+                                        </div>
+                                        <%}%>
+                            </div>
+                            <%}%>
+
+                                <% if( videoView=='true' ) {%>
+                                    <div class="videos others" id="videos">
+                                        <div class="video_container">
+                                            <div class="video">
+
+
+                                                <h2 style="color: #041562;">Video Topic</h2>
+
+                                                <div class="info">
+                                                    <div class="discuss">
+                                                        <i class="fas fa-comments"></i> Discuss
+                                                    </div>
+                                                </div>
+
+                                                <video width="720" height="500" controls>
                                             <source src="/videos/<%=video_content.Video%>" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
-                                        <br>
-                                        <a class="btn btn-success" href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/completed/<%= video_content.VideoContent_ID  %> ">Back
+                                                <br>
+                                                <a class="btn btn-success" href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/completed/<%= video_content.VideoContent_ID  %> ">Back
                                             to module</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <% } %>
+                                    <% } %>
 
-                                <% if( quizView=='true' ) { %>
+                                        <% if( quizView=='true' ) { %>
 
-                                    <div class="container quizs others" id="quizs">
-                                        <div class="row quiz_container">
-                                            <div id="course-content" class="col-md-12">
-                                                <div class="course-description">
-                                                    <br>
+                                            <div class="container quizs others" id="quizs">
+                                                <div class="row quiz_container">
+                                                    <div id="course-content" class="col-md-12">
+                                                        <div class="course-description">
+                                                            <br>
 
-                                                    <br>
+                                                            <br>
 
-                                                    <h5 class="course-title">Quiz - Question
-                                                        <%= quiz_serial %>
-                                                    </h5>
-                                                    <div class="quiz-wrapper">
+                                                            <h5 class="course-title">Quiz - Question
+                                                                <%= quiz_serial %>
+                                                            </h5>
+                                                            <div class="quiz-wrapper">
 
-                                                        <!--Q-->
-                                                        <h3>
-                                                            <%=question.Question%>
-                                                        </h3>
-                                                        <!--Q-->
+                                                                <!--Q-->
+                                                                <h3>
+                                                                    <%=question.Question%>
+                                                                </h3>
+                                                                <!--Q-->
 
-                                                        <div class="row" style="margin-bottom:2rem;">
-                                                            <div class="col-md-12">
+                                                                <div class="row" style="margin-bottom:2rem;">
+                                                                    <div class="col-md-12">
 
-                                                                <div class="panel panel-primary">
+                                                                        <div class="panel panel-primary">
 
-                                                                    <% if(showAnswer=='false' ) { %>
-                                                                        <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%= quiz_serial %> ">
-                                                                            <!-- options -->
-                                                                            <div class="panel-body">
+                                                                            <% if(showAnswer=='false' ) { %>
+                                                                                <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/<%= quiz_serial %> ">
+                                                                                    <!-- options -->
+                                                                                    <div class="panel-body">
 
-                                                                                <div style="width:100%;  margin-bottom: 5px; border-radius:10px;">
-                                                                                    <div class="radio">
-                                                                                        <label>
+                                                                                        <div style="width:100%;  margin-bottom: 5px; border-radius:10px;">
+                                                                                            <div class="radio">
+                                                                                                <label>
                                                                                             <input name="option1"
                                                                                                 id="option1"
                                                                                                 value="option1"
                                                                                                 type="radio">
                                                                                             <%= question.Option1 %>
                                                                                         </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div style="width:100%;  margin-bottom: 5px; border-radius:10px;">
-                                                                                    <div class="radio">
-                                                                                        <label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div style="width:100%;  margin-bottom: 5px; border-radius:10px;">
+                                                                                            <div class="radio">
+                                                                                                <label>
                                                                                             <input name="option2"
                                                                                                 id="option2"
                                                                                                 value="option2"
                                                                                                 type="radio">
                                                                                             <%= question.Option2 %>
                                                                                         </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div style="width:100%;  margin-bottom: 5px; ">
-                                                                                    <div class="radio">
-                                                                                        <label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div style="width:100%;  margin-bottom: 5px; ">
+                                                                                            <div class="radio">
+                                                                                                <label>
                                                                                             <input name="option3"
                                                                                                 id="option3"
                                                                                                 value="option3"
                                                                                                 type="radio">
                                                                                             <%= question.Option3 %>
                                                                                         </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div style="width:100%;  margin-bottom: 5px;">
-                                                                                    <div class="radio">
-                                                                                        <label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div style="width:100%;  margin-bottom: 5px;">
+                                                                                            <div class="radio">
+                                                                                                <label>
                                                                                             <input name="option4"
                                                                                                 id="option4"
                                                                                                 value="option4"
                                                                                                 type="radio">
                                                                                             <%= question.Option4 %>
                                                                                         </label>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!--options ends-->
+                                                                                    <!--options ends-->
 
 
-                                                                            <!--submission-->
-                                                                            <button type="submit" class="btn btn-primary " role="button">Confirm</a>
+                                                                                    <!--submission-->
+                                                                                    <button type="submit" class="btn btn-primary " role="button">Confirm</a>
                                                                         </form>
                                                                         <% } else { %>
                                                                             <div class="panel-body">
@@ -787,23 +785,23 @@
                                                                     <label for="question_inserted" style="width: 100%;">Your New Question : </label>
                                                                     <input name="question_inserted" id="question_inserted" placeholder="Write any doubt about this course' topics." style="width: 100%; height: 3rem;">
                                                                     <button type="submit" class="btn btn-success" style="margin-top: 5px;">Confirm</button>
-                                                                        </form>
+                                                                                </form>
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-
                                                             </div>
+
+
+
+
                                                         </div>
-                                                    </div>
+
+                                                        <% } %>
 
 
-
-
-                                                </div>
-
-                                                <% } %>
-
-
-                                                    <%- include('../includes/footer.ejs') %>
-                                                        <script src="/js/app.js"></script>
+                                                            <%- include('../includes/footer.ejs') %>
+                                                                <script src="/js/app.js"></script>
     </body>
 
     </html>

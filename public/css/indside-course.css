@@ -128,6 +128,23 @@ ul {
     margin-top: 5rem;
 }
 
+.Rating {
+    height: auto;
+    width: calc(100% - 20%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Rating .rating-box {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    padding: 0.5rem;
+    text-align: start;
+    margin-top: 3rem;
+}
+
 
 /* week section  */
 
