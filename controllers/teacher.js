@@ -423,9 +423,9 @@ exports.post_pre_add_course = async(req, res, next) => {
     var img_name = file.name;
     console.log(img_name);
     file.mv('public/img/' + file.name);
-    const enrolled=0;const rating=0;
+    const enrolled=0;const rating=0; const ratedBy=0;
 
-    const course_repo = await infoRepository.add_new_course(new_id, title,description,level,category,price,img_name,enrolled,rating);
+    const course_repo = await infoRepository.add_new_course(new_id, title,description,level,category,price,img_name,enrolled,rating,ratedBy);
     console.log(course_repo);
 
     const add_repo = await infoRepository.add_teacher_into_new_course(userId, new_id);

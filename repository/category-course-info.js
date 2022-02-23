@@ -1,3 +1,5 @@
+
+   
 const Repository = require('./database').Repository;
 
 class Category_Course_Teacher_Info_Repository extends Repository {
@@ -79,12 +81,6 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    addReviewByStudent=async function(course_id,user_ID,rating,review){
-        const query = 'INSERT INTO "Rating"("Course_ID","Student_ID","Rating","Review") VALUES(:1,:2,:3,:4) ';
-        const params = [course_id,user_ID,rating,review];
-        const result = await this.query(query, params, 'true');
-        return result;
-    }
     findCourseTeacherById = async function(Course_ID) {
         const query = 'SELECT * FROM "CreateCourse" JOIN "User" ON ("Teacher_ID"="User_ID") WHERE "Course_ID"= :1';
         const params = [Course_ID];
@@ -164,9 +160,15 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    add_new_course = async function(new_id, title,description,level,category,price,image,total_enrolled,rating) {
-        const query = 'INSERT INTO "Course"("course_id","Title","Description","Level","Catagory","Price","Image","total_Enrolled","Rating" ) VALUES(:1 ,:2 ,:3, :4,:5,:6, :7,:8,:9) ';
-        const params = [new_id, title,description,level,category,price,image,total_enrolled,rating];
+    add_new_course = async function(new_id, title,description,level,category,price,image,total_enrolled,rating,ratedBy) {
+        const query = 'INSERT INTO "Course"("course_id","Title","Description","Level","Catagory","Price","Image","total_Enrolled","Rating" ,"Ratedy") VALUES(:1 ,:2 ,:3, :4,:5,:6, :7,:8,:9, :10) ';
+        const params = [new_id, title,description,level,category,price,image,total_enrolled,rating,ratedBy];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
+    addReviewByStudent=async function(courseId,userId,rating,review){
+        const query = 'INSERT INTO "Rating"("Course_ID","Student_ID","Rating","Review") VALUES(:1, :2, :3,:4) ';
+        const params = [courseId,userId,rating,review];
         const result = await this.query(query, params, 'true');
         return result;
     }
@@ -337,4 +339,4 @@ class Category_Course_Teacher_Info_Repository extends Repository {
 }
 
 
-exports.Category_Course_Teacher_Info_Repository = Category_Course_Teacher_Info_Repository;
+exports.Category_Course_Teacher_Info_Repository = Category_Course_Teacher_Info_Repository
