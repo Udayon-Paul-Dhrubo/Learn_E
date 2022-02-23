@@ -94,3 +94,87 @@ const params = [Course_ID];
     }
 
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CREATE OR REPLACE TRIGGER UPDATE_CONTENT 
+AFTER INSERT 
+ON "Completion" 
+FOR EACH ROW 
+DECLARE 
+V_COURSEID NUMBER; 
+V_STUDENTID NUMBER; 
+BEGIN 
+V_COURSEID := :NEW."Course_ID" ; 
+V_STUDENTID := :NEW."Student_ID" ; 
+UPDATE "PurchaseHistory" SET "ContentCompleted"="ContentCompleted"+1 WHERE "Student_ID"=V_STUDENTID AND 
+ "Course_ID"=V_COURSEID; 
+END ;
+/
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+CREATE OR REPLACE FUNCTION GET_PROGRESS(COURSE_ID IN NUMBER,STUDENT_ID IN NUMBER) 
+RETURN NUMBER IS 
+TOTAL_VIDEOS NUMBER ; 
+TOTAL_QUIZES NUMBER ; 
+TOTAL_CONTENT NUMBER ; 
+FINISHED_CONTENT NUMBER; 
+PROGRESS NUMBER; 
+BEGIN 
+SELECT COUNT(*) INTO TOTAL_VIDEOS FROM "CourseModules" JOIN "Video_Content" USING("Module_ID") WHERE "Course_ID"= COURSE_ID ; 
+SELECT COUNT(*) INTO TOTAL_QUIZES FROM "CourseModules" JOIN "Quiz_Content" USING("Module_ID") WHERE "Course_ID"=COURSE_ID ; 
+SELECT "ContentCompleted" INTO FINISHED_CONTENT FROM "PurchaseHistory" WHERE "Student_ID"=STUDENT_ID AND "Course_ID"=COURSE_ID; 
+TOTAL_CONTENT :=TOTAL_VIDEOS+TOTAL_QUIZES; 
+PROGRESS := (FINISHED_CONTENT*100)/TOTAL_CONTENT; 
+RETURN PROGRESS ;  
+EXCEPTION 
+WHEN NO_DATA_FOUND THEN 
+RETURN 0 ; 
+WHEN TOO_MANY_ROWS THEN 
+RETURN 0 ; 
+WHEN OTHERS THEN 
+RETURN 0 ; 
+END ; 
+/
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+CREATE OR REPLACE TRIGGER UPDATE_TOTAL_ENROLLED
+AFTER INSERT
+ON "PurchaseHistory"
+FOR EACH ROW
+DECLARE
+V_COURSEID NUMBER;
+BEGIN
+V_COURSEID := :NEW."Course_ID" ;
+UPDATE "Course" SET "total_Enrolled"="total_Enrolled"+1 WHERE
+ "course_id"=V_COURSEID;
+END ;
+/
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+CREATE OR REPLACE TRIGGER UPDATE_RATING
+AFTER INSERT
+ON "Rating"
+FOR EACH ROW
+DECLARE
+V_RATING NUMBER;
+V_COURSEID NUMBER;
+V_RATEDBY NUMBER;
+
+BEGIN
+V_COURSEID := :NEW."Course_ID" ;
+V_RATING := :NEW."Rating" ;
+SELECT "RatedBy" INTO V_RATEDBY FROM "Course" WHERE "course_id"=V_COURSEID;
+UPDATE "Course" SET "Rating"=(("Rating"*V_RATEDBY+V_RATING)/(V_RATEDBY+1)), "RatedBy"="RatedBy"+1  WHERE
+ "course_id"=V_COURSEID;
+END ;
+/
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
