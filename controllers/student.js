@@ -322,6 +322,7 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
+    console.log("  QUIZ CONTENT ", QuizContent_repo.data.length);
 
 
 
@@ -345,6 +346,7 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
             QuizContent: QuizContent_repo.data[0],
+            quizContentExistence:QuizContent_repo.data.length,
             completedContents: completed_content_repo.data
 
         })

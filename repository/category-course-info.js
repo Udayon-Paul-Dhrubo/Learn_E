@@ -137,6 +137,12 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
+    isOwned=async function(course_ID, teacher_ID) {
+        const query = 'SELECT * FROM "CreateCourse" WHERE "Course_ID"= :1 AND "Teacher_ID"= :2 ';
+        const params = [course_ID, teacher_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
     createNewPurchase = async function(course_ID, student_ID,content) {
         const query = 'INSERT INTO "PurchaseHistory"("Student_ID","Course_ID","ContentCompleted") VALUES(:1 , :2, :3) ';
         const params = [student_ID, course_ID,content];
@@ -152,9 +158,9 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    add_new_course = async function(new_id, title) {
-        const query = 'INSERT INTO "Course"("course_id","Title" ) VALUES(:1 ,:2 ) ';
-        const params = [new_id, title];
+    add_new_course = async function(new_id, title,description,level,category,price,image,total_enrolled,rating) {
+        const query = 'INSERT INTO "Course"("course_id","Title","Description","Level","Catagory","Price","Image","total_Enrolled","Rating" ) VALUES(:1 ,:2 ,:3, :4,:5,:6, :7,:8,:9) ';
+        const params = [new_id, title,description,level,category,price,image,total_enrolled,rating];
         const result = await this.query(query, params, 'true');
         return result;
     }

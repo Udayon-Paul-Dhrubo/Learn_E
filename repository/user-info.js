@@ -11,9 +11,9 @@ class UserRepository extends Repository {
         return result;
     }
 
-    findByEmail = async function(userEmail) {
-        const query = 'select * from "User" where "Email" = :1';
-        const params = [userEmail];
+    findByEmail = async function(userEmail,pass) {
+        const query = 'select * from "User" where "Email" = :1 AND "Password"= :2 ';
+        const params = [userEmail,pass];
         const result = await this.query(query, params, 'false');
         return result;
     }

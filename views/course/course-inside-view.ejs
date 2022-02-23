@@ -37,8 +37,8 @@
 
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Grades" class="link"> Grades </a> </li>                             
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/FAQ" class="link"> FAQ </a> </li>
-
-
+                        
+                         
                         <li></li>
                         <li></li>
                         <li></li>
@@ -124,12 +124,14 @@
                                                     </tr>
                                                     <% } %>
                                                         <%}%>
+                                                        <%if(quizContentExistence!=0){%>
                                                             <!-- for loop -->
                                                             <% let isOk2='false' ; for(let completedContent of
                                                                 completedContents){
                                                                 if(completedContent.Content_ID==QuizContent.QuizContent_ID)
                                                                 { isOk2='true' ; break; } } %>
                                                                 <% if(isOk2=='false' ) {%>
+                                                                    
                                                                     <tr>
                                                                         <td><i class="fa fa-question-circle"></i></td>
                                                                         <td> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/<%=thisModule.Module_ID%>/quiz/1">
@@ -147,6 +149,7 @@
                                                                             <td><i class="fa fa-check"></i></td>
                                                                         </tr>
                                                                         <% } %>
+                                                                        <%}%>
 
                                 </tbody>
 
