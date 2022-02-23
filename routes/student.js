@@ -22,6 +22,8 @@ router.get('/user/:ID/course-view/:CRSID', studentController.get_course_view)
 router.get('/user/:ID/course-inside-view/:CRSID', studentController.getSingleCourseInsideView)
 
 router.get('/user/:ID/course-inside-view/:CRSID/Grades', studentController.getGrades)
+router.get('/user/:ID/course-inside-view/:CRSID/Review', studentController.addReview);
+router.post('/user/:ID/course-inside-view/:CRSID/Review', studentController.postReview);
 
 
 //FAQ

@@ -63,6 +63,12 @@ class UserRepository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
+    getReviewByStudent=async function(course_id,user_ID){
+        const query = 'select * from "Rating" WHERE "Course_ID"=:1 AND "Student_ID"=:2 ';
+        const params = [course_id,user_ID];
+        const result = await this.query(query, params, 'false');
+        return result;
+    }
     updateUser = async function(user_ID, userName, Email, Password, Image) {
         const query = 'UPDATE "User" SET "Name"= :2, "Email"= :3,"Password"= :4, "image"= :5 WHERE "User_ID"= :1 ';
         const params = [userName, Email, Password, Image, user_ID];
