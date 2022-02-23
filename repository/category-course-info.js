@@ -79,6 +79,12 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
+    addReviewByStudent=async function(course_id,user_ID,rating,review){
+        const query = 'INSERT INTO "Rating"("Course_ID","Student_ID","Rating","Review") VALUES(:1,:2,:3,:4) ';
+        const params = [course_id,user_ID,rating,review];
+        const result = await this.query(query, params, 'true');
+        return result;
+    }
     findCourseTeacherById = async function(Course_ID) {
         const query = 'SELECT * FROM "CreateCourse" JOIN "User" ON ("Teacher_ID"="User_ID") WHERE "Course_ID"= :1';
         const params = [Course_ID];

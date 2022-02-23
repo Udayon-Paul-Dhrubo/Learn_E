@@ -37,7 +37,7 @@
 
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Grades" class="link"> Grades </a> </li>                             
                         <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/FAQ" class="link"> FAQ </a> </li>
-                        
+                        <li> <a href="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Review" class="link"> Review This Course </a> </li>
                          
                         <li></li>
                         <li></li>
@@ -159,6 +159,47 @@
 
                     </div>
                     <% } %>
+                    <% if( reviewView=='true' ) {%>
+
+                        <%if(reviewExistence==true){%>
+                            <div class="Rating-box">                                            
+                                <div class="row">
+                                    <div class="col-md-.5">
+                                        <span><img src="/img/<%= userInfo.image %>"
+                                                style="height: 40px; width: 40px; border-radius: 50px; border: .3px solid;"></span>
+                                    </div>
+                                   
+                                    <div class="col-md-9 pull-right" style="display: inline;">                                                    
+                                        <small> Your Rating for this course : <br>                                                                                  
+                                            <strong> <%= ownReview.Rating %> </strong>                                                                                   
+                                        </small>
+                                    </div>
+                                </div>                                            
+                            </div>
+                            <div class="Riview -box">                                            
+                                <div class="row">
+                                   
+                                   
+                                    <div class="col-md-9 pull-right" style="display: inline;">                                                    
+                                        <small> Your Review for this course : <br>                                                                                  
+                                            <strong> <%= ownReview.Review %> </strong>                                                                                   
+                                        </small>
+                                    </div>
+                                </div>                                            
+                            </div>
+                            <%}else{%>
+                                <h1>HELLO WORLD</h1>
+                                <div class="question-box">                                                        
+                                    <form method="POST" action="/student/user/<%=userInfo.User_ID%>/course-inside-view/<%=course.course_id%>/Review" >
+                                        <label for="rating" style="width: 100%;">Rating  : </label>
+                                        <input name="rating" id="rating" placeholder="What Rating would you give this course? " style="width: 100%; height: 3rem;">
+                                        <label for="Review" style="width: 100%;">Write A Review : </label>
+                                        <input name="review" id="review" placeholder="What's your thought on this course ? " style="width: 100%; height: 3rem;">
+                                        <button type="submit" class="btn btn-success" style="margin-top: 5px;">Confirm</button>
+                                            </form>
+                                    </div>
+                                <%}%>
+                        <%}%>
 
                         <% if( videoView=='true' ) {%>
                             <div class="videos others" id="videos">
@@ -569,8 +610,11 @@
                                                     <h2>Grades </h2>
                                                     
                                                 </div>
-                        
-                        
+                                                <%if(gradeExistence==false){%>
+                                                    <div class="quizinfo">  
+                                                    <h2>You have not participated in any quiz yet </h2>
+                                                    </div>
+                     <%}else{%>   
                                                 <!-- week lesson-->
                                                 <div class="course-table ">
                         
@@ -600,6 +644,7 @@
                                                         </tbody>
                                                         </table>
                                                         </div>
+                                                        <%}%>
                                             </div>
                                             <% } %>
 
