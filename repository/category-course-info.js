@@ -1,5 +1,3 @@
-
-   
 const Repository = require('./database').Repository;
 
 class Category_Course_Teacher_Info_Repository extends Repository {
@@ -139,15 +137,15 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         const result = await this.query(query, params, 'false');
         return result;
     }
-    isOwned=async function(course_ID, teacher_ID) {
+    isOwned = async function(course_ID, teacher_ID) {
         const query = 'SELECT * FROM "CreateCourse" WHERE "Course_ID"= :1 AND "Teacher_ID"= :2 ';
         const params = [course_ID, teacher_ID];
         const result = await this.query(query, params, 'false');
         return result;
     }
-    createNewPurchase = async function(course_ID, student_ID,content) {
+    createNewPurchase = async function(course_ID, student_ID, content) {
         const query = 'INSERT INTO "PurchaseHistory"("Student_ID","Course_ID","ContentCompleted") VALUES(:1 , :2, :3) ';
-        const params = [student_ID, course_ID,content];
+        const params = [student_ID, course_ID, content];
         const result = await this.query(query, params, 'true');
         return result;
     }
@@ -160,15 +158,15 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    add_new_course = async function(new_id, title,description,level,category,price,image,total_enrolled,rating,ratedBy) {
-        const query = 'INSERT INTO "Course"("course_id","Title","Description","Level","Catagory","Price","Image","total_Enrolled","Rating" ,"Ratedy") VALUES(:1 ,:2 ,:3, :4,:5,:6, :7,:8,:9, :10) ';
-        const params = [new_id, title,description,level,category,price,image,total_enrolled,rating,ratedBy];
+    add_new_course = async function(new_id, title, description, level, category, price, image, total_enrolled, rating, ratedBy) {
+        const query = 'INSERT INTO "Course"("course_id","Title","Description","Level","Catagory","Price","Image","total_Enrolled","Rating" ,"RatedBy") VALUES(:1 ,:2 ,:3, :4,:5,:6, :7,:8,:9, :10) ';
+        const params = [new_id, title, description, level, category, price, image, total_enrolled, rating, ratedBy];
         const result = await this.query(query, params, 'true');
         return result;
     }
-    addReviewByStudent=async function(courseId,userId,rating,review){
+    addReviewByStudent = async function(courseId, userId, rating, review) {
         const query = 'INSERT INTO "Rating"("Course_ID","Student_ID","Rating","Review") VALUES(:1, :2, :3,:4) ';
-        const params = [courseId,userId,rating,review];
+        const params = [courseId, userId, rating, review];
         const result = await this.query(query, params, 'true');
         return result;
     }
@@ -313,22 +311,22 @@ class Category_Course_Teacher_Info_Repository extends Repository {
         return result;
     }
 
-    addGrade= async function(QuizContent_ID,Student_ID,Questions,Correct_Answers,course_ID,quizTopic) {
+    addGrade = async function(QuizContent_ID, Student_ID, Questions, Correct_Answers, course_ID, quizTopic) {
         const query = 'INSERT INTO "Grades"("Quiz_ID","Student_ID","Total_Questions","Correct_Answers","Course_ID","Topic") VALUES(:1,:2,:3,:4, :5, :6)';
-        const params = [QuizContent_ID,Student_ID,Questions,Correct_Answers,course_ID,quizTopic];
+        const params = [QuizContent_ID, Student_ID, Questions, Correct_Answers, course_ID, quizTopic];
         const result = await this.query(query, params, 'true');
         return result;
     }
-    updateQuizCorrectAnswer=async function(QuizContent_ID,Student_ID){
-        const query='UPDATE "Grades" SET "Correct_Answers"="Correct_Answers"+1  WHERE "Quiz_ID"= :1 AND "Student_ID"= :2 AND "Correct_Answers"<"Total_Questions" ';
-        const params = [QuizContent_ID,Student_ID];
+    updateQuizCorrectAnswer = async function(QuizContent_ID, Student_ID) {
+        const query = 'UPDATE "Grades" SET "Correct_Answers"="Correct_Answers"+1  WHERE "Quiz_ID"= :1 AND "Student_ID"= :2 AND "Correct_Answers"<"Total_Questions" ';
+        const params = [QuizContent_ID, Student_ID];
         const result = await this.query(query, params, 'true');
         return result;
     }
 
-    giveAnsToFaq_by_quesId = async function(answer, teacherId,quesId) {
+    giveAnsToFaq_by_quesId = async function(answer, teacherId, quesId) {
         const query = 'update "FAQ" set "Answer" = :1, "Teacher_ID" = :2 where "Question_ID" = :3 ';
-        const params = [ answer, teacherId,quesId];
+        const params = [answer, teacherId, quesId];
 
         const result = await this.query(query, params, 'true');
         return result;

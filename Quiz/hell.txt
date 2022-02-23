@@ -1,12 +1,12 @@
-What's the color of sky?
-blue 
-pink
-brown
-red
+What is the use of the <noscript> tag in Javascript?
+The contents are displayed by non JS Based browsers
+Clears all the cookies
+Both A & B
+None of the Above
 1
-what's the color of wind?
-violet
-red
-blue
-has not color
-4
+When an operator’s value is NULL, the typeof returned by the unary operator is
+Boolean
+Undefined
+Object
+Integer
+3

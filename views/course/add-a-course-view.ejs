@@ -10,7 +10,7 @@
 
                         <% if(create_button=='false' ) { %>
 
-                            <form method="post" action="/teacher/user/<%= userInfo.User_ID %>/add-course/pre" enctype="multipart/form-data" >
+                            <form method="post" action="/teacher/user/<%= userInfo.User_ID %>/add-course/pre" enctype="multipart/form-data">
                                 <div class="container" style="align-items: center;">
                                     <label for="course_name" style="width: 100%;"><strong>TITLE</strong></label>
                                     <input type="text" name="course_name" id="course_name" placeholder="Course Name" style="width: 80%;" />
@@ -27,12 +27,12 @@
                                     <label for="course_name" style="width: 100%;"><strong>SET PRICE LIMIT</strong></label>
                                     <input type="text" name="price" id="price" placeholder="Border line price range..." style="width: 80%;" />
                                     <br><br>
-        
+
                                     <label for="course_name" style="width: 100%;"><strong>COURSE IMAGE</strong></label>
-                                    
-                                            <input runat="Server" type="file" name="uploaded_image" enctype="multipart/form-data" accept="" />
+
+                                    <input runat="Server" type="file" name="uploaded_image" enctype="multipart/form-data" accept="" />
                                     <br>
-                                    
+
                                     <button class="btn btn-primary" type="submit" style="margin-top: 3rem;">Create
                                         New</button>
                                 </div>
@@ -54,7 +54,7 @@
 
                                         <div class="col-md-7 pull-right">
 
-                                            <form action="/teacher/user/<%=userInfo.User_ID%>/add-course/<%=courseInfo.course_id%>/search-teacher" method="POST">
+                                            <form action="/teacher/user/<%=userInfo.User_ID%>/add-course/<%= courseInfo.course_id %>/search-teacher" method="POST">
                                                 <div class="sf-type">
                                                     <div class="sf-input">
                                                         <input type="text" name="search_bar_req" id="search_bar_req" placeholder="Search by course or category" style="border: .3px solid;">

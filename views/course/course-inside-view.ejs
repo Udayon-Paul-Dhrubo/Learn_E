@@ -619,19 +619,22 @@
                                                     <table class="table ">
                                                         <thead>
                                                             <tr>
-                                                                <th>Quiz Topic</th>
+                                                                <th>Quiz Number</th>
                                                                 <th>Total Questions</th>
                                                                 <th>Correct Answers</th>
                                                             </tr>
                                                         </thead>
                         
                                                         <tbody>
+                                                            <% index = 0; %>
                                                             <%for(grade of grades)%>
                                                              <tr>
+                                                                
                                                             
                                                             <td>
                                                             
-                                                                    <%=grade.Topic%>
+                                                                    <% index++; %>
+                                                                Quiz No <%= index %>
                                                                 
                                                             </td>
                                                             <td>

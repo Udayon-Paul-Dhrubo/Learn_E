@@ -41,56 +41,48 @@ exports.postLogIn = async(req, res, next) => {
     const email = req.body.email;
     const pass = req.body.pass;
 
-    const user_repo = await userRepository.findByEmail(email,pass);
-   // console.log(user_repo.data[0]);
+    const user_repo = await userRepository.findByEmail(email, pass);
+    // console.log(user_repo.data[0]);
 
-    if(user_repo.data.length==0){
-    let msg = 'No account found!! Register Please..';}
-    else{
-      
-    
-    if (user_repo.success && user_repo.data.length > 0) {
+    if (user_repo.data.length != 0) {
 
-        const student_repo = await userRepository.isStudent(email);
-        console.log(student_repo);
-        if (student_repo.success && student_repo.data.length > 0) {
-            const student = student_repo.data[0];
-            console.log(student);
 
-            const url = '/student/user/' + student.Student_id + '/';
-            res.redirect(url);
+
+        if (user_repo.success && user_repo.data.length > 0) {
+
+            const student_repo = await userRepository.isStudent(email);
+            console.log(student_repo);
+            if (student_repo.success && student_repo.data.length > 0) {
+                const student = student_repo.data[0];
+                console.log(student);
+
+                const url = '/student/user/' + student.Student_id + '/';
+                return res.redirect(url);
+            }
+
+            const teacher_repo = await userRepository.isTeacher(email);
+            console.log(teacher_repo);
+            if (teacher_repo.success && teacher_repo.data.length > 0) {
+                const teacher = teacher_repo.data[0];
+                console.log(teacher);
+
+                const url = '/teacher/user/' + teacher.Teacher_ID + '/';
+                return res.redirect(url);
+            }
+
         }
 
-        const teacher_repo = await userRepository.isTeacher(email);
-        console.log(teacher_repo);
-        if (teacher_repo.success && teacher_repo.data.length > 0) {
-            const teacher = teacher_repo.data[0];
-            console.log(teacher);
-
-            const url = '/teacher/user/' + teacher.Teacher_ID + '/';
-            res.redirect(url);
-        }
 
     }
 
-
-    }
-
-
- 
-    msg = 'No account found with this user email and password.Please try again';
-
-
-
-
-
+    msg = 'Please try again';
     res.render('login/sign-in', {
         pageTitle: 'Log In',
         path: '/login',
         error: true,
         isStudent: 'false',
         logged_in: 'false',
-        eror:'true',
+        eror: 'true',
         errorMessage: msg
     })
 }

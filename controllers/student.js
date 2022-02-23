@@ -256,7 +256,7 @@ exports.get_Category_view = async(req, res, next) => {
 
 }
 exports.getSingleCourseInsideView = async(req, res, next) => {
-  console.log("inside course view")
+    console.log("inside course view")
 
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
@@ -271,8 +271,8 @@ exports.getSingleCourseInsideView = async(req, res, next) => {
 
     const purchased = await infoRepository.isPurchased(courseId, userId);
     if (purchased.data.length == 0) {
-        let completedContent=0;
-        const newPurchase = await infoRepository.createNewPurchase(courseId, userId,completedContent);
+        let completedContent = 0;
+        const newPurchase = await infoRepository.createNewPurchase(courseId, userId, completedContent);
         console.log("new purchase : ", courseId, userId);
         console.log("new purchase repo : ", newPurchase.success);
     }
@@ -348,17 +348,17 @@ exports.getSingleCourseInsideModuleView = async(req, res, next) => {
             thisModule: Module.data[0],
             VideoContents: VideoContent_repo.data,
             QuizContent: QuizContent_repo.data[0],
-            quizContentExistence:QuizContent_repo.data.length,
+            quizContentExistence: QuizContent_repo.data.length,
             completedContents: completed_content_repo.data
 
         })
     }
 }
-exports.postReview=async (req,res,next) =>{
+exports.postReview = async(req, res, next) => {
     console.log("INSIDE POST Review :");
     const userId = req.params.ID;
-    const rating =req.body.rating;
-    const review=req.body.review;
+    const rating = req.body.rating;
+    const review = req.body.review;
     const user_repo = await userRepository.findById(userId);
 
 
@@ -367,13 +367,13 @@ exports.postReview=async (req,res,next) =>{
     const course_repo = await infoRepository.findCourseById(courseId);
 
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
-   //inserting the review into database, write a trigger for updating the Rating of this course
-   const addReview=await infoRepository.addReviewByStudent(courseId,userId,rating,review);
-   console.log('Redirecting this URL');
-   const url = '/student/user/' + userId + '/course-inside-view/'+courseId+'/Review/';
+    //inserting the review into database, write a trigger for updating the Rating of this course
+    const addReview = await infoRepository.addReviewByStudent(courseId, userId, rating, review);
+    console.log('Redirecting this URL');
+    const url = '/student/user/' + userId + '/course-inside-view/' + courseId + '/Review/';
     res.redirect(url)
 }
-exports.addReview=async (req,res,next)=>{
+exports.addReview = async(req, res, next) => {
     console.log("INSIDE Review :");
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
@@ -385,10 +385,12 @@ exports.addReview=async (req,res,next)=>{
 
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
     let reviewdBefore;
-    const HasReviewdBefore=await userRepository.getReviewByStudent(courseId,userId);
-    if(HasReviewdBefore.data.length==0){reviewdBefore=false;console.log("HASN'T REVIEWD BEFORE")}
-    else{ reviewdBefore=true;
-    console.log(HasReviewdBefore);}
+    const HasReviewdBefore = await userRepository.getReviewByStudent(courseId, userId);
+    if (HasReviewdBefore.data.length == 0) { reviewdBefore = false;
+        console.log("HASN'T REVIEWD BEFORE") } else {
+        reviewdBefore = true;
+        console.log(HasReviewdBefore);
+    }
 
     if (user_repo.success && course_repo.success) {
         return res.render('course/course-inside-view.ejs', {
@@ -399,15 +401,15 @@ exports.addReview=async (req,res,next)=>{
             weekView: 'false',
             videoView: 'false',
             faqView: 'false',
-            reviewExistence:reviewdBefore,
-            ownReview:HasReviewdBefore.data[0],
+            reviewExistence: reviewdBefore,
+            ownReview: HasReviewdBefore.data[0],
             reviewView: 'true',
             quizView: 'false',
             gradeView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
-            
+
 
         })
     }
@@ -455,7 +457,7 @@ exports.getSingleCourseVideoContentView = async(req, res, next) => {
     }
 }
 exports.getSingleCourseQuizContentView = async(req, res, next) => {
-       console.log("get single course quiz content view ");
+    console.log("get single course quiz content view ");
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
 
@@ -474,13 +476,13 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
-    if(QuizContent_repo.data.length>0){
+    if (QuizContent_repo.data.length > 0) {
         //insert into grade with student ID, QUIZID, HOW MANY QUESTIONS
-        const QUIZID= QuizContent_repo.data[0].QuizContent_ID;
-        const quizTopic=Module.data[0].Topics;
-        console.log("Topic : ",quizTopic);
-        const answer=0;
-        const insertGrade=await infoRepository.addGrade(QUIZID,userId,QuizContent_repo.data.length,answer,courseId,quizTopic);
+        const QUIZID = QuizContent_repo.data[0].QuizContent_ID;
+        const quizTopic = Module.data[0].Topics;
+        console.log("Topic : ", quizTopic);
+        const answer = 0;
+        const insertGrade = await infoRepository.addGrade(QUIZID, userId, QuizContent_repo.data.length, answer, courseId, quizTopic);
     }
 
 
@@ -510,7 +512,7 @@ exports.getSingleCourseQuizContentView = async(req, res, next) => {
         })
     }
 }
-exports.getGrades=async(req,res,next)=>{
+exports.getGrades = async(req, res, next) => {
     console.log("INSIDE GRADES");
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
@@ -521,11 +523,11 @@ exports.getGrades=async(req,res,next)=>{
     const course_repo = await infoRepository.findCourseById(courseId);
 
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
-    const getGrades=await userRepository.getGrades(userId,courseId);
+    const getGrades = await userRepository.getGrades(userId, courseId);
     let hasGrades;
-  if(getGrades.data.length==0){
-      hasGrades=false;
-  }else hasGrades=true;
+    if (getGrades.data.length == 0) {
+        hasGrades = false;
+    } else hasGrades = true;
     console.log(getGrades);
 
     if (user_repo.success && course_repo.success) {
@@ -540,11 +542,11 @@ exports.getGrades=async(req,res,next)=>{
             quizView: 'false',
             reviewView: 'false',
             gradeView: 'true',
-            gradeExistence:hasGrades,
+            gradeExistence: hasGrades,
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,
-            grades:getGrades.data
+            grades: getGrades.data
 
         })
     }
@@ -570,8 +572,8 @@ exports.postSingleCourseQuizContentView = async(req, res, next) => {
 
 
     const QuizContent_repo = await infoRepository.findQuizContentIDByModule_ID(moduleId);
-    const quizID=QuizContent_repo.data[0].QuizContent_ID;
-    console.log("QUIZ ID : ",quizID);
+    const quizID = QuizContent_repo.data[0].QuizContent_ID;
+    console.log("QUIZ ID : ", quizID);
 
     const Ans = QuizContent_repo.data[serial - 1].Answer;
 
@@ -588,12 +590,12 @@ exports.postSingleCourseQuizContentView = async(req, res, next) => {
     if (ans2 == 1) given_ans = 2;
     if (ans3 == 1) given_ans = 3;
     if (ans4 == 1) given_ans = 4;
-    
+
     console.log(QuizContent_repo.data.length);
-   if(Ans==given_ans){
+    if (Ans == given_ans) {
         //update correct answer
-        const updateCorrectAnswer=await infoRepository.updateQuizCorrectAnswer(quizID,userId);
- }
+        const updateCorrectAnswer = await infoRepository.updateQuizCorrectAnswer(quizID, userId);
+    }
 
 
     if (user_repo.success && course_repo.success) {
@@ -750,6 +752,7 @@ exports.getSingleCourseInsideView_FAQ = async(req, res, next) => {
             quizView: 'false',
             gradeView: 'false',
             faqView: 'true',
+            reviewView: 'false',
             userInfo: user_repo.data[0],
             course: course_repo.data[0],
             modules: Module_repo.data,

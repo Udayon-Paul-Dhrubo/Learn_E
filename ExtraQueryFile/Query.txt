@@ -81,3 +81,44 @@ END ;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+CREATE OR REPLACE TRIGGER UPDATE_RATING
+AFTER INSERT
+ON "Rating"
+FOR EACH ROW
+DECLARE
+V_RATING NUMBER;
+V_COURSEID NUMBER;
+V_RATEDBY NUMBER;
+
+BEGIN
+V_COURSEID := :NEW."Course_ID" ;
+V_RATING := :NEW."Rating" ;
+SELECT "RatedBy" INTO V_RATEDBY FROM "Course" WHERE "course_id"=V_COURSEID;
+UPDATE "Course" SET "Rating"=ROUND((("Rating"*V_RATEDBY+V_RATING)/(V_RATEDBY+1)),2), "RatedBy"="RatedBy"+1  WHERE
+ "course_id"=V_COURSEID;
+END ;
+/
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+CREATE OR REPLACE TRIGGER UPDATE_RATING
+AFTER INSERT
+ON "Rating"
+FOR EACH ROW
+DECLARE
+V_RATING NUMBER;
+V_COURSEID NUMBER;
+V_RATEDBY NUMBER;
+
+BEGIN
+V_COURSEID := :NEW."Course_ID" ;
+V_RATING := :NEW."Rating" ;
+SELECT "RatedBy" INTO V_RATEDBY FROM "Course" WHERE "course_id"=V_COURSEID;
+UPDATE "Course" SET "Rating"=ROUND((("Rating"*V_RATEDBY+V_RATING)/(V_RATEDBY+1)),2), "RatedBy"="RatedBy"+1  WHERE
+ "course_id"=V_COURSEID;
+END ;
+/
+
