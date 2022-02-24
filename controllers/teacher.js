@@ -295,11 +295,11 @@ exports.createNewModule = async(req, res, next) => {
 
     //find out the serial it needs to be added
     const serial = await infoRepository.findSerialOfLastInsertedModuleOfCourse(courseId);
-   
-    let serialNext;
-    if(serial.data.length==0)serialNext=1;
 
-    else{ serialNext = serial.data[0].Serial + 1;}
+    let serialNext;
+    if (serial.data.length == 0) serialNext = 1;
+
+    else { serialNext = serial.data[0].Serial + 1; }
     console.log("serial to be added : ", serialNext)
         //insert into course modules
     const ModuleAddedToCourse = await infoRepository.addModuleToCourse(courseId, newModule_ID, serialNext);
@@ -367,7 +367,7 @@ exports.get_course_view = async(req, res, next) => {
             topCourses: TopCourse_repo.data,
             contents: content_repo.data,
             weekView: 'false',
-            owned:isOwned
+            owned: isOwned
 
         })
     }
@@ -410,11 +410,11 @@ exports.post_pre_add_course = async(req, res, next) => {
     console.log(new_id)
 
     const title = req.body.course_name;
-    const description=req.body.description;
-    const level=req.body.level;
-    const category=req.body.catagory;
-    const price=req.body.price;
-    console.log(title,description,level,category,price);
+    const description = req.body.description;
+    const level = req.body.level;
+    const category = req.body.catagory;
+    const price = req.body.price;
+    console.log(title, description, level, category, price);
     console.log(req.body.uploaded_image);
     console.log(typeof(req.body.uploaded_image));
     if (req.files) console.log("some file was uploaded ");
@@ -423,9 +423,11 @@ exports.post_pre_add_course = async(req, res, next) => {
     var img_name = file.name;
     console.log(img_name);
     file.mv('public/img/' + file.name);
-    const enrolled=0;const rating=0; const ratedBy=0;
+    const enrolled = 0;
+    const rating = 0;
+    const ratedBy = 0;
 
-    const course_repo = await infoRepository.add_new_course(new_id, title,description,level,category,price,img_name,enrolled,rating,ratedBy);
+    const course_repo = await infoRepository.add_new_course(new_id, title, description, level, category, price, img_name, enrolled, rating, ratedBy);
     console.log(course_repo);
 
     const add_repo = await infoRepository.add_teacher_into_new_course(userId, new_id);
@@ -529,7 +531,7 @@ exports.post_add_course_FAQ = async(req, res, next) => {
     console.log('answer', answer);
     console.log('question id : ', questionId);
 
-    const insert_repo = await infoRepository.giveAnsToFaq_by_quesId(answer, userId,questionId);
+    const insert_repo = await infoRepository.giveAnsToFaq_by_quesId(answer, userId, questionId);
     console.log('insert_repo', insert_repo);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/FAQ';
@@ -758,7 +760,7 @@ exports.post_add_course_add_video = async(req, res, next) => {
     var file = req.files.uploaded_video;
     var video_name = file.name;
     console.log(video_name);
-    file.mv('videos/' + file.name);
+    file.mv('public/videos/' + file.name);
     const addVideo = await infoRepository.addNewVideo(newVideo_ID, moduleId, title, description, video_name);
 
     let url = '/teacher/user/' + userId + '/add-course/' + courseId + '/' + moduleId;
