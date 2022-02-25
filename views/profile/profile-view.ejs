@@ -24,7 +24,7 @@
                                     </p>
                                     <hr>
                                     <p>My Courses <small class="label label-primary">
-                                            <%=courses.length%>
+                                            <%= courses.length %>
                                         </small></p>
                                     <hr>
                                     <p>Notifications <small class="label label-primary"><a href="#">0</a></small></p>
@@ -84,43 +84,43 @@
 
                                     <div class="container col-md-8">
                                         <% if(isStudent == 'true') {%>
-                                        <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;"> My Courses </a>
-                                        <%}else {%>
-                                            <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;">Courses Created By Me </a>
-                                        <%}%>
-                                        <hr style="margin-bottom : 2rem;">
+                                            <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;"> My Courses </a>
+                                            <%}else {%>
+                                                <a href="" class="btn btn-secondary text-primary text-uppercase <%= myCoursesReq=='true'? 'active':'' %> " style="display: inline; margin-right: 3rem;">Courses Created By Me </a>
+                                                <%}%>
+                                                    <hr style="margin-bottom : 2rem;">
 
-                                        <% if(courses.length> 0 ) { %>
-                                            <%for(let course of courses){%>
-                                                <!-- for loop here -->
-                                                <div class="row course-list ">
+                                                    <% if(courses.length> 0 ) { %>
+                                                        <%for(let course of courses){%>
+                                                            <!-- for loop here -->
+                                                            <div class="row course-list ">
 
-                                                    <div class="col-md-4 col-sm-4 col-xs-12 ">
-                                                        <div class="shop-item-list">
-                                                            <div>
-                                                                <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png " alt=" ">
-                                                                <div class="magnifier ">
+                                                                <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                                                    <div class="shop-item-list">
+                                                                        <div>
+                                                                            <img src="/upload/xcourse_01.png.pagespeed.ic.XTOvCuUmZu.png " alt=" ">
+                                                                            <div class="magnifier ">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-md-8 col-md-8 ">
-                                                        <div class="shop-list-desc ">
-                                                            <h4 style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
-                                                                <% if(isStudent == 'true') {%>
-                                                                    <a href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
-                                                                        <%=course.Title%>
-                                                                    </a>
-                                                                    <% } else {%>
-                                                                        <a href="/teacher/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
-                                                                            <%=course.Title%>
-                                                                        </a>
-                                                                        <% } %>
-                                                            </h4>
+                                                                <div class="col-md-8 col-md-8 ">
+                                                                    <div class="shop-list-desc ">
+                                                                        <h4 style="font-size:large; margin-top:0; margin-bottom: 0; margin-left: 0; ">
+                                                                            <% if(isStudent == 'true') {%>
+                                                                                <a href="/student/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
+                                                                                    <%=course.Title%>
+                                                                                </a>
+                                                                                <% } else {%>
+                                                                                    <a href="/teacher/user/<%=userInfo.User_ID%>/course-view/<%= course.Course_ID %> ">
+                                                                                        <%=course.Title%>
+                                                                                    </a>
+                                                                                    <% } %>
+                                                                        </h4>
 
-                                                            <div class="shopmeta " style="margin-bottom:0; ">
-                                                                <span class="rating pull-right"> 
+                                                                        <div class="shopmeta " style="margin-bottom:0; ">
+                                                                            <span class="rating pull-right"> 
                                                                     <% let rate=Math.floor(course.Rating); %>
                                                                     <% for( let star=0; star<rate; star++){ %>
                                                                         <i class="fa fa-star"></i>
@@ -130,31 +130,31 @@
                                                                     <% } %>
                                 
                                                                 </span>
-                                                            </div>
-                                                            <% if(isStudent == 'true') {%>
-                                                            <!--progress bar -->
-                                                            <p class="lead" style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">
-                                                                <%=course.PROGRESS%> Percent Completed</p>
-                                                            <div class="progress ">
-                                                                <div class="progress-bar " role="progressbar " style=" background-color: rgb(18, 19, 19); width: <%=course.PROGRESS%>% ; ">
-                                                                    <span class="sr-only " style=" margin-top: 0; ">Complete
+                                                                        </div>
+                                                                        <% if(isStudent == 'true') {%>
+                                                                            <!--progress bar -->
+                                                                            <p class="lead" style=" margin-bottom: 0; margin-top: 1rem; color:rgb(21, 129, 44); ">
+                                                                                <%=course.PROGRESS%> Percent Completed</p>
+                                                                            <div class="progress ">
+                                                                                <div class="progress-bar " role="progressbar " style=" background-color: rgb(18, 19, 19); width: <%=course.PROGRESS%>% ; ">
+                                                                                    <span class="sr-only " style=" margin-top: 0; ">Complete
                                                                         40%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <%}%>
+                                                                                <!---- progress bar ends-->
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <%}%>
-                                                           <!---- progress bar ends-->
+                                                                <!-- for loop ends here -->
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <%}%>
-                                                    <!-- for loop ends here -->
-
-                                                    <% } else { %>
-                                                        <h2 class="text-primary text-uppercase" style="letter-spacing: 5px; margin-top: 5rem;">
-                                                            No courses yet..
-                                                        </h2>
-                                                        <% } %>
+                                                                <% } else { %>
+                                                                    <h2 class="text-primary text-uppercase" style="letter-spacing: 5px; margin-top: 5rem;">
+                                                                        No courses yet..
+                                                                    </h2>
+                                                                    <% } %>
 
                                     </div>
                                     <% }%>

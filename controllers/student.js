@@ -49,8 +49,9 @@ exports.getHome = async(req, res, next) => {
 exports.getProfileView = async(req, res, next) => {
     const userId = req.params.ID;
     const user_repo = await userRepository.findById(userId);
-    console.log(user_repo);
+
     const coursesTaken = await userRepository.coursesTaken(userId);
+    console.log('coursesTaken : ', coursesTaken);
 
 
     if (user_repo.success) {
@@ -63,6 +64,7 @@ exports.getProfileView = async(req, res, next) => {
             userInfo: user_repo.data[0],
             myCoursesReq: 'true',
             courses: coursesTaken.data,
+
 
         })
     }
@@ -386,8 +388,10 @@ exports.addReview = async(req, res, next) => {
     const Module_repo = await infoRepository.findModulesByCourseId(courseId);
     let reviewdBefore;
     const HasReviewdBefore = await userRepository.getReviewByStudent(courseId, userId);
-    if (HasReviewdBefore.data.length == 0) { reviewdBefore = false;
-        console.log("HASN'T REVIEWD BEFORE") } else {
+    if (HasReviewdBefore.data.length == 0) {
+        reviewdBefore = false;
+        console.log("HASN'T REVIEWD BEFORE")
+    } else {
         reviewdBefore = true;
         console.log(HasReviewdBefore);
     }
